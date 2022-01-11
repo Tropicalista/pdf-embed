@@ -1,16 +1,16 @@
 <?php
 /**
- * Plugin Name:       Pdf Embed
- * Description:       PDF embedded with official Adobe API.
- * Requires at least: 5.8
- * Requires PHP:      7.0
- * Version:           0.1.0
- * Author:            Formello
- * License:           GPL-2.0-or-later
- * License URI:       https://www.gnu.org/licenses/gpl-2.0.html
- * Text Domain:       adobe-pdf
+ * Plugin Name: Pdf Embed
+ * Plugin URI:  https://formello.net/
+ * Description: PDF embedded with official Adobe API.
+ * Version:     0.1.0
+ * Author:      Formello
+ * Author URI:  https://formello.net
+ * License:     GPL2
+ * License URI: https://www.gnu.org/licenses/gpl-2.0.html
+ * Text Domain: formello
+ * @package     Formello/PdfEmbed
  *
- * @package           Formello/PdfEmbed
  */
 
 /**
