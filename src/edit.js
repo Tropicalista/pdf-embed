@@ -37,7 +37,7 @@ import {
 	MenuItem,
 } from '@wordpress/components';
 
-import { useEffect, Fragment } from '@wordpress/element';
+import { useEffect, Fragment, useState } from '@wordpress/element';
 import apiFetch from '@wordpress/api-fetch';
 
 /**
@@ -50,6 +50,8 @@ import './editor.scss';
 import { get } from 'lodash';
 import Settings from './settings';
 import Holder from './holder';
+import api from '@wordpress/api';
+import { select, subscribe } from '@wordpress/data';
 
 /**
  * The edit function describes the structure of your block in the context of the
@@ -61,11 +63,47 @@ import Holder from './holder';
  */
 export default function Edit( props ) {
 
+	const [ apiLoaded, setApiLoaded] = useState( false )
 	const { attributes, setAttributes } = props
 	const {
 		apiKey,
 		mediaUrl
 	} = attributes;
+
+	useEffect( () => {
+
+	    subscribe( () => {
+
+	        const isSavingPost = select('core/editor').isSavingPost();
+	        const isAutosavingPost = select('core/editor').isAutosavingPost();
+
+	        if ( isAutosavingPost ) {
+	            return;
+	        }
+
+	        if ( ! isSavingPost ) {
+	            return;
+	        }
+
+	        const settings = new api.models.Settings( {
+	            [ 'pdf_embed_api_key' ]: apiKey,
+	        } );
+	        settings.save();
+	    });
+
+	    api.loadPromise.then( () => {
+	        let settings = new api.models.Settings();
+
+	        if ( apiLoaded === false ) {
+	            settings.fetch().then( ( response ) => {
+	            	console.log(response[ 'pdf_embed_api_key' ])
+	            	setAttributes( { apiKey: response[ 'pdf_embed_api_key' ] } )
+	            	setApiLoaded( true )
+	            } );
+	        }
+	    } );
+
+	}, [] )
 
 	return (
 		<div {...useBlockProps()}>

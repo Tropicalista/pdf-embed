@@ -65,25 +65,6 @@ export default function Holder( props ) {
 
 	useEffect( () => {
 
-	    subscribe( () => {
-
-	        const isSavingPost = select('core/editor').isSavingPost();
-	        const isAutosavingPost = select('core/editor').isAutosavingPost();
-
-	        if ( isAutosavingPost ) {
-	            return;
-	        }
-
-	        if ( ! isSavingPost ) {
-	            return;
-	        }
-
-	        const settings = new api.models.Settings( {
-	            [ 'embed_pdf_api_key' ]: apiKey,
-	        } );
-	        settings.save();
-	    });
-
 		var script = document.createElement('script');
 		script.src = 'https://documentcloud.adobe.com/view-sdk/main.js';
 
