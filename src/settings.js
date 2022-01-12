@@ -50,7 +50,9 @@ export default function Settings( { attributes, setAttributes } ) {
 		embedMode,
 		width,
 		height,
-		apiKey
+		apiKey,
+		showAnnotationTools,
+		enableFormFilling
 	} = attributes;
 
 	return (
@@ -73,6 +75,7 @@ export default function Settings( { attributes, setAttributes } ) {
 		            label={ __( 'Embed mode', 'popper' ) }
 		            value={ embedMode }
 		            options={ [
+		                { label: __( 'Default', 'popper' ), value: '' },
 		                { label: __( 'Sized Container', 'popper' ), value: 'SIZED_CONTAINER' },
 		                { label: __( 'Inline', 'popper' ), value: 'IN_LINE' },
 		            ] }
@@ -97,6 +100,16 @@ export default function Settings( { attributes, setAttributes } ) {
 					label={ __( 'Page Controls Docked', 'popper' ) }
 					checked={ dockPageControls }
 					onChange={ ( val ) => setAttributes( { dockPageControls: val } ) } 
+				/>
+				<ToggleControl
+					label={ __( 'Show Annotation Tools', 'popper' ) }
+					checked={ showAnnotationTools }
+					onChange={ ( val ) => setAttributes( { showAnnotationTools: val } ) } 
+				/>
+				<ToggleControl
+					label={ __( 'Enable Form Filling', 'popper' ) }
+					checked={ enableFormFilling }
+					onChange={ ( val ) => setAttributes( { enableFormFilling: val } ) } 
 				/>
 				<PanelRow>
 				{ 'SIZED_CONTAINER' === embedMode && (

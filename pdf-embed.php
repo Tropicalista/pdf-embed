@@ -3,7 +3,7 @@
  * Plugin Name: Pdf Embed
  * Plugin URI:  https://formello.net/
  * Description: PDF embedded with official Adobe API.
- * Version:     0.1.3
+ * Version:     0.1.4
  * Author:      Formello
  * Author URI:  https://formello.net
  * License:     GPL2
@@ -27,3 +27,14 @@ function pdf_embed_block_init() {
 	);
 }
 add_action( 'init', 'pdf_embed_block_init' );
+
+function pdf_embed_setting() {
+	$args = array(
+		'type' => 'string',
+		'sanitize_callback' => 'sanitize_text_field',
+		'default' => '',
+		'show_in_rest' => true,
+	);
+	register_setting( 'embed_pdf', 'embed_pdf_api_key', $args );
+}
+add_action( 'init', 'pdf_embed_setting' );

@@ -33,7 +33,9 @@ export default function save( { attributes } ) {
         showPageControls,
         showFullScreen,
         dockPageControls,
-        fileName
+        fileName,
+        showAnnotationTools,
+        enableFormFilling
     } = attributes;
 
 	return (
@@ -48,6 +50,8 @@ export default function save( { attributes } ) {
             data-showPageControls={ showPageControls }
             data-showFullScreen={ showFullScreen }
             data-dockPageControls={ dockPageControls }
+            data-showAnnotationTools={ showAnnotationTools }
+            data-enableFormFilling={ enableFormFilling }
         ></div>
 	);
 }

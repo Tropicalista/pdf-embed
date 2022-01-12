@@ -31,7 +31,7 @@
 		},
 		"embedMode": {
 			"type": "string",
-			"default": "SIZED_CONTAINER"
+			"default": ""
 		},
 		"showDownloadPDF": {
 			"type": "boolean",
@@ -54,6 +54,10 @@
 			"default": true
 		},
 		"enableFormFilling": {
+			"type": "boolean",
+			"default": true
+		},
+		"showAnnotationTools": {
 			"type": "boolean",
 			"default": true
 		}
