@@ -25,3 +25,8 @@ node_modules/
 
 # dotenv environment variables file
 .env
+
+*.zip
+
+formello.sublime-project
+formello.sublime-workspace
