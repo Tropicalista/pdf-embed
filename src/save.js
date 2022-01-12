@@ -23,7 +23,31 @@ import { useBlockProps } from '@wordpress/block-editor';
  * @return {WPElement} Element to render.
  */
 export default function save( { attributes } ) {
+    const { 
+        mediaUrl,
+        embedMode,
+        height,
+        apiKey,
+        showPrintPDF,
+        showDownloadPDF,
+        showPageControls,
+        showFullScreen,
+        dockPageControls,
+        fileName
+    } = attributes;
+
 	return (
-        <div id="adobe-dc-view" {...useBlockProps.save()} style={{ height: attributes.height }}></div>
+        <div id="adobe-dc-view" { ...useBlockProps.save() } 
+            style={{ height: attributes.height }}
+            data-apiKey={ apiKey }
+            data-fileName={ fileName }
+            data-mediaUrl={ mediaUrl }
+            data-embedMode={ embedMode }
+            data-showDownloadPDF={ showDownloadPDF }
+            data-showPrintPDF={ showPrintPDF }
+            data-showPageControls={ showPageControls }
+            data-showFullScreen={ showFullScreen }
+            data-dockPageControls={ dockPageControls }
+        ></div>
 	);
 }

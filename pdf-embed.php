@@ -3,7 +3,7 @@
  * Plugin Name: Pdf Embed
  * Plugin URI:  https://formello.net/
  * Description: PDF embedded with official Adobe API.
- * Version:     0.1.2
+ * Version:     0.1.3
  * Author:      Formello
  * Author URI:  https://formello.net
  * License:     GPL2
@@ -22,37 +22,8 @@
  */
 function pdf_embed_block_init() {
 
-	$script_asset_path = __DIR__ . '/build/frontend.asset.php';
-	if ( ! file_exists( $script_asset_path ) ) {
-		throw new \Error(
-			'You need to run `npm start` or `npm run build` for the "tropicalista/pdfembed" block first.'
-		);
-	}
-
-	$script_asset = require $script_asset_path;
-
-	wp_register_script(
-		'adobe-pdf-block-frontend',
-		plugins_url( 'build/frontend.js', __FILE__ ),
-		array(),
-		$script_asset['version'],
-		true
-	);
-
-	register_block_type(
+	register_block_type_from_metadata(
 		__DIR__,
-		array(
-			'render_callback' => function ( $attributes, $content ) {
-
-				if ( ! is_admin() ) {
-					wp_enqueue_script( 'adobe-pdf-block-frontend' );
-
-					wp_add_inline_script( 'adobe-pdf-block-frontend', 'var embedConfig =' . wp_json_encode( $attributes ) );
-				}
-
-				return $content;
-			},
-		)
 	);
 }
 add_action( 'init', 'pdf_embed_block_init' );

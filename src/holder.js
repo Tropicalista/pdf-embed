@@ -46,7 +46,7 @@ import Settings from './settings';
 export default function Holder( props ) {
 
 	const { attributes, setAttributes } = props;
-	const { mediaUrl, embedMode, height, apiKey, showPrintPdf } = attributes;
+	const { mediaUrl, embedMode, height, apiKey, showPrintPdf, fileName } = attributes;
 
 	const onSelectMedia = ( media ) => {
 		setAttributes( {
@@ -63,6 +63,10 @@ export default function Holder( props ) {
 	}
 
 	useEffect( () => {
+		var script = document.createElement('script');
+		script.src = 'https://documentcloud.adobe.com/view-sdk/main.js';
+
+  		document.head.appendChild(script);
 		if( ! mediaUrl ){
 			return
 		}
@@ -70,15 +74,11 @@ export default function Holder( props ) {
         	var adobeDCView = new AdobeDC.View( { clientId: apiKey, divId: 'adobe-dc-view' } );
 	        adobeDCView.previewFile({
 	            content:{ location: { url: mediaUrl } },
-	            metaData:{ fileName: "Bodea Brochure.pdf" }
+	            metaData:{ fileName: fileName }
 	        }, attributes );
 
 		} )
 
-		var script = document.createElement('script');
-		script.src = 'https://documentcloud.adobe.com/view-sdk/main.js';
-
-  		document.head.appendChild(script);
 	}, [] )
 
 	useEffect( () => {
@@ -95,7 +95,7 @@ export default function Holder( props ) {
 		var adobeDCView = new AdobeDC.View({clientId: apiKey, divId: "adobe-dc-view"});
         adobeDCView.previewFile({
             content:{ location: { url: mediaUrl } },
-            metaData:{ fileName: "Bodea Brochure.pdf" }
+            metaData:{ fileName: fileName }
         }, attributes );
 
 
