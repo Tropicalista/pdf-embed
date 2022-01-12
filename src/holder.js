@@ -23,8 +23,6 @@ import {
 import { RangeControl, PanelBody, PanelRow, TextControl, RadioControl, ToggleControl, Placeholder, ToolbarGroup } from '@wordpress/components';
 
 import { useEffect, Fragment } from '@wordpress/element';
-import api from '@wordpress/api';
-import { select, subscribe } from '@wordpress/data';
 
 /**
  * Lets webpack process CSS, SASS or SCSS files referenced in JavaScript files.

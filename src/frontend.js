@@ -9,7 +9,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
    // Your code to run since DOM is loaded and ready
 	var elm = document.getElementById( 'adobe-dc-view' );
 	var embedConfig = elm.dataset;
-console.log(embedConfig)
+
 	document.addEventListener("adobe_dc_view_sdk.ready", function(){ 
 		var adobeDCView = new AdobeDC.View( {
 			clientId: embedConfig.apikey, 
