@@ -22,22 +22,12 @@ import {
 } from '@wordpress/block-editor';
 
 import { 
-	RangeControl, 
-	PanelBody, 
-	PanelRow, 
+	BaseControl, 
 	TextControl, 
-	RadioControl, 
-	ToggleControl, 
 	Placeholder, 
-	ToolbarGroup, 
-	ToolbarItem, 
-	Button,
-	Dropdown, 
-	NavigableMenu, 
-	MenuItem,
 } from '@wordpress/components';
 
-import { useEffect, Fragment, useState } from '@wordpress/element';
+import { useEffect, Fragment, useState, RawHTML } from '@wordpress/element';
 import apiFetch from '@wordpress/api-fetch';
 
 /**
@@ -116,8 +106,16 @@ export default function Edit( props ) {
 				:
 				<Placeholder 
 					icon={ 'pdf' } 
-					instructions={ __( 'Please insert an api Key in the settings panel on the right.', 'popper' ) }
-					label={ __( 'Missing key', 'popper' ) } />
+					instructions={ 
+						<RawHTML>
+							{ sprintf(
+								__( '<p>Please insert a <b>free api Key</b> in the settings panel on the right. Get your free API key on %s.</p>', 'popper' ),
+								`<a href="https://www.adobe.io/apis/documentcloud/dcsdk/pdf-embed.html" target="_blank">Adobe  Official site</a>` )
+							}
+						</RawHTML>	
+					}
+					label={ __( 'Missing key', 'popper' ) }
+				/>
 			
 			}
 
