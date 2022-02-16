@@ -2,7 +2,7 @@
 Contributors:      The WordPress Contributors
 Tags:              pdf, pdf embedder, embed pdf, pdf embed api, pdf block, pdf plugin, block
 Tested up to:      5.8.2
-Stable tag:        0.1.7
+Stable tag:        0.1.8
 License:           GPL-2.0-or-later
 License URI:       https://www.gnu.org/licenses/gpl-2.0.html
 Requires at least: 5.6.0
@@ -40,9 +40,11 @@ Yes you will need a free Adobe PDF Embed API.
 
 == Changelog ==
 
+= 0.1.8 =
+* Fix hardcoded pdf
+
 = 0.1.7 =
 * Fix missing assets
-
 
 = 0.1.6 =
 * Fix missing frontend js

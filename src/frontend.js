@@ -1,5 +1,3 @@
-console.log('PDF embedder')
-
 var script = document.createElement('script');
 script.src = 'https://documentcloud.adobe.com/view-sdk/main.js';
 
@@ -18,7 +16,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
 		adobeDCView.previewFile({
 			content: {
 				location: {
-					url: "https://documentcloud.adobe.com/view-sdk-demo/PDFs/Summary.pdf"
+					url: embedConfig.mediaurl
 				}
 			},
 			metaData: {
