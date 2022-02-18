@@ -7,11 +7,13 @@ document.addEventListener("DOMContentLoaded", function(event) {
    // Your code to run since DOM is loaded and ready
 	var elm = document.getElementById( 'adobe-dc-view' );
 	var embedConfig = elm.dataset;
+	var userLang = navigator.language || navigator.userLanguage;
 
 	document.addEventListener("adobe_dc_view_sdk.ready", function(){ 
 		var adobeDCView = new AdobeDC.View( {
 			clientId: embedConfig.apikey, 
-			divId: "adobe-dc-view"
+			divId: "adobe-dc-view",
+			locale: userLang
 		} );
 		adobeDCView.previewFile({
 			content: {
@@ -33,28 +35,6 @@ document.addEventListener("DOMContentLoaded", function(event) {
 			enableFormFilling: JSON.parse( embedConfig.enableformfilling )
 		} );
 
-	    /* Define Save API Handler */
-	    var saveApiHandler = function (metaData, content, options) {
-	        console.log(metaData, content, options);
-	        return new Promise(function (resolve, reject) {
-	            /* Dummy implementation of Save API, replace with your business logic */
-	            setTimeout(function () {
-	                var response = {
-	                    code: AdobeDC.View.Enum.ApiResponseCode.SUCCESS,
-	                    data: {
-	                        metaData: Object.assign(metaData, {updatedAt: new Date().getTime()})
-	                    },
-	                };
-	                resolve(response);
-	            }, 2000);
-	        });
-	    };
-
-	    adobeDCView.registerCallback(
-	        AdobeDC.View.Enum.CallbackType.SAVE_API,
-	        saveApiHandler,
-	        {}
-	    );
 	});
 
 });

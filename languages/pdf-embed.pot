@@ -1,0 +1,125 @@
+# Copyright (C) 2022 Formello
+# This file is distributed under the GPL2.
+msgid ""
+msgstr ""
+"Project-Id-Version: Pdf Embed 0.1.8\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/pdf-embed\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"POT-Creation-Date: 2022-02-16T10:58:13+01:00\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"X-Generator: WP-CLI 2.6.0\n"
+"X-Domain: pdf-embed\n"
+
+#. Plugin Name of the plugin
+msgid "Pdf Embed"
+msgstr ""
+
+#. Plugin URI of the plugin
+msgid "https://formello.net/"
+msgstr ""
+
+#. Description of the plugin
+msgid "PDF embedded with official Adobe API."
+msgstr ""
+
+#. Author of the plugin
+msgid "Formello"
+msgstr ""
+
+#. Author URI of the plugin
+msgid "https://formello.net"
+msgstr ""
+
+#: build/index.js:1
+#: src/settings.js:60
+msgid "Settings"
+msgstr ""
+
+#: build/index.js:1
+#: src/settings.js:62
+msgid "API Key"
+msgstr ""
+
+#: build/index.js:1
+#: src/settings.js:66
+msgid "<p>Get your free API key on %s.</p>"
+msgstr ""
+
+#: build/index.js:1
+#: src/settings.js:75
+msgid "Embed mode"
+msgstr ""
+
+#: build/index.js:1
+#: src/settings.js:78
+msgid "Default"
+msgstr ""
+
+#: build/index.js:1
+#: src/settings.js:79
+msgid "Sized Container"
+msgstr ""
+
+#: build/index.js:1
+#: src/settings.js:80
+msgid "Inline"
+msgstr ""
+
+#: build/index.js:1
+#: src/settings.js:85
+msgid "Show Download PDF"
+msgstr ""
+
+#: build/index.js:1
+#: src/settings.js:90
+msgid "Show Print PDF"
+msgstr ""
+
+#: build/index.js:1
+#: src/settings.js:95
+msgid "Show FullScreen Mode"
+msgstr ""
+
+#: build/index.js:1
+#: src/settings.js:100
+msgid "Page Controls Docked"
+msgstr ""
+
+#: build/index.js:1
+#: src/settings.js:105
+msgid "Show Annotation Tools"
+msgstr ""
+
+#: build/index.js:1
+#: src/settings.js:110
+msgid "Enable Form Filling"
+msgstr ""
+
+#: build/index.js:1
+#: src/settings.js:118
+msgid "Height"
+msgstr ""
+
+#: build/index.js:1
+#: src/edit.js:112
+msgid "<p>Please insert a <b>free api Key</b> in the settings panel on the right. Get your free API key on %s.</p>"
+msgstr ""
+
+#: build/index.js:1
+#: src/edit.js:117
+msgid "Missing key"
+msgstr ""
+
+#: block.json
+msgctxt "block title"
+msgid "Embed Pdf"
+msgstr ""
+
+#: block.json
+msgctxt "block description"
+msgid "PDF embedder with official Adobe Embed API."
+msgstr ""

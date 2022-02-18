@@ -62,8 +62,9 @@
 			"default": true
 		}
 	},
-	"textdomain": "adobe-pdf",
+	"textdomain": "pdf-embed",
 	"editorScript": "file:./build/index.js",
 	"editorStyle": "file:./build/index.css",
-	"style": "file:./build/style-index.css"
+	"style": "file:./build/style-index.css",
+	"viewScript": "file:./build/frontend.js"
 }

@@ -44,7 +44,7 @@ import Settings from './settings';
  */
 export default function Holder( props ) {
 
-	const { attributes, setAttributes } = props;
+	const { attributes, setAttributes, clientId } = props;
 	const { mediaUrl, embedMode, height, apiKey, showPrintPdf, fileName } = attributes;
 
 	const onSelectMedia = ( media ) => {
@@ -71,7 +71,7 @@ export default function Holder( props ) {
 			return
 		}
 		document.addEventListener("adobe_dc_view_sdk.ready", function(){ 
-        	var adobeDCView = new AdobeDC.View( { clientId: apiKey, divId: 'adobe-dc-view' } );
+        	var adobeDCView = new AdobeDC.View( { clientId: apiKey, divId: 'block-' + clientId } );
 	        adobeDCView.previewFile({
 	            content:{ location: { url: mediaUrl } },
 	            metaData:{ fileName: fileName }
@@ -86,13 +86,13 @@ export default function Holder( props ) {
 			return
 		}
 
-    	var elm = document.getElementById( 'adobe-dc-view' )
+    	var elm = document.getElementById( 'block-' + clientId )
     	if( !elm ){
     		return
     	}
     	elm.style.height = '500px'
 
-		var adobeDCView = new AdobeDC.View({clientId: apiKey, divId: "adobe-dc-view"});
+		var adobeDCView = new AdobeDC.View({clientId: apiKey, divId: 'block-' + clientId});
         adobeDCView.previewFile({
             content:{ location: { url: mediaUrl } },
             metaData:{ fileName: fileName }
@@ -121,7 +121,7 @@ export default function Holder( props ) {
 							</ToolbarGroup>
 						}
 					</BlockControls>
-					<div id="adobe-dc-view" style={{ height: height }}></div>
+					<div style={{ height: height }}></div>
 				</>
 				:
 				<MediaPlaceholder
