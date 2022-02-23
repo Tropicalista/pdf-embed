@@ -48,10 +48,14 @@ export default function Holder( props ) {
 	const { mediaUrl, embedMode, height, apiKey, showPrintPdf, fileName } = attributes;
 
 	const onSelectMedia = ( media ) => {
-		setAttributes( {
-			mediaUrl: media.url,
-			fileName: media.filename
-		} );
+		console.log(media)
+		
+		if( media.id ){
+			setAttributes( {
+				mediaUrl: media.url,
+				fileName: media.filename ? media.filename : media.title
+			} );
+		}
 	}
 
 	const onSelectUrl = ( media ) => {
@@ -82,12 +86,12 @@ export default function Holder( props ) {
 	}, [] )
 
 	useEffect( () => {
-		if( !window.AdobeDC ){
+		if( !window.AdobeDC || !mediaUrl ){
 			return
 		}
 
     	var elm = document.getElementById( 'block-' + clientId )
-    	if( !elm ){
+    	if( !elm || !mediaUrl ){
     		return
     	}
     	elm.style.height = '500px'

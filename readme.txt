@@ -2,7 +2,7 @@
 Contributors:      Formello, Tropicalista
 Tags:              pdf, pdf embedder, embed pdf, pdf embed api, pdf block, pdf plugin, block
 Tested up to:      5.9
-Stable tag:        0.1.9
+Stable tag:        0.2.0
 License:           GPL-2.0-or-later
 License URI:       https://www.gnu.org/licenses/gpl-2.0.html
 Requires at least: 5.6.0
@@ -29,7 +29,7 @@ If you like this plugin, then consider checking out our other projects:
 * [Formello](https://wordpress.org/plugins/formello): a form builder to collect leads, newsletter signup, contact form and more.
 * [Popper](https://wordpress.org/plugins/popper): a popup builder to increase leads with exit intent.
 * [Mortgage Calculator](https://wordpress.org/plugins/mortgage): a mortgage calculator block for Gutenberg.
-* [Search Console(https://wordpress.org/plugins/search-console): view all your search console data inside WordPress admin.
+* [Search Console](https://wordpress.org/plugins/search-console): view all your search console data inside WordPress admin.
 
 == Installation ==
 
@@ -43,11 +43,14 @@ e.g.
 
 == Frequently Asked Questions ==
 
-= I do need an API key to use this block? =
+= Do I need an API key to use this block? =
 
 Yes you will need a free Adobe PDF Embed API.
 
 == Changelog ==
+
+= 0.2.0 =
+* Fix missing fileName on upload
 
 = 0.1.9 =
 * Fix contributors
