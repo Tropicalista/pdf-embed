@@ -1,1 +1,43 @@
-!function(){var e=document.createElement("script");e.src="https://documentcloud.adobe.com/view-sdk/main.js",document.head.appendChild(e),document.addEventListener("DOMContentLoaded",(function(e){var o=document.getElementById("adobe-dc-view").dataset,n=navigator.language||navigator.userLanguage;document.addEventListener("adobe_dc_view_sdk.ready",(function(){new AdobeDC.View({clientId:o.apikey,divId:"adobe-dc-view",locale:n}).previewFile({content:{location:{url:o.mediaurl}},metaData:{fileName:o.filename}},{embedMode:o.embedmode,showDownloadPDF:JSON.parse(o.showdownloadpdf),showPrintPDF:JSON.parse(o.showprintpdf),showPageControls:JSON.parse(o.showpagecontrols),showFullScreen:JSON.parse(o.showfullscreen),dockPageControls:JSON.parse(o.dockpagecontrols),showAnnotationTools:JSON.parse(o.showannotationtools),enableFormFilling:JSON.parse(o.enableformfilling)})}))}))}();
+/******/ (function() { // webpackBootstrap
+var __webpack_exports__ = {};
+/*!*************************!*\
+  !*** ./src/frontend.js ***!
+  \*************************/
+var script = document.createElement('script');
+script.src = 'https://documentcloud.adobe.com/view-sdk/main.js';
+document.head.appendChild(script);
+document.addEventListener("adobe_dc_view_sdk.ready", function () {
+  var elms = document.querySelectorAll('.wp-block-tropicalista-pdfembed');
+  var userLang = navigator.language || navigator.userLanguage;
+
+  for (let i = 0; i < elms.length; i++) {
+    var embedConfig = elms[i].dataset;
+    var adobeDCView = new AdobeDC.View({
+      clientId: embedConfig.apikey,
+      divId: elms[i].id,
+      locale: userLang
+    });
+    adobeDCView.previewFile({
+      content: {
+        location: {
+          url: embedConfig.mediaurl
+        }
+      },
+      metaData: {
+        fileName: embedConfig.filename
+      }
+    }, {
+      embedMode: embedConfig.embedmode,
+      showDownloadPDF: JSON.parse(embedConfig.showdownloadpdf),
+      showPrintPDF: JSON.parse(embedConfig.showprintpdf),
+      showPageControls: JSON.parse(embedConfig.showpagecontrols),
+      showFullScreen: JSON.parse(embedConfig.showfullscreen),
+      dockPageControls: JSON.parse(embedConfig.dockpagecontrols),
+      showAnnotationTools: JSON.parse(embedConfig.showannotationtools),
+      enableFormFilling: JSON.parse(embedConfig.enableformfilling)
+    });
+  }
+});
+/******/ })()
+;
+//# sourceMappingURL=frontend.js.map

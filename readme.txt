@@ -2,7 +2,7 @@
 Contributors:      Formello, Tropicalista
 Tags:              pdf, pdf embedder, embed pdf, pdf embed api, pdf block, pdf plugin, block
 Tested up to:      5.9
-Stable tag:        0.2.0
+Stable tag:        0.2.1
 License:           GPL-2.0-or-later
 License URI:       https://www.gnu.org/licenses/gpl-2.0.html
 Requires at least: 5.6.0
@@ -48,6 +48,9 @@ e.g.
 Yes you will need a free Adobe PDF Embed API.
 
 == Changelog ==
+
+= 0.2.1 =
+* Allow more than one pdf displayed on a page/post
 
 = 0.2.0 =
 * Fix missing fileName on upload

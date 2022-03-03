@@ -11,6 +11,9 @@
 		"html": false
 	},
 	"attributes": {
+		"blockId": {
+			"type": "string"
+		},
 		"apiKey": {
 			"type": "string"
 		},

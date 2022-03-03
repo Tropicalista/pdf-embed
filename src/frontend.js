@@ -1,18 +1,19 @@
 var script = document.createElement('script');
 script.src = 'https://documentcloud.adobe.com/view-sdk/main.js';
 
-document.head.appendChild(script); //or something of the likes
+document.head.appendChild(script);
 
-document.addEventListener("DOMContentLoaded", function(event) {
-   // Your code to run since DOM is loaded and ready
-	var elm = document.getElementById( 'adobe-dc-view' );
-	var embedConfig = elm.dataset;
+document.addEventListener("adobe_dc_view_sdk.ready", function(){ 
+
+	var elms = document.querySelectorAll( '.wp-block-tropicalista-pdfembed' );
 	var userLang = navigator.language || navigator.userLanguage;
 
-	document.addEventListener("adobe_dc_view_sdk.ready", function(){ 
+	for (let i = 0; i < elms.length; i++) {
+		var embedConfig = elms[i].dataset
+
 		var adobeDCView = new AdobeDC.View( {
 			clientId: embedConfig.apikey, 
-			divId: "adobe-dc-view",
+			divId: elms[i].id,
 			locale: userLang
 		} );
 		adobeDCView.previewFile({
@@ -35,7 +36,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
 			enableFormFilling: JSON.parse( embedConfig.enableformfilling )
 		} );
 
-	});
+	}
 
 });
 

@@ -24,6 +24,7 @@ import { useBlockProps } from '@wordpress/block-editor';
  */
 export default function save( { attributes } ) {
     const { 
+        blockId,
         mediaUrl,
         embedMode,
         height,
@@ -39,7 +40,7 @@ export default function save( { attributes } ) {
     } = attributes;
 
 	return (
-        <div id="adobe-dc-view" { ...useBlockProps.save() } 
+        <div id={ blockId } { ...useBlockProps.save() } 
             style={{ height: attributes.height }}
             data-apiKey={ apiKey }
             data-fileName={ fileName }

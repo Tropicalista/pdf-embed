@@ -23,10 +23,11 @@ import { select, subscribe } from '@wordpress/data';
 export default function Edit( props ) {
 
 	const [ apiLoaded, setApiLoaded] = useState( false )
-	const { attributes, setAttributes } = props
+	const { attributes, setAttributes, clientId } = props
 	const {
 		apiKey,
-		height
+		height,
+		blockId
 	} = attributes;
 
 	useEffect( () => {
@@ -60,6 +61,10 @@ export default function Edit( props ) {
 	            } );
 	        }
 	    } );
+
+	    if(!blockId){
+	    	setAttributes( { blockId: clientId } )
+	    }
 
 	}, [] )
 

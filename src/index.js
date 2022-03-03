@@ -14,6 +14,8 @@ import { registerBlockType } from '@wordpress/blocks';
  */
 import './style.scss';
 
+import metadata from '../block.json';
+
 /**
  * Internal dependencies
  */
@@ -25,7 +27,7 @@ import save from './save';
  *
  * @see https://developer.wordpress.org/block-editor/reference-guides/block-api/block-registration/
  */
-registerBlockType('tropicalista/pdfembed', {
+registerBlockType( metadata, {
 	/**
 	 * @see ./edit.js
 	 */
