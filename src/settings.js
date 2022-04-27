@@ -18,7 +18,7 @@ import {
 	InspectorControls,
 } from '@wordpress/block-editor';
 
-import { RangeControl, PanelBody, PanelRow, SelectControl, RadioControl, ToggleControl, TextControl} from '@wordpress/components';
+import { RangeControl, PanelBody, SelectControl, RadioControl, ToggleControl, TextControl } from '@wordpress/components';
 
 import { Fragment, RawHTML } from '@wordpress/element';
 
@@ -111,7 +111,7 @@ export default function Settings( { attributes, setAttributes } ) {
 					checked={ enableFormFilling }
 					onChange={ ( val ) => setAttributes( { enableFormFilling: val } ) } 
 				/>
-				<PanelRow>
+
 				{ 'SIZED_CONTAINER' === embedMode && (
 					<Fragment>
 					<RangeControl
@@ -122,7 +122,7 @@ export default function Settings( { attributes, setAttributes } ) {
 						help={
 							<small>
 								{ __(
-									'Show the popup when this percentage of the page has been scrolled.'
+									'Set the height of PDF.', 'pdf-embed'
 								) }
 							</small>
 						}
@@ -134,7 +134,7 @@ export default function Settings( { attributes, setAttributes } ) {
 					/>
 					</Fragment>
 				) }				
-				</PanelRow>
+
 			</PanelBody>
 		</Fragment>
 	);
