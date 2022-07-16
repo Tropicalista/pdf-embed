@@ -21,7 +21,7 @@ import metadata from '../block.json';
  */
 import Edit from './edit';
 import save from './save';
-//import filter from './filter';
+import filter from './filter';
 
 /**
  * Every block starts by registering a new block type definition.

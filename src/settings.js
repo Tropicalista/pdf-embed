@@ -18,9 +18,19 @@ import {
 	InspectorControls,
 } from '@wordpress/block-editor';
 
-import { RangeControl, PanelBody, SelectControl, RadioControl, ToggleControl, TextControl } from '@wordpress/components';
+import { 
+	RangeControl,
+	PanelBody,
+	SelectControl,
+	RadioControl,
+	ToggleControl,
+	TextControl,
+	__experimentalInputControl as InputControl,
+	Button,
+} from '@wordpress/components';
 
 import { Fragment, RawHTML } from '@wordpress/element';
+import ApiButton from './api-button';
 
 /**
  * Lets webpack process CSS, SASS or SCSS files referenced in JavaScript files.
@@ -30,6 +40,7 @@ import { Fragment, RawHTML } from '@wordpress/element';
  */
 import './editor.scss';
 import { get } from 'lodash';
+import api from '@wordpress/api';
 
 /**
  * The edit function describes the structure of your block in the context of the
@@ -39,7 +50,9 @@ import { get } from 'lodash';
  *
  * @return {WPElement} Element to render.
  */
-export default function Settings( { attributes, setAttributes } ) {
+export default function Settings( props ) {
+
+	const { attributes, setAttributes } = props;
 
 	const { 
 		mediaUrl,
@@ -58,19 +71,13 @@ export default function Settings( { attributes, setAttributes } ) {
 	return (
 		<Fragment>
 			<PanelBody title={ __( 'Settings', 'pdf-embed' ) } initialOpen={ true }>
-				<TextControl
-					label={ __( 'API Key', 'pdf-embed' ) }
-					help={
-						<RawHTML>
-							{ sprintf(
-								__( '<p>Get your free API key on %s.</p>', 'pdf-embed' ),
-								`<a href="https://www.adobe.io/apis/documentcloud/dcsdk/pdf-embed.html" target="_blank">Adobe  Official site</a>` )
-							}
-						</RawHTML>						
+				<ApiButton {...props} />						
+				<RawHTML>
+					{ sprintf(
+						__( '<p>Get your free API key on %s.</p>', 'pdf-embed' ),
+						`<a href="https://www.adobe.io/apis/documentcloud/dcsdk/pdf-embed.html" target="_blank">Adobe  Official site</a>` )
 					}
-					value={ apiKey }
-					onChange={ ( val ) => setAttributes( { apiKey: val } ) } 
-				/>
+				</RawHTML>
 		        <SelectControl
 		            label={ __( 'Embed mode', 'pdf-embed' ) }
 		            value={ embedMode }

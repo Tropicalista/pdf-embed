@@ -38,6 +38,41 @@ document.addEventListener("adobe_dc_view_sdk.ready", function(){
 
 	}
 
+	var buttons = document.querySelectorAll( 'a' );
+	for (let i = 0; i < buttons.length; i++) {
+		buttons[i].onclick = function(e) { 
+			e.preventDefault()
+			previewFile(e)
+		};
+	}
+
 });
 
 
+/* Function to render the file using PDF Embed API. */
+function previewFile(e)
+{
+    /* Initialize the AdobeDC View object */
+    var adobeDCView = new AdobeDC.View({
+        /* Pass your registered client id */
+        clientId: pdf_embed.apiKey
+    });
+
+    /* Invoke the file preview API on Adobe DC View object */
+    adobeDCView.previewFile({
+        /* Pass information on how to access the file */
+        content: {
+            /* Location of file where it is hosted */
+            location: {
+                url: e.target.href,
+            },
+        },
+        /* Pass meta data of file */
+        metaData: {
+            /* file name */
+            fileName: new URL( e.target.href ).pathname.split("/").pop()
+        }
+    }, {
+	    embedMode: "LIGHT_BOX"
+    });
+};

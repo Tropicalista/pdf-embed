@@ -1,8 +1,8 @@
 === Pdf Embed ===
 Contributors:      Formello, Tropicalista
 Tags:              pdf, pdf embedder, embed pdf, pdf embed api, pdf block, pdf plugin, block
-Tested up to:      5.9
-Stable tag:        0.2.2
+Tested up to:      6.0.1
+Stable tag:        0.2.3
 License:           GPL-2.0-or-later
 License URI:       https://www.gnu.org/licenses/gpl-2.0.html
 Requires at least: 5.6.0
@@ -14,7 +14,7 @@ PDF embedder with official Adobe Embed API.
 
 A simple, responsive and 100% free Gutenberg Block to display PDF on your website using the official [Adobe PDF Embed API](https://www.adobe.io/apis/documentcloud/dcsdk/pdf-embed.html).
 
-= Features =
+== Features ==
 - Embed or inline PDF
 - Fully responsive
 - Works fine on Chrome, Firefox, Opera, Edge and IE11
@@ -48,6 +48,11 @@ e.g.
 Yes you will need a free Adobe PDF Embed API.
 
 == Changelog ==
+
+= 0.2.3 =
+* Better handling of save api key
+* Added input on placeholder
+* Added light mode to buttons
 
 = 0.2.2 =
 * Added comment to function

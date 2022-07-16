@@ -20,9 +20,19 @@ import {
 	MediaReplaceFlow
 } from '@wordpress/block-editor';
 
-import { RangeControl, PanelBody, PanelRow, TextControl, RadioControl, ToggleControl, Placeholder, ToolbarGroup } from '@wordpress/components';
+import { 
+	RangeControl, 
+	PanelBody, 
+	PanelRow, 
+	TextControl, 
+	RadioControl, 
+	ToggleControl, 
+	Placeholder, 
+	ToolbarGroup, 
+	SandBox
+} from '@wordpress/components';
 
-import { useEffect, Fragment } from '@wordpress/element';
+import { useEffect, Fragment, useState } from '@wordpress/element';
 
 /**
  * Lets webpack process CSS, SASS or SCSS files referenced in JavaScript files.
@@ -44,11 +54,10 @@ import Settings from './settings';
  */
 export default function Holder( props ) {
 
-	const { attributes, setAttributes, clientId } = props;
-	const { mediaUrl, embedMode, height, apiKey, showPrintPdf, fileName } = attributes;
+	const { attributes, setAttributes, clientId, isSelected } = props;
+	const { mediaUrl, embedMode, height, apiKey, showPrintPdf, fileName, blockId } = attributes;
 
 	const onSelectMedia = ( media ) => {
-		console.log(media)
 		
 		if( media.id ){
 			setAttributes( {
@@ -75,7 +84,7 @@ export default function Holder( props ) {
 			return
 		}
 		document.addEventListener("adobe_dc_view_sdk.ready", function(){ 
-        	var adobeDCView = new AdobeDC.View( { clientId: apiKey, divId: 'block-' + clientId } );
+        	var adobeDCView = new AdobeDC.View( { clientId: apiKey, divId: blockId } );
 	        adobeDCView.previewFile({
 	            content:{ location: { url: mediaUrl } },
 	            metaData:{ fileName: fileName }
@@ -90,13 +99,13 @@ export default function Holder( props ) {
 			return
 		}
 
-    	var elm = document.getElementById( 'block-' + clientId )
+    	var elm = document.getElementById( blockId )
     	if( !elm || !mediaUrl ){
     		return
     	}
-    	elm.style.height = '500px'
+    	elm.style.height = height + 'px'
 
-		var adobeDCView = new AdobeDC.View({clientId: apiKey, divId: 'block-' + clientId});
+		var adobeDCView = new AdobeDC.View({clientId: apiKey, divId: blockId });
         adobeDCView.previewFile({
             content:{ location: { url: mediaUrl } },
             metaData:{ fileName: fileName }
@@ -104,6 +113,15 @@ export default function Holder( props ) {
 
 
 	}, [ mediaUrl, embedMode, apiKey, showPrintPdf ] )
+
+	const blockProps = useBlockProps();
+
+	const [ interactive, setInteractive ] = useState(false)
+
+    useEffect(() => {
+    	if( !isSelected )
+        	setInteractive( false );
+    }, [isSelected] )
 
 	return (
 		<Fragment>
@@ -125,7 +143,15 @@ export default function Holder( props ) {
 							</ToolbarGroup>
 						}
 					</BlockControls>
-					<div style={{ height: height }}></div>
+					<div>
+						<div id={ blockId } style={{ height: height }}></div>
+						{ ! interactive && (
+							<div
+								className="block-library-embed__interactive-overlay"
+								onMouseUp={ () => setInteractive(true) }
+							/>
+						) }
+					</div>
 				</>
 				:
 				<MediaPlaceholder

@@ -3,11 +3,14 @@ import {
 	useBlockProps, 
 	InspectorControls
 } from '@wordpress/block-editor';
+import { useEntityProp } from '@wordpress/core-data';
 
 import { 
 	BaseControl, 
 	TextControl, 
-	Placeholder, 
+	Placeholder,
+	__experimentalInputControl as InputControl,
+	Button
 } from '@wordpress/components';
 
 import { useEffect, Fragment, useState, RawHTML } from '@wordpress/element';
@@ -17,6 +20,7 @@ import './editor.scss';
 import { get } from 'lodash';
 import Settings from './settings';
 import Holder from './holder';
+import ApiButton from './api-button';
 import api from '@wordpress/api';
 import { select, subscribe } from '@wordpress/data';
 
@@ -25,45 +29,22 @@ export default function Edit( props ) {
 	const [ apiLoaded, setApiLoaded] = useState( false )
 	const { attributes, setAttributes, clientId } = props
 	const {
-		apiKey,
 		height,
-		blockId
+		blockId,
+		apiKey
 	} = attributes;
 
+	useEffect(() => {
+
+		setAttributes( { apiKey: pdf_embed.apiKey } )
+
+	}, [] );
+
 	useEffect( () => {
-
-	    subscribe( () => {
-
-	        const isSavingPost = select('core/editor').isSavingPost();
-	        const isAutosavingPost = select('core/editor').isAutosavingPost();
-
-	        if ( isAutosavingPost ) {
-	            return;
-	        }
-
-	        if ( ! isSavingPost ) {
-	            return;
-	        }
-
-	        const settings = new api.models.Settings( {
-	            [ 'pdf_embed_api_key' ]: apiKey,
-	        } );
-	        settings.save();
-	    });
-
-	    api.loadPromise.then( () => {
-	        let settings = new api.models.Settings();
-
-	        if ( apiLoaded === false ) {
-	            settings.fetch().then( ( response ) => {
-	            	setAttributes( { apiKey: response[ 'pdf_embed_api_key' ] } )
-	            	setApiLoaded( true )
-	            } );
-	        }
-	    } );
+		const idx = clientId.substr( 2, 9 ).replace( '-', '' ).replace( /-/g, '' );
 
 	    if(!blockId){
-	    	setAttributes( { blockId: clientId } )
+	    	setAttributes( { blockId: idx } )
 	    }
 
 	}, [] )
@@ -82,14 +63,15 @@ export default function Edit( props ) {
 					instructions={ 
 						<RawHTML>
 							{ sprintf(
-								__( '<p>Please insert a <b>free api Key</b> in the settings panel on the right. Get your free API key on %s.</p>', 'pdf-embed' ),
+								__( '<p>Please insert a <b>free api Key</b> here or in the settings panel on the right. Get your free API key on %s.</p>', 'pdf-embed' ),
 								`<a href="https://www.adobe.io/apis/documentcloud/dcsdk/pdf-embed.html" target="_blank">Adobe  Official site</a>` )
 							}
 						</RawHTML>	
 					}
 					label={ __( 'Missing key', 'pdf-embed' ) }
-				/>
-			
+				>
+		        	<ApiButton {...props} />						
+                </Placeholder>
 			}
 
 		</div>
