@@ -10,6 +10,9 @@ import {
     ToolbarButton,
     ToolbarGroup,
 } from '@wordpress/components';
+import classnames from 'classnames';
+
+const supportedBlocks = [ 'core/button', 'generateblocks/button' ];
 
 /**
  * Create HOC to add spacing control to inspector controls of block.
@@ -17,7 +20,7 @@ import {
 const withSpacingControl = createHigherOrderComponent( ( BlockEdit ) => {
     return ( props ) => {
         // Do nothing if it's another block than our defined ones.
-        if ( ! [ 'core/button', 'generateblocks/button' ].includes( props.name ) ) {
+        if ( ! supportedBlocks.includes( props.name ) ) {
             return (
                 <BlockEdit { ...props } />
             );
@@ -80,8 +83,32 @@ function addAttributes( settings, name ) {
     return settings;
 }
 
+function addClassName( props, blockType, attributes ) {
+    
+    // Do nothing if it's not one of our specified blocks.
+    if ( ! supportedBlocks.includes( blockType.name ) ) {
+        return props;
+    }
+
+    const { embedPdf } = attributes;
+    const { className } = props;
+
+    return Object.assign( {}, props, {
+        className: classnames( className, {
+            embedPdf: embedPdf,
+        } ),
+    } );
+
+}
+
 addFilter(
     'blocks.registerBlockType',
     'tropicalista/pdf-embed',
     addAttributes
+);
+
+addFilter(
+    'blocks.getSaveContent.extraProps',
+    'tropicalista/pdf-embed',
+    addClassName
 );

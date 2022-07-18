@@ -38,7 +38,8 @@ document.addEventListener("adobe_dc_view_sdk.ready", function(){
 
 	}
 
-	var buttons = document.querySelectorAll( 'a' );
+	var buttons = document.querySelectorAll( '.embedPdf>a, a' );
+	console.log(buttons)
 	for (let i = 0; i < buttons.length; i++) {
 		buttons[i].onclick = function(e) { 
 			e.preventDefault()
@@ -50,8 +51,12 @@ document.addEventListener("adobe_dc_view_sdk.ready", function(){
 
 
 /* Function to render the file using PDF Embed API. */
-function previewFile(e)
-{
+function previewFile(e) {
+
+	if( !e.target.href ){
+		return
+	}
+
     /* Initialize the AdobeDC View object */
     var adobeDCView = new AdobeDC.View({
         /* Pass your registered client id */

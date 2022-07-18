@@ -1,1 +1,88 @@
-!function(){var e=document.createElement("script");function o(e){new AdobeDC.View({clientId:pdf_embed.apiKey}).previewFile({content:{location:{url:e.target.href}},metaData:{fileName:new URL(e.target.href).pathname.split("/").pop()}},{embedMode:"LIGHT_BOX"})}e.src="https://documentcloud.adobe.com/view-sdk/main.js",document.head.appendChild(e),document.addEventListener("adobe_dc_view_sdk.ready",(function(){var e=document.querySelectorAll(".wp-block-tropicalista-pdfembed"),a=navigator.language||navigator.userLanguage;for(let o=0;o<e.length;o++){var n=e[o].dataset;new AdobeDC.View({clientId:n.apikey,divId:e[o].id,locale:a}).previewFile({content:{location:{url:n.mediaurl}},metaData:{fileName:n.filename}},{embedMode:n.embedmode,showDownloadPDF:JSON.parse(n.showdownloadpdf),showPrintPDF:JSON.parse(n.showprintpdf),showPageControls:JSON.parse(n.showpagecontrols),showFullScreen:JSON.parse(n.showfullscreen),dockPageControls:JSON.parse(n.dockpagecontrols),showAnnotationTools:JSON.parse(n.showannotationtools),enableFormFilling:JSON.parse(n.enableformfilling)})}var t=document.querySelectorAll("a");for(let e=0;e<t.length;e++)t[e].onclick=function(e){e.preventDefault(),o(e)}}))}();
+/******/ (function() { // webpackBootstrap
+var __webpack_exports__ = {};
+/*!*************************!*\
+  !*** ./src/frontend.js ***!
+  \*************************/
+var script = document.createElement('script');
+script.src = 'https://documentcloud.adobe.com/view-sdk/main.js';
+document.head.appendChild(script);
+document.addEventListener("adobe_dc_view_sdk.ready", function () {
+  var elms = document.querySelectorAll('.wp-block-tropicalista-pdfembed');
+  var userLang = navigator.language || navigator.userLanguage;
+
+  for (let i = 0; i < elms.length; i++) {
+    var embedConfig = elms[i].dataset;
+    var adobeDCView = new AdobeDC.View({
+      clientId: embedConfig.apikey,
+      divId: elms[i].id,
+      locale: userLang
+    });
+    adobeDCView.previewFile({
+      content: {
+        location: {
+          url: embedConfig.mediaurl
+        }
+      },
+      metaData: {
+        fileName: embedConfig.filename
+      }
+    }, {
+      embedMode: embedConfig.embedmode,
+      showDownloadPDF: JSON.parse(embedConfig.showdownloadpdf),
+      showPrintPDF: JSON.parse(embedConfig.showprintpdf),
+      showPageControls: JSON.parse(embedConfig.showpagecontrols),
+      showFullScreen: JSON.parse(embedConfig.showfullscreen),
+      dockPageControls: JSON.parse(embedConfig.dockpagecontrols),
+      showAnnotationTools: JSON.parse(embedConfig.showannotationtools),
+      enableFormFilling: JSON.parse(embedConfig.enableformfilling)
+    });
+  }
+
+  var buttons = document.querySelectorAll('.embedPdf>a, a');
+  console.log(buttons);
+
+  for (let i = 0; i < buttons.length; i++) {
+    buttons[i].onclick = function (e) {
+      e.preventDefault();
+      previewFile(e);
+    };
+  }
+});
+/* Function to render the file using PDF Embed API. */
+
+function previewFile(e) {
+  if (!e.target.href) {
+    return;
+  }
+  /* Initialize the AdobeDC View object */
+
+
+  var adobeDCView = new AdobeDC.View({
+    /* Pass your registered client id */
+    clientId: pdf_embed.apiKey
+  });
+  /* Invoke the file preview API on Adobe DC View object */
+
+  adobeDCView.previewFile({
+    /* Pass information on how to access the file */
+    content: {
+      /* Location of file where it is hosted */
+      location: {
+        url: e.target.href
+      }
+    },
+
+    /* Pass meta data of file */
+    metaData: {
+      /* file name */
+      fileName: new URL(e.target.href).pathname.split("/").pop()
+    }
+  }, {
+    embedMode: "LIGHT_BOX"
+  });
+}
+
+;
+/******/ })()
+;
+//# sourceMappingURL=frontend.js.map
