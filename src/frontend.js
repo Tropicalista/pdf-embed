@@ -38,8 +38,7 @@ document.addEventListener("adobe_dc_view_sdk.ready", function(){
 
 	}
 
-	var buttons = document.querySelectorAll( '.embedPdf>a, a' );
-	console.log(buttons)
+	var buttons = document.querySelectorAll( '.embedPdf>a, a.embedPdf' );
 	for (let i = 0; i < buttons.length; i++) {
 		buttons[i].onclick = function(e) { 
 			e.preventDefault()
