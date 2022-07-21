@@ -40,9 +40,12 @@ document.addEventListener("adobe_dc_view_sdk.ready", function(){
 
 	var buttons = document.querySelectorAll( '.embedPdf>a, a.embedPdf' );
 	for (let i = 0; i < buttons.length; i++) {
-		buttons[i].onclick = function(e) { 
-			e.preventDefault()
-			previewFile(e)
+		buttons[i].onclick = function(e) {
+			let ext = e.target.href.split(/[#?]/)[0].split('.').pop().trim()
+			if( 'pdf' === ext ){
+				e.preventDefault()
+				previewFile(e)
+			}
 		};
 	}
 
