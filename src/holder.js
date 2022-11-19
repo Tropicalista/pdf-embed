@@ -77,7 +77,7 @@ export default function Holder( props ) {
 	useEffect( () => {
 
 		var script = document.createElement('script');
-		script.src = 'https://documentcloud.adobe.com/view-sdk/main.js';
+		script.src = 'https://documentcloud.adobe.com/view-sdk/viewer.js';
 
   		document.head.appendChild(script);
 		if( ! mediaUrl ){

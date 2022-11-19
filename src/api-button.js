@@ -14,11 +14,15 @@ export default function ApiButton( props ) {
 	const { apiKey } = attributes;
 
 	const saveApi = (val) => {
+		setLoading( true )
         const settings = new api.models.Settings( {
             [ 'pdf_embed_api_key' ]: val,
         } );	
         settings.save( null, {
-        	success: () => setAttributes( { apiKey: val } )
+        	success: () => {
+        		setAttributes( { apiKey: val } )
+				setLoading( false )
+        	}
         })
 	}
 
@@ -44,7 +48,7 @@ export default function ApiButton( props ) {
 						aria-disabled={ loading }
 						isBusy={ loading }
 					>
-						{ __( 'Save', 'formello' ) }
+						{ __( 'Save' ) }
 					</Button>
 	            }
 	        />
