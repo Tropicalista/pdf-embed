@@ -1,5 +1,5 @@
 var script = document.createElement('script');
-script.src = 'https://documentcloud.adobe.com/view-sdk/viewer.js';
+script.src = 'https://documentservices.adobe.com/view-sdk/viewer.js';
 
 document.head.appendChild(script);
 

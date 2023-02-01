@@ -40,7 +40,7 @@ import { useEffect, Fragment, useState } from '@wordpress/element';
  *
  * @see https://www.npmjs.com/package/@wordpress/scripts#using-css
  */
-import './editor.scss';
+
 import { get } from 'lodash';
 import Settings from './settings';
 
@@ -77,7 +77,7 @@ export default function Holder( props ) {
 	useEffect( () => {
 
 		var script = document.createElement('script');
-		script.src = 'https://documentcloud.adobe.com/view-sdk/viewer.js';
+		script.src = 'https://documentservices.adobe.com/view-sdk/viewer.js';
 
   		document.head.appendChild(script);
 		if( ! mediaUrl ){
@@ -143,15 +143,13 @@ export default function Holder( props ) {
 							</ToolbarGroup>
 						}
 					</BlockControls>
-					<div>
-						<div id={ blockId } style={{ height: height }}></div>
-						{ ! interactive && (
-							<div
-								className="block-library-embed__interactive-overlay"
-								onMouseUp={ () => setInteractive(true) }
-							/>
-						) }
-					</div>
+					<div id={ blockId } style={{ height: height }}></div>
+					{ ! interactive && (
+						<div
+							className="block-library-embed__interactive-overlay"
+							onMouseUp={ () => setInteractive(true) }
+						/>
+					) }
 				</>
 				:
 				<MediaPlaceholder
