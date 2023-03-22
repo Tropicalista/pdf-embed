@@ -2,7 +2,7 @@
 Contributors:      Formello, Tropicalista
 Tags:              pdf, pdf embedder, embed pdf, pdf embed api, pdf block, pdf plugin, block
 Tested up to:      6.1.1
-Stable tag:        0.2.8
+Stable tag:        0.2.9
 License:           GPL-2.0-or-later
 License URI:       https://www.gnu.org/licenses/gpl-2.0.html
 Requires at least: 5.6.0
@@ -48,6 +48,10 @@ e.g.
 Yes you will need a free Adobe PDF Embed API.
 
 == Changelog ==
+
+= 0.2.9 =
+* Fix height on editor
+* Fix api button
 
 = 0.2.8 =
 * Fix new api url

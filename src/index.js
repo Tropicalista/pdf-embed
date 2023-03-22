@@ -38,4 +38,4 @@ registerBlockType( metadata, {
 	 * @see ./save.js
 	 */
 	save,
-});
+} );

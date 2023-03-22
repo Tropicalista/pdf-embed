@@ -6,6 +6,10 @@
  */
 
 .wp-block-tropicalista-pdfembed {
-    height: 500px;
-    min-height: 500px;
+    min-height: auto;
+
+    @media (min-width: 320px) and (max-width: 480px) {
+        max-height: 80vh;
+    }
+
 }

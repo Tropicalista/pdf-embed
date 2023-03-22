@@ -1,85 +1,92 @@
-var script = document.createElement('script');
+const script = document.createElement( 'script' );
 script.src = 'https://documentservices.adobe.com/view-sdk/viewer.js';
 
-document.head.appendChild(script);
+document.head.appendChild( script );
 
-document.addEventListener("adobe_dc_view_sdk.ready", function(){ 
+document.addEventListener( 'adobe_dc_view_sdk.ready', function () {
+	const elms = document.querySelectorAll( '.wp-block-tropicalista-pdfembed' );
+	const userLang = navigator.language || navigator.userLanguage;
 
-	var elms = document.querySelectorAll( '.wp-block-tropicalista-pdfembed' );
-	var userLang = navigator.language || navigator.userLanguage;
+	for ( let i = 0; i < elms.length; i++ ) {
+		const embedConfig = elms[ i ].dataset;
 
-	for (let i = 0; i < elms.length; i++) {
-		var embedConfig = elms[i].dataset
-
-		var adobeDCView = new AdobeDC.View( {
-			clientId: embedConfig.apikey, 
-			divId: elms[i].id,
-			locale: userLang
+		const adobeDCView = new AdobeDC.View( {
+			clientId: embedConfig.apikey,
+			divId: elms[ i ].id,
+			locale: userLang,
 		} );
-		adobeDCView.previewFile({
-			content: {
-				location: {
-					url: embedConfig.mediaurl
-				}
+		adobeDCView.previewFile(
+			{
+				content: {
+					location: {
+						url: embedConfig.mediaurl,
+					},
+				},
+				metaData: {
+					fileName: embedConfig.filename,
+				},
 			},
-			metaData: {
-				fileName: embedConfig.filename
+			{
+				embedMode: embedConfig.embedmode,
+				showDownloadPDF: JSON.parse( embedConfig.showdownloadpdf ),
+				showPrintPDF: JSON.parse( embedConfig.showprintpdf ),
+				showPageControls: JSON.parse( embedConfig.showpagecontrols ),
+				showFullScreen: JSON.parse( embedConfig.showfullscreen ),
+				dockPageControls: JSON.parse( embedConfig.dockpagecontrols ),
+				showAnnotationTools: JSON.parse(
+					embedConfig.showannotationtools
+				),
+				enableFormFilling: JSON.parse( embedConfig.enableformfilling ),
 			}
-		}, { 
-			embedMode: embedConfig.embedmode,
-			showDownloadPDF: JSON.parse( embedConfig.showdownloadpdf ),
-			showPrintPDF: JSON.parse( embedConfig.showprintpdf ),
-			showPageControls: JSON.parse( embedConfig.showpagecontrols ),
-			showFullScreen: JSON.parse( embedConfig.showfullscreen ),
-			dockPageControls: JSON.parse( embedConfig.dockpagecontrols ),
-			showAnnotationTools: JSON.parse( embedConfig.showannotationtools ),
-			enableFormFilling: JSON.parse( embedConfig.enableformfilling )
-		} );
-
+		);
 	}
 
-	var buttons = document.querySelectorAll( '.embedPdf>a, a.embedPdf' );
-	for (let i = 0; i < buttons.length; i++) {
-		buttons[i].onclick = function(e) {
-			let ext = e.target.href.split(/[#?]/)[0].split('.').pop().trim()
-			if( 'pdf' === ext ){
-				e.preventDefault()
-				previewFile(e)
+	const buttons = document.querySelectorAll( '.embedPdf>a, a.embedPdf' );
+	for ( let i = 0; i < buttons.length; i++ ) {
+		buttons[ i ].onclick = function ( e ) {
+			const ext = e.target.href
+				.split( /[#?]/ )[ 0 ]
+				.split( '.' )
+				.pop()
+				.trim();
+			if ( 'pdf' === ext ) {
+				e.preventDefault();
+				previewFile( e );
 			}
 		};
 	}
-
-});
-
+} );
 
 /* Function to render the file using PDF Embed API. */
-function previewFile(e) {
-
-	if( !e.target.href ){
-		return
+function previewFile( e ) {
+	if ( ! e.target.href ) {
+		return;
 	}
 
-    /* Initialize the AdobeDC View object */
-    var adobeDCView = new AdobeDC.View({
-        /* Pass your registered client id */
-        clientId: pdf_embed.apiKey
-    });
+	/* Initialize the AdobeDC View object */
+	const adobeDCView = new AdobeDC.View( {
+		/* Pass your registered client id */
+		clientId: pdf_embed.apiKey,
+	} );
 
-    /* Invoke the file preview API on Adobe DC View object */
-    adobeDCView.previewFile({
-        /* Pass information on how to access the file */
-        content: {
-            /* Location of file where it is hosted */
-            location: {
-                url: e.target.href,
-            },
-        },
-        /* Pass meta data of file */
-        metaData: {
-            /* file name */
-            fileName: new URL( e.target.href ).pathname.split("/").pop()
-        }
-    }, {
-	    embedMode: "LIGHT_BOX"
-    });
-};
+	/* Invoke the file preview API on Adobe DC View object */
+	adobeDCView.previewFile(
+		{
+			/* Pass information on how to access the file */
+			content: {
+				/* Location of file where it is hosted */
+				location: {
+					url: e.target.href,
+				},
+			},
+			/* Pass meta data of file */
+			metaData: {
+				/* file name */
+				fileName: new URL( e.target.href ).pathname.split( '/' ).pop(),
+			},
+		},
+		{
+			embedMode: 'LIGHT_BOX',
+		}
+	);
+}

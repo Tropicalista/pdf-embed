@@ -2,13 +2,14 @@
 	"$schema": "https://json.schemastore.org/block.json",
 	"apiVersion": 2,
 	"name": "tropicalista/pdfembed",
-	"version": "0.2.0",
+	"version": "0.2.9",
 	"title": "Embed Pdf",
 	"category": "embed",
 	"icon": "pdf",
 	"description": "PDF embedder with official Adobe Embed API.",
 	"supports": {
-		"html": false
+		"html": false,
+		"anchor": true
 	},
 	"attributes": {
 		"blockId": {
@@ -18,8 +19,7 @@
 			"type": "string"
 		},
 		"width": {
-			"type": "number",
-			"default": 500
+			"type": "number"
 		},
 		"height": {
 			"type": "number"
