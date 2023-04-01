@@ -9,9 +9,17 @@
 	"description": "PDF embedder with official Adobe Embed API.",
 	"supports": {
 		"html": false,
-		"anchor": true
+		"anchor": true,
+		"dimensions": {
+			"minHeight": true
+		}
 	},
 	"attributes": {
+		"id": {
+			"type": "string",
+			"source": "attribute",
+			"attribute": "id"
+		},
 		"blockId": {
 			"type": "string"
 		},

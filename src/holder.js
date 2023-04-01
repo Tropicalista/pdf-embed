@@ -15,23 +15,62 @@ import {
 	MediaPlaceholder,
 	BlockControls,
 	MediaReplaceFlow,
+	InspectorControls,
+	useBlockProps
 } from '@wordpress/block-editor';
 
 import { ToolbarGroup } from '@wordpress/components';
-
-import { useEffect, Fragment, useState } from '@wordpress/element';
+import { useRefEffect } from '@wordpress/compose';
+import { useEffect, Fragment, useState, useRef } from '@wordpress/element';
+import Settings from './settings';
 
 export default function Holder( props ) {
-	const { attributes, setAttributes, isSelected } = props;
+	const { attributes, setAttributes, isSelected, clientId } = props;
 	const {
 		mediaUrl,
 		embedMode,
 		height,
 		apiKey,
 		showPrintPdf,
+		showDownloadPdf,
 		fileName,
 		blockId,
 	} = attributes;
+
+	const ref = useRefEffect( ( element ) => {
+
+		const { ownerDocument } = element;
+		const { defaultView } = ownerDocument;
+
+		const script = defaultView.document.createElement( 'script' );
+		script.src = 'https://documentservices.adobe.com/view-sdk/viewer.js';
+
+		defaultView.document.head.appendChild( script );
+
+		if ( ! mediaUrl ) {
+			return;
+		}
+
+		defaultView.document.addEventListener( 'adobe_dc_view_sdk.ready', function () {
+
+			const adobeDCView = new defaultView.AdobeDC.View( {
+				clientId: apiKey,
+				divId: blockId,
+			} );
+
+			adobeDCView.previewFile(
+				{
+					content: { location: { url: mediaUrl } },
+					metaData: { fileName },
+				},
+				attributes
+			);
+
+		} );
+
+	}, [mediaUrl, embedMode, apiKey, showPrintPdf, showDownloadPdf] );
+
+	const blockProps = useBlockProps( { ref } );
 
 	const onSelectMedia = ( media ) => {
 		if ( media.id ) {
@@ -49,102 +88,60 @@ export default function Holder( props ) {
 		} );
 	};
 
-	useEffect( () => {
-		const script = document.createElement( 'script' );
-		script.src = 'https://documentservices.adobe.com/view-sdk/viewer.js';
-
-		document.head.appendChild( script );
-		if ( ! mediaUrl ) {
-			return;
-		}
-		document.addEventListener( 'adobe_dc_view_sdk.ready', function () {
-			const adobeDCView = new AdobeDC.View( {
-				clientId: apiKey,
-				divId: blockId,
-			} );
-			adobeDCView.previewFile(
-				{
-					content: { location: { url: mediaUrl } },
-					metaData: { fileName },
-				},
-				attributes
-			);
-		} );
-	}, [] );
-
-	useEffect( () => {
-		if ( ! window.AdobeDC || ! mediaUrl ) {
-			return;
-		}
-
-		const elm = document.getElementById( blockId );
-		if ( ! elm || ! mediaUrl ) {
-			return;
-		}
-		elm.style.height = height + 'px';
-
-		const adobeDCView = new AdobeDC.View( {
-			clientId: apiKey,
-			divId: blockId,
-		} );
-		adobeDCView.previewFile(
-			{
-				content: { location: { url: mediaUrl } },
-				metaData: { fileName },
-			},
-			attributes
-		);
-	}, [ mediaUrl, embedMode, apiKey, showPrintPdf ] );
-
 	const [ interactive, setInteractive ] = useState( false );
 
 	useEffect( () => {
 		if ( ! isSelected ) setInteractive( false );
 	}, [ isSelected ] );
 
-	return (
-		<Fragment>
-			{ mediaUrl ? (
-				<>
-					<BlockControls>
-						{ mediaUrl && (
-							<ToolbarGroup>
-								<MediaReplaceFlow
-									mediaURL={ mediaUrl }
-									allowedTypes={ [ 'application/pdf' ] }
-									accept=".pdf"
-									onSelect={ ( media ) =>
-										onSelectMedia( media )
-									}
-								></MediaReplaceFlow>
-							</ToolbarGroup>
-						) }
-					</BlockControls>
-					<div id={ blockId } style={ { height } }></div>
-					{ ! interactive && (
-						<div
-							className="block-library-embed__interactive-overlay"
-							onMouseUp={ () => setInteractive( true ) }
-						/>
+	if( mediaUrl ) {
+		return (
+			<div {...blockProps}>
+				<InspectorControls>
+					<Settings { ...props } />
+				</InspectorControls>
+				<BlockControls>
+					{ mediaUrl && (
+						<ToolbarGroup>
+							<MediaReplaceFlow
+								mediaURL={ mediaUrl }
+								allowedTypes={ [ 'application/pdf' ] }
+								accept=".pdf"
+								onSelect={ ( media ) =>
+									onSelectMedia( media )
+								}
+							></MediaReplaceFlow>
+						</ToolbarGroup>
 					) }
-				</>
-			) : (
-				<MediaPlaceholder
-					icon="pdf"
-					labels={ {
-						title: __( 'PDF' ),
-						instructions: __(
-							'Upload a PDF file, pick one from your media library, or add one with a URL.',
-							'pdf-embed'
-						),
-					} }
-					className="block-image"
-					onSelect={ onSelectMedia }
-					onSelectURL={ onSelectUrl }
-					accept=".pdf"
-					allowedTypes={ [ 'application/pdf' ] }
-				/>
-			) }
-		</Fragment>
+				</BlockControls>
+				<div id={ blockId } style={ { height } }></div>
+				{ ! interactive && (
+					<div
+						className="block-library-embed__interactive-overlay"
+						onMouseUp={ () => setInteractive( true ) }
+					/>
+				) }
+			</div>
+		)
+	}
+
+	return (
+		<div {...blockProps}>
+			<MediaPlaceholder
+				icon="pdf"
+				labels={ {
+					title: __( 'PDF' ),
+					instructions: __(
+						'Upload a PDF file, pick one from your media library, or add one with a URL.',
+						'pdf-embed'
+					),
+				} }
+				className="block-image"
+				onSelect={ onSelectMedia }
+				onSelectURL={ onSelectUrl }
+				accept=".pdf"
+				allowedTypes={ [ 'application/pdf' ] }
+			/>
+		</div>
 	);
 }

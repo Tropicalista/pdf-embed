@@ -5,7 +5,9 @@ import {
 	SelectControl,
 	ToggleControl,
 } from '@wordpress/components';
-
+import {
+	HeightControl,
+} from '@wordpress/block-editor';
 import { Fragment, RawHTML } from '@wordpress/element';
 import ApiButton from './api-button';
 
@@ -103,24 +105,26 @@ export default function Settings( props ) {
 
 				{ 'SIZED_CONTAINER' === embedMode && (
 					<Fragment>
-						<RangeControl
+						<HeightControl
 							label={ __( 'Height', 'pdf-embed' ) }
-							help={
-								<small>
-									{ __(
-										'Set the height of PDF.',
-										'pdf-embed'
-									) }
-								</small>
-							}
 							beforeIcon="image-flip-vertical"
 							value={ height }
 							onChange={ ( val ) =>
 								setAttributes( { height: val } )
 							}
-							min={ 500 }
-							max={ 1000 }
+							help={
+								__(
+									'Set the height of PDF.',
+									'pdf-embed'
+								)
+							}
 						/>
+						<small>
+							{ __(
+								'Set the height of PDF.',
+								'pdf-embed'
+							) }
+						</small>
 					</Fragment>
 				) }
 			</PanelBody>
