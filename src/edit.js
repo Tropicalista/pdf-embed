@@ -1,9 +1,8 @@
 import { __, sprintf } from '@wordpress/i18n';
-import { useBlockProps } from '@wordpress/block-editor';
 
 import { Placeholder } from '@wordpress/components';
 
-import { useEffect, RawHTML, useRef } from '@wordpress/element';
+import { useEffect, RawHTML } from '@wordpress/element';
 
 import './editor.scss';
 import Holder from './holder';
@@ -30,14 +29,12 @@ export default function Edit( props ) {
 		}
 	}, [] );
 
-	if( apiKey ){
-		return <Holder {...props} />
+	if ( apiKey ) {
+		return <Holder { ...props } />;
 	}
 
 	return (
-
 		<Placeholder
-			{...useBlockProps()}
 			icon={ 'pdf' }
 			instructions={
 				<RawHTML>
@@ -54,6 +51,5 @@ export default function Edit( props ) {
 		>
 			<ApiButton { ...props } />
 		</Placeholder>
-
 	);
 }

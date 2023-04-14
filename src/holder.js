@@ -16,16 +16,16 @@ import {
 	BlockControls,
 	MediaReplaceFlow,
 	InspectorControls,
-	useBlockProps
+	useBlockProps,
 } from '@wordpress/block-editor';
 
 import { ToolbarGroup } from '@wordpress/components';
 import { useRefEffect } from '@wordpress/compose';
-import { useEffect, Fragment, useState, useRef } from '@wordpress/element';
+import { useEffect, useState } from '@wordpress/element';
 import Settings from './settings';
 
 export default function Holder( props ) {
-	const { attributes, setAttributes, isSelected, clientId } = props;
+	const { attributes, setAttributes, isSelected } = props;
 	const {
 		mediaUrl,
 		embedMode,
@@ -37,38 +37,41 @@ export default function Holder( props ) {
 		blockId,
 	} = attributes;
 
-	const ref = useRefEffect( ( element ) => {
+	const ref = useRefEffect(
+		( element ) => {
+			const { ownerDocument } = element;
+			const { defaultView } = ownerDocument;
 
-		const { ownerDocument } = element;
-		const { defaultView } = ownerDocument;
+			const script = defaultView.document.createElement( 'script' );
+			script.src =
+				'https://documentservices.adobe.com/view-sdk/viewer.js';
 
-		const script = defaultView.document.createElement( 'script' );
-		script.src = 'https://documentservices.adobe.com/view-sdk/viewer.js';
+			defaultView.document.head.appendChild( script );
 
-		defaultView.document.head.appendChild( script );
+			if ( ! mediaUrl ) {
+				return;
+			}
 
-		if ( ! mediaUrl ) {
-			return;
-		}
+			defaultView.document.addEventListener(
+				'adobe_dc_view_sdk.ready',
+				function () {
+					const adobeDCView = new defaultView.AdobeDC.View( {
+						clientId: apiKey,
+						divId: blockId,
+					} );
 
-		defaultView.document.addEventListener( 'adobe_dc_view_sdk.ready', function () {
-
-			const adobeDCView = new defaultView.AdobeDC.View( {
-				clientId: apiKey,
-				divId: blockId,
-			} );
-
-			adobeDCView.previewFile(
-				{
-					content: { location: { url: mediaUrl } },
-					metaData: { fileName },
-				},
-				attributes
+					adobeDCView.previewFile(
+						{
+							content: { location: { url: mediaUrl } },
+							metaData: { fileName },
+						},
+						attributes
+					);
+				}
 			);
-
-		} );
-
-	}, [mediaUrl, embedMode, apiKey, showPrintPdf, showDownloadPdf] );
+		},
+		[ mediaUrl, embedMode, apiKey, showPrintPdf, showDownloadPdf ]
+	);
 
 	const blockProps = useBlockProps( { ref } );
 
@@ -94,9 +97,9 @@ export default function Holder( props ) {
 		if ( ! isSelected ) setInteractive( false );
 	}, [ isSelected ] );
 
-	if( mediaUrl ) {
+	if ( mediaUrl ) {
 		return (
-			<div {...blockProps}>
+			<div { ...blockProps }>
 				<InspectorControls>
 					<Settings { ...props } />
 				</InspectorControls>
@@ -107,9 +110,7 @@ export default function Holder( props ) {
 								mediaURL={ mediaUrl }
 								allowedTypes={ [ 'application/pdf' ] }
 								accept=".pdf"
-								onSelect={ ( media ) =>
-									onSelectMedia( media )
-								}
+								onSelect={ ( media ) => onSelectMedia( media ) }
 							></MediaReplaceFlow>
 						</ToolbarGroup>
 					) }
@@ -122,11 +123,11 @@ export default function Holder( props ) {
 					/>
 				) }
 			</div>
-		)
+		);
 	}
 
 	return (
-		<div {...blockProps}>
+		<div { ...blockProps }>
 			<MediaPlaceholder
 				icon="pdf"
 				labels={ {

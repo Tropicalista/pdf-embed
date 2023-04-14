@@ -1,13 +1,6 @@
 import { __, sprintf } from '@wordpress/i18n';
-import {
-	RangeControl,
-	PanelBody,
-	SelectControl,
-	ToggleControl,
-} from '@wordpress/components';
-import {
-	HeightControl,
-} from '@wordpress/block-editor';
+import { PanelBody, SelectControl, ToggleControl } from '@wordpress/components';
+import { HeightControl } from '@wordpress/block-editor';
 import { Fragment, RawHTML } from '@wordpress/element';
 import ApiButton from './api-button';
 
@@ -112,18 +105,10 @@ export default function Settings( props ) {
 							onChange={ ( val ) =>
 								setAttributes( { height: val } )
 							}
-							help={
-								__(
-									'Set the height of PDF.',
-									'pdf-embed'
-								)
-							}
+							help={ __( 'Set the height of PDF.', 'pdf-embed' ) }
 						/>
 						<small>
-							{ __(
-								'Set the height of PDF.',
-								'pdf-embed'
-							) }
+							{ __( 'Set the height of PDF.', 'pdf-embed' ) }
 						</small>
 					</Fragment>
 				) }
