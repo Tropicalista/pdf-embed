@@ -50,6 +50,10 @@ export default function Settings( props ) {
 							label: __( 'Inline', 'pdf-embed' ),
 							value: 'IN_LINE',
 						},
+						{
+							label: __( 'Full Window', 'pdf-embed' ),
+							value: 'FULL_WINDOW',
+						},
 					] }
 					onChange={ ( val ) => setAttributes( { embedMode: val } ) }
 				/>
