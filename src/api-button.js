@@ -3,9 +3,10 @@ import { __ } from '@wordpress/i18n';
 import {
 	__experimentalInputControl as InputControl,
 	Button,
+	ExternalLink
 } from '@wordpress/components';
 
-import { Fragment, useState, useEffect } from '@wordpress/element';
+import { Fragment, useState, useEffect, createInterpolateElement } from '@wordpress/element';
 import api from '@wordpress/api';
 
 export default function ApiButton( props ) {
@@ -36,6 +37,21 @@ export default function ApiButton( props ) {
 		<Fragment>
 			<InputControl
 				label={ __( 'API Key', 'pdf-embed' ) }
+				help={ createInterpolateElement(
+					__(
+						'Get your free API key on <a>Adobe  Official site</a>.',
+						'pdf-embed'
+					),
+					{
+						a: (
+							<ExternalLink // eslint-disable-line
+								href="https://www.adobe.io/apis/documentcloud/dcsdk/pdf-embed.html"
+								target="_blank"
+								rel="noreferrer"
+							/>
+						),
+					}
+				) }
 				value={ apiLocal || '' }
 				onChange={ ( val ) => setApiLocal( val ) }
 				suffix={

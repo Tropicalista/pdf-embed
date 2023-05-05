@@ -1,7 +1,7 @@
 import { __, sprintf } from '@wordpress/i18n';
 import { PanelBody, SelectControl, ToggleControl } from '@wordpress/components';
 import { HeightControl } from '@wordpress/block-editor';
-import { Fragment, RawHTML } from '@wordpress/element';
+import { Fragment } from '@wordpress/element';
 import ApiButton from './api-button';
 
 import './editor.scss';
@@ -27,15 +27,6 @@ export default function Settings( props ) {
 				initialOpen={ true }
 			>
 				<ApiButton { ...props } />
-				<RawHTML>
-					{ sprintf(
-						__(
-							'<small>Get your free API key on %s.</small>',
-							'pdf-embed'
-						),
-						`<a href="https://www.adobe.io/apis/documentcloud/dcsdk/pdf-embed.html" target="_blank">Adobe  Official site</a>`
-					) }
-				</RawHTML>
 				<hr />
 				<SelectControl
 					label={ __( 'Embed mode', 'pdf-embed' ) }
@@ -100,7 +91,7 @@ export default function Settings( props ) {
 					}
 				/>
 
-				{ 'SIZED_CONTAINER' === embedMode && (
+				{ 'INLINE' !== embedMode && (
 					<Fragment>
 						<HeightControl
 							label={ __( 'Height', 'pdf-embed' ) }
