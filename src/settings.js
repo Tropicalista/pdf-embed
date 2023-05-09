@@ -91,7 +91,7 @@ export default function Settings( props ) {
 					}
 				/>
 
-				{ 'INLINE' !== embedMode && (
+				{ 'IN_LINE' !== embedMode && (
 					<Fragment>
 						<HeightControl
 							label={ __( 'Height', 'pdf-embed' ) }

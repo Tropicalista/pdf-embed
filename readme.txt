@@ -1,8 +1,8 @@
 === Pdf Embed ===
 Contributors:      Formello, Tropicalista
 Tags:              pdf, pdf embedder, embed pdf, pdf embed api, pdf block, pdf plugin, block
-Tested up to:      6.2.0
-Stable tag:        0.3.2
+Tested up to:      6.2
+Stable tag:        0.3.3
 License:           GPL-2.0-or-later
 License URI:       https://www.gnu.org/licenses/gpl-2.0.html
 Requires at least: 5.6.0
@@ -48,6 +48,10 @@ e.g.
 Yes you will need a free Adobe PDF Embed API.
 
 == Changelog ==
+
+= 0.3.3 =
+* Added better help message.
+* Fiz height control showing on inline option.
 
 = 0.3.2 =
 * Added full window options to enable form filling.
