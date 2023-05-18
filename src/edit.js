@@ -1,9 +1,15 @@
 import { __, sprintf } from '@wordpress/i18n';
 
-import { Placeholder } from '@wordpress/components';
-
-import { useEffect, RawHTML } from '@wordpress/element';
-
+import {
+	__experimentalInputControl as InputControl,
+	Button,
+	ExternalLink,
+	Placeholder
+} from '@wordpress/components';
+import { useEffect, RawHTML, useState, createInterpolateElement } from '@wordpress/element';
+import {
+	useBlockProps,
+} from '@wordpress/block-editor';
 import './editor.scss';
 import Holder from './holder';
 import ApiButton from './api-button';
@@ -29,27 +35,31 @@ export default function Edit( props ) {
 		}
 	}, [] );
 
+	const blockProps = useBlockProps();
+
 	if ( apiKey ) {
 		return <Holder { ...props } />;
 	}
 
 	return (
-		<Placeholder
-			icon={ 'pdf' }
-			instructions={
-				<RawHTML>
-					{ sprintf(
-						__(
-							'<p>Please insert a <b>free api Key</b> here or in the settings panel on the right. Get your free API key on %s.</p>',
-							'pdf-embed'
-						),
-						`<a href="https://www.adobe.io/apis/documentcloud/dcsdk/pdf-embed.html" target="_blank">Adobe  Official site</a>`
-					) }
-				</RawHTML>
-			}
-			label={ __( 'PDF Embed', 'pdf-embed' ) }
-		>
-			<ApiButton { ...props } />
-		</Placeholder>
+		<div { ...blockProps }>
+			<Placeholder
+				icon={ 'pdf' }
+				instructions={
+					<RawHTML>
+						{ sprintf(
+							__(
+								'<p>Please insert a <b>free api Key</b> here or in the settings panel on the right. Get your free API key on %s.</p>',
+								'pdf-embed'
+							),
+							`<a href="https://www.adobe.io/apis/documentcloud/dcsdk/pdf-embed.html" target="_blank">Adobe  Official site</a>`
+						) }
+					</RawHTML>
+				}
+				label={ __( 'PDF Embed', 'pdf-embed' ) }
+			>
+				<ApiButton { ...props } />
+			</Placeholder>
+		</div>
 	);
 }

@@ -23,9 +23,10 @@ import { ToolbarGroup } from '@wordpress/components';
 import { useRefEffect } from '@wordpress/compose';
 import { useEffect, useState } from '@wordpress/element';
 import Settings from './settings';
+import classnames from 'classnames';
 
 export default function Holder( props ) {
-	const { attributes, setAttributes, isSelected } = props;
+	const { attributes, setAttributes, isSelected, className } = props;
 	const {
 		mediaUrl,
 		embedMode,

@@ -27,7 +27,8 @@
 			"type": "number"
 		},
 		"height": {
-			"type": "string"
+			"type": "string",
+			"default": "500px"
 		},
 		"mediaUrl": {
 			"type": "string"

@@ -6,7 +6,7 @@
  */
 
 .wp-block-tropicalista-pdfembed {
-    min-height: auto;
+    min-height: 500px;
 
     @media (min-width: 320px) and (max-width: 480px) {
         max-height: 80vh;

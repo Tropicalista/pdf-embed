@@ -1,5 +1,5 @@
 import { __, sprintf } from '@wordpress/i18n';
-import { PanelBody, SelectControl, ToggleControl } from '@wordpress/components';
+import { PanelBody, SelectControl, ToggleControl, BaseControl } from '@wordpress/components';
 import { HeightControl } from '@wordpress/block-editor';
 import { Fragment } from '@wordpress/element';
 import ApiButton from './api-button';
@@ -92,7 +92,9 @@ export default function Settings( props ) {
 				/>
 
 				{ 'IN_LINE' !== embedMode && (
-					<Fragment>
+					<BaseControl
+						help={ __( 'Set the height of PDF.', 'pdf-embed' ) }
+					>
 						<HeightControl
 							label={ __( 'Height', 'pdf-embed' ) }
 							beforeIcon="image-flip-vertical"
@@ -100,12 +102,8 @@ export default function Settings( props ) {
 							onChange={ ( val ) =>
 								setAttributes( { height: val } )
 							}
-							help={ __( 'Set the height of PDF.', 'pdf-embed' ) }
 						/>
-						<small>
-							{ __( 'Set the height of PDF.', 'pdf-embed' ) }
-						</small>
-					</Fragment>
+					</BaseControl>
 				) }
 			</PanelBody>
 		</Fragment>

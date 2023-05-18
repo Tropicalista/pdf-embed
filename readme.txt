@@ -2,7 +2,7 @@
 Contributors:      Formello, Tropicalista
 Tags:              pdf, pdf embedder, embed pdf, pdf embed api, pdf block, pdf plugin, block
 Tested up to:      6.2
-Stable tag:        0.3.3
+Stable tag:        0.3.4
 License:           GPL-2.0-or-later
 License URI:       https://www.gnu.org/licenses/gpl-2.0.html
 Requires at least: 5.6.0
@@ -21,6 +21,7 @@ A simple, responsive and 100% free Gutenberg Block to display PDF on your websit
 - Show download button
 - Show print button
 - Show full screen
+- 🔥Show PDF in Lightbox on button click
 
 == WHAT’S NEXT ==
 
@@ -48,6 +49,9 @@ e.g.
 Yes you will need a free Adobe PDF Embed API.
 
 == Changelog ==
+
+= 0.3.4 =
+* Added filter to show pdf on Lightbox on button click. Only for ('core/button', 'generateblocks/button')
 
 = 0.3.3 =
 * Added better help message.
