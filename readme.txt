@@ -10,6 +10,8 @@ Requires PHP:      5.6
 
 PDF embedder with official Adobe Embed API.
 
+[vimeo https://vimeo.com/827868503]
+
 == Description ==
 
 A simple, responsive and 100% free Gutenberg Block to display PDF on your website using the official [Adobe PDF Embed API](https://www.adobe.io/apis/documentcloud/dcsdk/pdf-embed.html).
