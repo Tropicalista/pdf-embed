@@ -10,7 +10,7 @@ Requires PHP:      5.6
 
 PDF embedder with official Adobe Embed API.
 
-[vimeo https://vimeo.com/827868503]
+https://vimeo.com/827868503
 
 == Description ==
 
