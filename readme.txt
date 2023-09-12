@@ -1,8 +1,8 @@
 === Pdf Embed ===
 Contributors:      Formello, Tropicalista
 Tags:              pdf, pdf embedder, embed pdf, pdf embed api, pdf block, pdf plugin, block
-Tested up to:      6.2
-Stable tag:        0.3.4
+Tested up to:      6.3
+Stable tag:        0.3.5
 License:           GPL-2.0-or-later
 License URI:       https://www.gnu.org/licenses/gpl-2.0.html
 Requires at least: 5.6.0
@@ -51,6 +51,9 @@ e.g.
 Yes you will need a free Adobe PDF Embed API.
 
 == Changelog ==
+
+= 0.3.5 =
+* Address WP 6.3
 
 = 0.3.4 =
 * Added filter to show pdf on Lightbox on button click. Only for ('core/button', 'generateblocks/button')

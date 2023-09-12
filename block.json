@@ -2,7 +2,7 @@
 	"$schema": "https://json.schemastore.org/block.json",
 	"apiVersion": 2,
 	"name": "tropicalista/pdfembed",
-	"version": "0.3.1",
+	"version": "0.3.5",
 	"title": "Embed Pdf",
 	"category": "embed",
 	"icon": "pdf",
