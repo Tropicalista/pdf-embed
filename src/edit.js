@@ -4,12 +4,15 @@ import {
 	__experimentalInputControl as InputControl,
 	Button,
 	ExternalLink,
-	Placeholder
+	Placeholder,
 } from '@wordpress/components';
-import { useEffect, RawHTML, useState, createInterpolateElement } from '@wordpress/element';
 import {
-	useBlockProps,
-} from '@wordpress/block-editor';
+	useEffect,
+	RawHTML,
+	useState,
+	createInterpolateElement,
+} from '@wordpress/element';
+import { useBlockProps } from '@wordpress/block-editor';
 import './editor.scss';
 import Holder from './holder';
 import ApiButton from './api-button';
@@ -45,17 +48,10 @@ export default function Edit( props ) {
 		<div { ...blockProps }>
 			<Placeholder
 				icon={ 'pdf' }
-				instructions={
-					<RawHTML>
-						{ sprintf(
-							__(
-								'<p>Please insert a <b>free api Key</b> here or in the settings panel on the right. Get your free API key on %s.</p>',
-								'pdf-embed'
-							),
-							`<a href="https://www.adobe.io/apis/documentcloud/dcsdk/pdf-embed.html" target="_blank">Adobe  Official site</a>`
-						) }
-					</RawHTML>
-				}
+				instructions={ __(
+					'Please insert a free api Key here or in the settings panel on the right.',
+					'pdf-embed'
+				) }
 				label={ __( 'PDF Embed', 'pdf-embed' ) }
 			>
 				<ApiButton { ...props } />
