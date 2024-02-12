@@ -19,14 +19,21 @@ import {
 	useBlockProps,
 } from '@wordpress/block-editor';
 
-import { ToolbarGroup } from '@wordpress/components';
+import { ToolbarGroup, Disabled, SandBox } from '@wordpress/components';
 import { useRefEffect } from '@wordpress/compose';
-import { useEffect, useState } from '@wordpress/element';
+import {
+	useEffect,
+	useState,
+	useRef,
+	memo,
+	Fragment,
+} from '@wordpress/element';
 import Settings from './settings';
 import classnames from 'classnames';
+import ViewSDK from './ViewSDK';
 
 export default function Holder( props ) {
-	const { attributes, setAttributes, isSelected, className } = props;
+	const { attributes, setAttributes, isSelected, clientId } = props;
 	const {
 		mediaUrl,
 		embedMode,
@@ -38,43 +45,73 @@ export default function Holder( props ) {
 		blockId,
 	} = attributes;
 
-	const ref = useRefEffect(
+	const [ interactive, setInteractive ] = useState( false );
+
+	/**
+	 * setup the initial authentication of mapkit and setup all the event listeners
+	 *
+	 * ensures that the mapkit object gets initialized on the correct window which is
+	 * needed for the iframe editors.
+	 */
+	const setupRef = useRefEffect(
 		( element ) => {
+			// use the mapkit object on the window of the current document
 			const { ownerDocument } = element;
 			const { defaultView } = ownerDocument;
 
-			const script = defaultView.document.createElement( 'script' );
-			script.src =
-				'https://documentservices.adobe.com/view-sdk/viewer.js';
-
-			defaultView.document.head.appendChild( script );
-
-			if ( ! mediaUrl ) {
-				return;
-			}
-
-			defaultView.document.addEventListener(
+			element.ownerDocument.addEventListener(
 				'adobe_dc_view_sdk.ready',
 				function () {
-					const adobeDCView = new defaultView.AdobeDC.View( {
-						clientId: apiKey,
-						divId: blockId,
-					} );
-
+					const adobeDCView =
+						new element.ownerDocument.defaultView.AdobeDC.View( {
+							clientId: apiKey,
+							divId: blockId,
+						} );
 					adobeDCView.previewFile(
 						{
-							content: { location: { url: mediaUrl } },
+							content: {
+								location: {
+									url: mediaUrl,
+								},
+							},
 							metaData: { fileName },
 						},
-						attributes
+						{ embedMode, showPrintPdf, showDownloadPdf }
 					);
 				}
 			);
+
+			if ( mediaUrl && defaultView.AdobeDC ) {
+				const adobeDCView =
+					new element.ownerDocument.defaultView.AdobeDC.View( {
+						clientId: apiKey,
+						divId: blockId,
+					} );
+				adobeDCView.previewFile(
+					{
+						content: {
+							location: {
+								url: mediaUrl,
+							},
+						},
+						metaData: { fileName },
+					},
+					{ embedMode, showPrintPdf, showDownloadPdf }
+				);
+			}
+
+			if ( ! defaultView.AdobeDC ) {
+				const script = defaultView.document.createElement( 'script' );
+				script.src =
+					'https://acrobatservices.adobe.com/view-sdk/viewer.js';
+
+				defaultView.document.head.appendChild( script );
+			}
 		},
 		[ mediaUrl, embedMode, apiKey, showPrintPdf, showDownloadPdf ]
 	);
 
-	const blockProps = useBlockProps( { ref } );
+	const blockProps = useBlockProps( { ref: setupRef } );
 
 	const onSelectMedia = ( media ) => {
 		if ( media.id ) {
@@ -91,8 +128,6 @@ export default function Holder( props ) {
 			fileName: new URL( media ).pathname.split( '/' ).pop(),
 		} );
 	};
-
-	const [ interactive, setInteractive ] = useState( false );
 
 	useEffect( () => {
 		if ( ! isSelected ) setInteractive( false );
@@ -116,6 +151,7 @@ export default function Holder( props ) {
 						</ToolbarGroup>
 					) }
 				</BlockControls>
+
 				<div id={ blockId } style={ { height } }></div>
 				{ ! interactive && (
 					<div

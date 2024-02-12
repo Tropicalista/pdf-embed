@@ -3,30 +3,50 @@ import { __ } from '@wordpress/i18n';
 import {
 	__experimentalInputControl as InputControl,
 	Button,
-	ExternalLink
+	ExternalLink,
 } from '@wordpress/components';
-
-import { Fragment, useState, useEffect, createInterpolateElement } from '@wordpress/element';
+import {
+	useEntityRecord,
+	useEntityProp,
+	store as coreStore,
+} from '@wordpress/core-data';
+import { useDispatch } from '@wordpress/data';
+import {
+	Fragment,
+	useState,
+	useEffect,
+	createInterpolateElement,
+} from '@wordpress/element';
 import api from '@wordpress/api';
 
 export default function ApiButton( props ) {
 	const { attributes, setAttributes } = props;
 	const { apiKey } = attributes;
 
-	const saveApi = ( val ) => {
-		setLoading( true );
-		const settings = new api.models.Settings( {
-			pdf_embed_api_key: val,
-		} );
-		settings.save( null, {
-			success: () => {
-				setAttributes( { apiKey: val } );
-				setLoading( false );
-			},
+	const { record, isResolving, hasResolved } = useEntityRecord(
+		'root',
+		'site'
+	);
+
+	const [ exampleSetting, setExampleSetting ] = useEntityProp(
+		'root',
+		'site',
+		'pdf_embed_api_key'
+	);
+
+	const { saveEntityRecord, saveEditedEntityRecord } =
+		useDispatch( coreStore );
+
+	const onSettingChanged = ( value ) => {
+		setExampleSetting( value );
+	};
+
+	const t = () => {
+		saveEditedEntityRecord( 'root', 'site', undefined, {
+			pdf_embed_api_key: exampleSetting,
 		} );
 	};
 
-	const [ loading, setLoading ] = useState( false );
 	const [ apiLocal, setApiLocal ] = useState( false );
 
 	useEffect( () => {
@@ -52,14 +72,14 @@ export default function ApiButton( props ) {
 						),
 					}
 				) }
-				value={ apiLocal || '' }
-				onChange={ ( val ) => setApiLocal( val ) }
+				value={ exampleSetting || '' }
+				onChange={ ( val ) => onSettingChanged( val ) }
 				suffix={
 					<Button
-						onClick={ () => saveApi( apiLocal ) }
+						onClick={ () => t() }
 						isPrimary
-						aria-disabled={ loading }
-						isBusy={ loading }
+						aria-disabled={ isResolving }
+						isBusy={ isResolving }
 					>
 						{ __( 'Save' ) }
 					</Button>

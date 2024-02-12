@@ -1,8 +1,8 @@
 === Pdf Embed ===
 Contributors:      Formello, Tropicalista
 Tags:              pdf, pdf embedder, embed pdf, pdf embed api, pdf block, pdf plugin, block
-Tested up to:      6.4.2
-Stable tag:        0.3.6
+Tested up to:      6.4.3
+Stable tag:        0.3.7
 License:           GPL-2.0-or-later
 License URI:       https://www.gnu.org/licenses/gpl-2.0.html
 Requires at least: 5.6.0
@@ -51,6 +51,9 @@ e.g.
 Yes you will need a free Adobe PDF Embed API.
 
 == Changelog ==
+
+= 0.3.7 =
+* Fix Inline embed mode responsive issue
 
 = 0.3.6 =
 * Fix error on WP 6.4

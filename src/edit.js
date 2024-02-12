@@ -2,16 +2,9 @@ import { __, sprintf } from '@wordpress/i18n';
 
 import {
 	__experimentalInputControl as InputControl,
-	Button,
-	ExternalLink,
 	Placeholder,
 } from '@wordpress/components';
-import {
-	useEffect,
-	RawHTML,
-	useState,
-	createInterpolateElement,
-} from '@wordpress/element';
+import { useEffect } from '@wordpress/element';
 import { useBlockProps } from '@wordpress/block-editor';
 import './editor.scss';
 import Holder from './holder';
