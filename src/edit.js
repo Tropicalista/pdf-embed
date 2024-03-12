@@ -1,40 +1,27 @@
-import { __, sprintf } from '@wordpress/i18n';
+import { __ } from '@wordpress/i18n';
 
-import {
-	__experimentalInputControl as InputControl,
-	Placeholder,
-} from '@wordpress/components';
 import { useEffect } from '@wordpress/element';
-import { useBlockProps } from '@wordpress/block-editor';
+import { Placeholder } from '@wordpress/components';
+import { InspectorControls, useBlockProps } from '@wordpress/block-editor';
 import './editor.scss';
-import Holder from './holder';
-import ApiButton from './api-button';
+import KeyInput from './key-input';
+import Settings from './settings';
+import { Viewer } from './viewer';
 
 export default function Edit( props ) {
-	const { attributes, setAttributes, clientId } = props;
-	const { blockId, apiKey, anchor } = attributes;
-
-	useEffect( () => {
-		setAttributes( { apiKey: pdf_embed.apiKey } );
-
-		const idx = clientId
-			.substr( 2, 9 )
-			.replace( '-', '' )
-			.replace( /-/g, '' );
-
-		if ( ! blockId ) {
-			setAttributes( { blockId: idx } );
-		}
-
-		if ( ! anchor ) {
-			setAttributes( { anchor: idx } );
-		}
-	}, [] );
-
+	const { attributes } = props;
+	const { apiKey } = attributes;
 	const blockProps = useBlockProps();
 
 	if ( apiKey ) {
-		return <Holder { ...props } />;
+		return (
+			<div { ...blockProps }>
+				<InspectorControls>
+					<Settings { ...props } />
+				</InspectorControls>
+				<Viewer { ...props } />
+			</div>
+		);
 	}
 
 	return (
@@ -47,7 +34,7 @@ export default function Edit( props ) {
 				) }
 				label={ __( 'PDF Embed', 'pdf-embed' ) }
 			>
-				<ApiButton { ...props } />
+				<KeyInput { ...props } />
 			</Placeholder>
 		</div>
 	);

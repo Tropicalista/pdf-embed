@@ -21,35 +21,36 @@ const withSpacingControl = createHigherOrderComponent( ( BlockEdit ) => {
 		const { attributes, setAttributes } = props;
 
 		const isPdfLink = () => {
-			if ( !attributes.url ) {
+			if ( ! attributes.url ) {
 				return false;
 			}
-			return 'pdf' === attributes.url
-				.split( /[#?]/ )[ 0 ]
-				.split( '.' )
-				.pop()
-				.trim();
-		}
+			return (
+				'pdf' ===
+				attributes.url.split( /[#?]/ )[ 0 ].split( '.' ).pop().trim()
+			);
+		};
 
 		return (
 			<Fragment>
 				<BlockEdit { ...props } />
 				<BlockControls>
-				{
-					isPdfLink() && 
-					<ToolbarGroup>
-						<ToolbarButton
-							label={ __( 'Open pdf in lightbox', 'pdf-embed' ) }
-							icon={ 'pdf' }
-							onClick={ () => {
-								setAttributes( {
-									embedPdf: ! attributes.embedPdf,
-								} );
-							} }
-							isPressed={ attributes.embedPdf }
-						/>
-					</ToolbarGroup>
-				}
+					{ isPdfLink() && (
+						<ToolbarGroup>
+							<ToolbarButton
+								label={ __(
+									'Open pdf in lightbox',
+									'pdf-embed'
+								) }
+								icon={ 'pdf' }
+								onClick={ () => {
+									setAttributes( {
+										embedPdf: ! attributes.embedPdf,
+									} );
+								} }
+								isPressed={ attributes.embedPdf }
+							/>
+						</ToolbarGroup>
+					) }
 				</BlockControls>
 			</Fragment>
 		);

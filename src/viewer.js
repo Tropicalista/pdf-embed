@@ -15,44 +15,20 @@ import {
 	MediaPlaceholder,
 	BlockControls,
 	MediaReplaceFlow,
-	InspectorControls,
 	useBlockProps,
 } from '@wordpress/block-editor';
 
-import { ToolbarGroup, Disabled, SandBox } from '@wordpress/components';
-import { useRefEffect } from '@wordpress/compose';
-import {
-	useEffect,
-	useState,
-	useRef,
-	memo,
-	Fragment,
-} from '@wordpress/element';
-import Settings from './settings';
-import classnames from 'classnames';
-import ViewSDK from './ViewSDK';
+import { ToolbarGroup } from '@wordpress/components';
+import { useRefEffect, useInstanceId } from '@wordpress/compose';
+import { useEffect, useState } from '@wordpress/element';
 
-export default function Holder( props ) {
+export const Viewer = ( props ) => {
 	const { attributes, setAttributes, isSelected, clientId } = props;
-	const {
-		mediaUrl,
-		embedMode,
-		height,
-		apiKey,
-		showPrintPdf,
-		showDownloadPdf,
-		fileName,
-		blockId,
-	} = attributes;
+	const { mediaUrl, height, fileName, apiKey } = attributes;
+	const instanceId = useInstanceId( Viewer );
 
 	const [ interactive, setInteractive ] = useState( false );
 
-	/**
-	 * setup the initial authentication of mapkit and setup all the event listeners
-	 *
-	 * ensures that the mapkit object gets initialized on the correct window which is
-	 * needed for the iframe editors.
-	 */
 	const setupRef = useRefEffect(
 		( element ) => {
 			// use the mapkit object on the window of the current document
@@ -62,42 +38,13 @@ export default function Holder( props ) {
 			element.ownerDocument.addEventListener(
 				'adobe_dc_view_sdk.ready',
 				function () {
-					const adobeDCView =
-						new element.ownerDocument.defaultView.AdobeDC.View( {
-							clientId: apiKey,
-							divId: blockId,
-						} );
-					adobeDCView.previewFile(
-						{
-							content: {
-								location: {
-									url: mediaUrl,
-								},
-							},
-							metaData: { fileName },
-						},
-						{ embedMode, showPrintPdf, showDownloadPdf }
-					);
+					if ( defaultView.AdobeDC ) {
+						loadAdobeDc();
+					}
 				}
 			);
-
 			if ( mediaUrl && defaultView.AdobeDC ) {
-				const adobeDCView =
-					new element.ownerDocument.defaultView.AdobeDC.View( {
-						clientId: apiKey,
-						divId: blockId,
-					} );
-				adobeDCView.previewFile(
-					{
-						content: {
-							location: {
-								url: mediaUrl,
-							},
-						},
-						metaData: { fileName },
-					},
-					{ embedMode, showPrintPdf, showDownloadPdf }
-				);
+				loadAdobeDc();
 			}
 
 			if ( ! defaultView.AdobeDC ) {
@@ -108,10 +55,29 @@ export default function Holder( props ) {
 				defaultView.document.head.appendChild( script );
 			}
 		},
-		[ mediaUrl, embedMode, apiKey, showPrintPdf, showDownloadPdf ]
+		[ attributes ]
 	);
 
-	const blockProps = useBlockProps( { ref: setupRef } );
+	const loadAdobeDc = () => {
+		const adobeDCView = new window.AdobeDC.View( {
+			clientId: apiKey,
+			divId: clientId,
+		} );
+
+		adobeDCView.previewFile(
+			{
+				content: {
+					location: {
+						url: mediaUrl,
+					},
+				},
+				metaData: { fileName },
+			},
+			attributes
+		);
+	};
+
+	const blockProps = useBlockProps( { id: instanceId } );
 
 	const onSelectMedia = ( media ) => {
 		if ( media.id ) {
@@ -136,9 +102,6 @@ export default function Holder( props ) {
 	if ( mediaUrl ) {
 		return (
 			<div { ...blockProps }>
-				<InspectorControls>
-					<Settings { ...props } />
-				</InspectorControls>
 				<BlockControls>
 					{ mediaUrl && (
 						<ToolbarGroup>
@@ -151,12 +114,19 @@ export default function Holder( props ) {
 						</ToolbarGroup>
 					) }
 				</BlockControls>
-
-				<div id={ blockId } style={ { height } }></div>
+				<div
+					id={ clientId }
+					ref={ setupRef }
+					style={ { height } }
+					tabIndex={ '-1' }
+				></div>
 				{ ! interactive && (
+					/* eslint-disable-next-line jsx-a11y/no-static-element-interactions */
 					<div
 						className="block-library-embed__interactive-overlay"
-						onMouseUp={ () => setInteractive( true ) }
+						onMouseUp={ () => {
+							setInteractive( true );
+						} }
 					/>
 				) }
 			</div>
@@ -182,4 +152,4 @@ export default function Holder( props ) {
 			/>
 		</div>
 	);
-}
+};

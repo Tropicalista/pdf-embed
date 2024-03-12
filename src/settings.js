@@ -1,8 +1,13 @@
-import { __, sprintf } from '@wordpress/i18n';
-import { PanelBody, SelectControl, ToggleControl, BaseControl } from '@wordpress/components';
+import { __ } from '@wordpress/i18n';
+import {
+	PanelBody,
+	SelectControl,
+	ToggleControl,
+	BaseControl,
+} from '@wordpress/components';
 import { HeightControl } from '@wordpress/block-editor';
 import { Fragment } from '@wordpress/element';
-import ApiButton from './api-button';
+import ApiButton from './key-input';
 
 import './editor.scss';
 
@@ -13,11 +18,15 @@ export default function Settings( props ) {
 		showDownloadPDF,
 		showPrintPDF,
 		showFullScreen,
-		dockPageControls,
+		showZoomControl,
 		embedMode,
 		height,
 		showAnnotationTools,
 		enableFormFilling,
+		defaultViewMode,
+		showBookmarks,
+		showThumbnails,
+		dockPageControls,
 	} = attributes;
 
 	return (
@@ -30,9 +39,12 @@ export default function Settings( props ) {
 				<hr />
 				<SelectControl
 					label={ __( 'Embed mode', 'pdf-embed' ) }
-					value={ embedMode }
+					value={ embedMode || 'FULL_WINDOW' }
 					options={ [
-						{ label: __( 'Default', 'pdf-embed' ), value: '' },
+						{
+							label: __( 'Full Window', 'pdf-embed' ),
+							value: 'FULL_WINDOW',
+						},
 						{
 							label: __( 'Sized Container', 'pdf-embed' ),
 							value: 'SIZED_CONTAINER',
@@ -41,12 +53,34 @@ export default function Settings( props ) {
 							label: __( 'Inline', 'pdf-embed' ),
 							value: 'IN_LINE',
 						},
-						{
-							label: __( 'Full Window', 'pdf-embed' ),
-							value: 'FULL_WINDOW',
-						},
 					] }
 					onChange={ ( val ) => setAttributes( { embedMode: val } ) }
+				/>
+				<SelectControl
+					label={ __( 'Default view mode', 'pdf-embed' ) }
+					value={ defaultViewMode }
+					options={ [
+						{ label: __( 'Default', 'pdf-embed' ), value: '' },
+						{
+							label: __( 'Fit Page', 'pdf-embed' ),
+							value: 'FIT_PAGE',
+						},
+						{
+							label: __( 'Fit Width', 'pdf-embed' ),
+							value: 'FIT_WIDTH',
+						},
+						{
+							label: __( 'Two Column Fit Page', 'pdf-embed' ),
+							value: 'TWO_COLUMN_FIT_PAGE',
+						},
+						{
+							label: __( 'Two Column', 'pdf-embed' ),
+							value: 'TWO_COLUMN',
+						},
+					] }
+					onChange={ ( val ) =>
+						setAttributes( { defaultViewMode: val } )
+					}
 				/>
 				<ToggleControl
 					label={ __( 'Show Download PDF', 'pdf-embed' ) }
@@ -70,10 +104,24 @@ export default function Settings( props ) {
 					}
 				/>
 				<ToggleControl
-					label={ __( 'Page Controls Docked', 'pdf-embed' ) }
-					checked={ dockPageControls }
+					label={ __( 'Show Zoom Control', 'pdf-embed' ) }
+					checked={ showZoomControl }
 					onChange={ ( val ) =>
-						setAttributes( { dockPageControls: val } )
+						setAttributes( { showZoomControl: val } )
+					}
+				/>
+				<ToggleControl
+					label={ __( 'Show Thumbnails', 'pdf-embed' ) }
+					checked={ showThumbnails }
+					onChange={ ( val ) =>
+						setAttributes( { showThumbnails: val } )
+					}
+				/>
+				<ToggleControl
+					label={ __( 'Show Bookmarks', 'pdf-embed' ) }
+					checked={ showBookmarks }
+					onChange={ ( val ) =>
+						setAttributes( { showBookmarks: val } )
 					}
 				/>
 				<ToggleControl
@@ -81,6 +129,13 @@ export default function Settings( props ) {
 					checked={ showAnnotationTools }
 					onChange={ ( val ) =>
 						setAttributes( { showAnnotationTools: val } )
+					}
+				/>
+				<ToggleControl
+					label={ __( 'Dock Page Controls', 'pdf-embed' ) }
+					checked={ dockPageControls }
+					onChange={ ( val ) =>
+						setAttributes( { dockPageControls: val } )
 					}
 				/>
 				<ToggleControl

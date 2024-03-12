@@ -5,13 +5,13 @@ document.head.appendChild( script );
 
 document.addEventListener( 'adobe_dc_view_sdk.ready', function () {
 	const elms = document.querySelectorAll( '.wp-block-tropicalista-pdfembed' );
-	const userLang = navigator.language || navigator.userLanguage;
+	const userLang = window.navigator.language || window.navigator.userLanguage;
 
 	for ( let i = 0; i < elms.length; i++ ) {
 		const embedConfig = elms[ i ].dataset;
 
-		const adobeDCView = new AdobeDC.View( {
-			clientId: embedConfig.apikey,
+		const adobeDCView = new window.AdobeDC.View( {
+			clientId: embedConfig.apiKey,
 			divId: elms[ i ].id,
 			locale: userLang,
 		} );
@@ -19,24 +19,26 @@ document.addEventListener( 'adobe_dc_view_sdk.ready', function () {
 			{
 				content: {
 					location: {
-						url: embedConfig.mediaurl,
+						url: embedConfig.mediaUrl,
 					},
 				},
 				metaData: {
-					fileName: embedConfig.filename,
+					fileName: embedConfig.fileName,
 				},
 			},
 			{
-				embedMode: embedConfig.embedmode,
-				showDownloadPDF: JSON.parse( embedConfig.showdownloadpdf ),
-				showPrintPDF: JSON.parse( embedConfig.showprintpdf ),
-				showPageControls: JSON.parse( embedConfig.showpagecontrols ),
-				showFullScreen: JSON.parse( embedConfig.showfullscreen ),
-				dockPageControls: JSON.parse( embedConfig.dockpagecontrols ),
-				showAnnotationTools: JSON.parse(
-					embedConfig.showannotationtools
-				),
-				enableFormFilling: JSON.parse( embedConfig.enableformfilling ),
+				embedMode: embedConfig.embedMode,
+				dockPageControls: Boolean( embedConfig.dockPageControls ),
+				showDownloadPDF: Boolean( embedConfig.showDownloadPdf ),
+				showPrintPDF: Boolean( embedConfig.showPrintPdf ),
+				showPageControls: Boolean( embedConfig.showPageControls ),
+				showZoomControl: Boolean( embedConfig.showZoomControl ),
+				showFullScreen: Boolean( embedConfig.showFullScreen ),
+				showThumbnails: Boolean( embedConfig.showThumbnails ),
+				showBookmarks: Boolean( embedConfig.showBookmarks ),
+				defaultViewMode: embedConfig.defaultViewMode,
+				showAnnotationTools: Boolean( embedConfig.showAnnotationTools ),
+				enableFormFilling: Boolean( embedConfig.enableFormFilling ),
 			}
 		);
 	}

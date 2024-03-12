@@ -14,7 +14,7 @@ import { registerBlockType } from '@wordpress/blocks';
  */
 import './style.scss';
 
-import metadata from '../block.json';
+import metadata from './block.json';
 
 /**
  * Internal dependencies
@@ -22,6 +22,7 @@ import metadata from '../block.json';
 import Edit from './edit';
 import save from './save';
 import './filter';
+import deprecated from './deprecated';
 
 /**
  * Every block starts by registering a new block type definition.
@@ -29,6 +30,7 @@ import './filter';
  * @see https://developer.wordpress.org/block-editor/reference-guides/block-api/block-registration/
  */
 registerBlockType( metadata, {
+	deprecated,
 	/**
 	 * @see ./edit.js
 	 */

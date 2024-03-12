@@ -1,8 +1,7 @@
 import { useBlockProps } from '@wordpress/block-editor';
 
-export default function save( { attributes } ) {
+export default function save( { attributes, className } ) {
 	const {
-		blockId,
 		mediaUrl,
 		embedMode,
 		height,
@@ -10,29 +9,36 @@ export default function save( { attributes } ) {
 		showPrintPDF,
 		showDownloadPDF,
 		showPageControls,
+		showBookmarks,
+		showThumbnails,
 		showFullScreen,
-		dockPageControls,
+		defaultViewMode,
+		showZoomControl,
 		fileName,
 		showAnnotationTools,
 		enableFormFilling,
+		dockPageControls,
 	} = attributes;
 
 	return (
 		<div
-			id={ blockId }
-			{ ...useBlockProps.save() }
+			{ ...useBlockProps.save( { className } ) }
 			style={ { height } }
-			data-apiKey={ apiKey }
-			data-fileName={ fileName }
-			data-mediaUrl={ mediaUrl }
-			data-embedMode={ embedMode }
-			data-showDownloadPDF={ showDownloadPDF }
-			data-showPrintPDF={ showPrintPDF }
-			data-showPageControls={ showPageControls }
-			data-showFullScreen={ showFullScreen }
-			data-dockPageControls={ dockPageControls }
-			data-showAnnotationTools={ showAnnotationTools }
-			data-enableFormFilling={ enableFormFilling }
+			data-api-key={ apiKey }
+			data-file-name={ fileName }
+			data-media-url={ mediaUrl }
+			data-embed-mode={ embedMode }
+			data-dock-page-controls={ dockPageControls || undefined }
+			data-show-download-PDF={ showDownloadPDF || undefined }
+			data-show-print-PDF={ showPrintPDF || undefined }
+			data-show-page-controls={ showPageControls || undefined }
+			data-show-thumbnails={ showThumbnails || undefined }
+			data-show-bookmarks={ showBookmarks || undefined }
+			data-show-zoom-control={ showZoomControl || undefined }
+			data-show-full-screen={ showFullScreen || undefined }
+			data-default-view-mode={ defaultViewMode || undefined }
+			data-show-annotation-tools={ showAnnotationTools || undefined }
+			data-enable-form-filling={ enableFormFilling || undefined }
 		></div>
 	);
 }
