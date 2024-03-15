@@ -10,11 +10,6 @@
     "features": {
         "networking": true
     },
-    "settings": {
-        "blogname": "My Blog",
-        "blogdescription": "Just another WordPress site",
-        "pdf_embed": "3fb4fad95dd14dfcb6848b7b8b810cbc"
-    },
     "steps": [
         {
             "step": "installPlugin",
