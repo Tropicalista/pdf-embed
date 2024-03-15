@@ -1,6 +1,6 @@
 === Pdf Embed ===
 Contributors:      Formello, Tropicalista
-Tags:              pdf, pdf embedder, embed pdf, pdf embed api, pdf block, pdf plugin, block
+Tags:              pdf embedder, embed pdf, pdf embed api, pdf block, block
 Tested up to:      6.4.3
 Stable tag:        0.3.8
 License:           GPL-2.0-or-later
