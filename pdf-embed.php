@@ -39,15 +39,6 @@ add_action( 'init', 'pdf_embed_block_init' );
  */
 function pdf_embed_setting() {
 	wp_add_inline_script(
-		'tropicalista-pdfembed-editor-script',
-		'const pdf_embed = ' . wp_json_encode(
-			array(
-				'apiKey' => get_option( 'pdf_embed_api_key', '' ),
-			)
-		),
-		'before'
-	);
-	wp_add_inline_script(
 		'tropicalista-pdfembed-view-script',
 		'const pdf_embed = ' . wp_json_encode(
 			array(

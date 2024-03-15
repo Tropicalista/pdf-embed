@@ -17,21 +17,23 @@ import {
 	MediaReplaceFlow,
 	useBlockProps,
 } from '@wordpress/block-editor';
+import { useEntityProp } from '@wordpress/core-data';
 
 import { ToolbarGroup } from '@wordpress/components';
 import { useRefEffect, useInstanceId } from '@wordpress/compose';
-import { useEffect, useState } from '@wordpress/element';
+import { useEffect, useState, useRef } from '@wordpress/element';
 
 export const Viewer = ( props ) => {
 	const { attributes, setAttributes, isSelected, clientId } = props;
-	const { mediaUrl, height, fileName, apiKey } = attributes;
+	const { mediaUrl, height, fileName } = attributes;
 	const instanceId = useInstanceId( Viewer );
+	const [ pdfKey ] = useEntityProp( 'root', 'site', 'pdf_embed_api_key' );
 
 	const [ interactive, setInteractive ] = useState( false );
+	const pdf = useRef( null );
 
 	const setupRef = useRefEffect(
 		( element ) => {
-			// use the mapkit object on the window of the current document
 			const { ownerDocument } = element;
 			const { defaultView } = ownerDocument;
 
@@ -44,7 +46,7 @@ export const Viewer = ( props ) => {
 				}
 			);
 			if ( mediaUrl && defaultView.AdobeDC ) {
-				loadAdobeDc();
+				if ( pdfKey ) loadAdobeDc();
 			}
 
 			if ( ! defaultView.AdobeDC ) {
@@ -60,7 +62,7 @@ export const Viewer = ( props ) => {
 
 	const loadAdobeDc = () => {
 		const adobeDCView = new window.AdobeDC.View( {
-			clientId: apiKey,
+			clientId: pdfKey,
 			divId: clientId,
 		} );
 

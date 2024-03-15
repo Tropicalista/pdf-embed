@@ -1,6 +1,5 @@
 const script = document.createElement( 'script' );
 script.src = 'https://acrobatservices.adobe.com/view-sdk/viewer.js';
-
 document.head.appendChild( script );
 
 document.addEventListener( 'adobe_dc_view_sdk.ready', function () {

@@ -24,7 +24,8 @@
       "type": "string",
       "source": "attribute",
       "selector": "div.wp-block-tropicalista-pdfembed",
-      "attribute": "data-api-key"
+      "attribute": "data-api-key",
+      "default": ""
     },
     "width": {
       "type": "number"

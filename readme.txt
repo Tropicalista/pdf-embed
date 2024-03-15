@@ -54,6 +54,7 @@ Yes you will need a free [Adobe PDF Embed API](https://developer.adobe.com/docum
 
 = 0.3.8 =
 * Added control to fit page
+* Always include the api key stored in DB
 
 = 0.3.7 =
 * Fix Inline embed mode responsive issue

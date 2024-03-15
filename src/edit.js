@@ -1,19 +1,34 @@
 import { __ } from '@wordpress/i18n';
 
 import { useEffect } from '@wordpress/element';
-import { Placeholder } from '@wordpress/components';
+import {
+	Placeholder,
+	Disabled,
+	Spinner,
+	Flex,
+	FlexItem,
+} from '@wordpress/components';
 import { InspectorControls, useBlockProps } from '@wordpress/block-editor';
 import './editor.scss';
 import KeyInput from './key-input';
 import Settings from './settings';
 import { Viewer } from './viewer';
+import { useEntityRecord } from '@wordpress/core-data';
 
 export default function Edit( props ) {
-	const { attributes } = props;
-	const { apiKey } = attributes;
 	const blockProps = useBlockProps();
 
-	if ( apiKey ) {
+	const { record, hasResolved } = useEntityRecord( 'root', 'site' );
+
+	if ( ! hasResolved ) {
+		return (
+			<Disabled>
+				<Spinner />
+			</Disabled>
+		);
+	}
+
+	if ( record.pdf_embed_api_key ) {
 		return (
 			<div { ...blockProps }>
 				<InspectorControls>
@@ -34,7 +49,11 @@ export default function Edit( props ) {
 				) }
 				label={ __( 'PDF Embed', 'pdf-embed' ) }
 			>
-				<KeyInput { ...props } />
+				<Flex expanded={ true }>
+					<FlexItem isBlock>
+						<KeyInput { ...props } />
+					</FlexItem>
+				</Flex>
 			</Placeholder>
 		</div>
 	);
