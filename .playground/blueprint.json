@@ -22,15 +22,15 @@
             }
         },
         {
-            "step": "setSiteOptions",
-            "options": {
-                "pdf_embed": "3fb4fad95dd14dfcb6848b7b8b810cbc"
-            }
-        },
-        {
             "step": "login",
             "username": "admin",
             "password": "password"
+        },
+        {
+            "step": "setSiteOptions",
+            "options": {
+                "pdf_embed_api_key": "3fb4fad95dd14dfcb6848b7b8b810cbc"
+            }
         }
     ]
 }
