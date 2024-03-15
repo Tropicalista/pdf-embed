@@ -1,0 +1,35 @@
+{
+    "landingPage": "\/wp-admin\/plugins.php",
+    "preferredVersions": {
+        "php": "8.0",
+        "wp": "latest"
+    },
+    "phpExtensionBundles": [
+        "kitchen-sink"
+    ],
+    "features": {
+        "networking": true
+    },
+    "settings": {
+        "blogname": "My Blog",
+        "blogdescription": "Just another WordPress site",
+        "pdf_embed": "3fb4fad95dd14dfcb6848b7b8b810cbc"
+    },
+    "steps": [
+        {
+            "step": "installPlugin",
+            "pluginZipFile": {
+                "resource": "url",
+                "url": "https:\/\/downloads.wordpress.org\/plugin\/pdf-embed.0.3.8.zip"
+            },
+            "options": {
+                "activate": true
+            }
+        },
+        {
+            "step": "login",
+            "username": "admin",
+            "password": "password"
+        }
+    ]
+}
