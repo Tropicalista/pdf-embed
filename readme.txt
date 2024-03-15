@@ -53,6 +53,8 @@ Yes you will need a free [Adobe PDF Embed API](https://developer.adobe.com/docum
 == Changelog ==
 
 = 0.3.8 =
+* Better api key handling
+* Added view mode options
 * Added control to fit page
 * Always include the api key stored in DB
 

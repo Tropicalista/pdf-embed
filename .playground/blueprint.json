@@ -20,7 +20,7 @@
             "step": "installPlugin",
             "pluginZipFile": {
                 "resource": "url",
-                "url": "https:\/\/downloads.wordpress.org\/plugin\/pdf-embed.0.37.zip"
+                "url": "https:\/\/downloads.wordpress.org\/plugin\/pdf-embed.0.3.8.zip"
             },
             "options": {
                 "activate": true

@@ -35,7 +35,7 @@ document.addEventListener( 'adobe_dc_view_sdk.ready', function () {
 				showFullScreen: Boolean( embedConfig.showFullScreen ),
 				showThumbnails: Boolean( embedConfig.showThumbnails ),
 				showBookmarks: Boolean( embedConfig.showBookmarks ),
-				defaultViewMode: embedConfig.defaultViewMode,
+				defaultViewMode: embedConfig.defaultViewMode || 'FULL_WINDOW',
 				showAnnotationTools: Boolean( embedConfig.showAnnotationTools ),
 				enableFormFilling: Boolean( embedConfig.enableFormFilling ),
 			}

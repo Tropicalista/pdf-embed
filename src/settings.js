@@ -60,7 +60,10 @@ export default function Settings( props ) {
 					label={ __( 'Default view mode', 'pdf-embed' ) }
 					value={ defaultViewMode }
 					options={ [
-						{ label: __( 'Default', 'pdf-embed' ), value: '' },
+						{
+							label: __( 'Default', 'pdf-embed' ),
+							value: 'FIT_PAGE',
+						},
 						{
 							label: __( 'Fit Page', 'pdf-embed' ),
 							value: 'FIT_PAGE',
