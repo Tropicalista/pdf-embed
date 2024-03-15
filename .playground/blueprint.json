@@ -15,7 +15,17 @@
             "step": "installPlugin",
             "pluginZipFile": {
                 "resource": "url",
-                "url": "https:\/\/downloads.wordpress.org\/plugin\/pdf-embed.0.3.8.zip"
+                "url": "https:\/\/downloads.wordpress.org\/plugin\/pdf-embed.zip"
+            },
+            "options": {
+                "activate": true
+            }
+        },
+        {
+            "step": "installPlugin",
+            "pluginZipFile": {
+                "resource": "url",
+                "url": "https:\/\/downloads.wordpress.org\/plugin\/formello.zip"
             },
             "options": {
                 "activate": true

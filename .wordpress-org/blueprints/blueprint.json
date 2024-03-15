@@ -15,7 +15,17 @@
             "step": "installPlugin",
             "pluginZipFile": {
                 "resource": "url",
-                "url": "https:\/\/downloads.wordpress.org\/plugin\/pdf-embed.0.3.8.zip"
+                "url": "https:\/\/downloads.wordpress.org\/plugin\/pdf-embed.zip"
+            },
+            "options": {
+                "activate": true
+            }
+        },
+        {
+            "step": "installPlugin",
+            "pluginZipFile": {
+                "resource": "url",
+                "url": "https:\/\/downloads.wordpress.org\/plugin\/formello.zip"
             },
             "options": {
                 "activate": true
@@ -25,6 +35,12 @@
             "step": "login",
             "username": "admin",
             "password": "password"
+        },
+        {
+            "step": "setSiteOptions",
+            "options": {
+                "pdf_embed_api_key": "3fb4fad95dd14dfcb6848b7b8b810cbc"
+            }
         }
     ]
 }
