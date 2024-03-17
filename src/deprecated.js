@@ -65,6 +65,18 @@ const supports = { html: false, anchor: true };
 const v1 = {
 	blockAttributes,
 	supports,
+	isEligible() {
+		return true;
+	},
+	migrate( attributes ) {
+		console.log(attributes)
+		return {
+			...attributes,
+			'data-api-key': attributes.apiKey,
+			'data-media-url': attributes.mediaUrl,
+			'data-default-view-mode': 'FIT_PAGE',
+		};
+	},
 	save( { attributes } ) {
 		const {
 			blockId,

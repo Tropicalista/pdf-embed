@@ -13,7 +13,7 @@ import {
 	useEffect,
 } from '@wordpress/element';
 
-export default function KeyInput( { attributes, setAttributes } ) {
+export default function KeyInput( { setAttributes } ) {
 	const [ pdfKey ] = useEntityProp( 'root', 'site', 'pdf_embed_api_key' );
 	const [ siteUrl ] = useEntityProp( 'root', 'site', 'url' );
 

@@ -21,7 +21,7 @@ import { useEntityProp } from '@wordpress/core-data';
 
 import { ToolbarGroup } from '@wordpress/components';
 import { useRefEffect, useInstanceId } from '@wordpress/compose';
-import { useEffect, useState, useRef } from '@wordpress/element';
+import { useEffect, useState } from '@wordpress/element';
 
 export const Viewer = ( props ) => {
 	const { attributes, setAttributes, isSelected, clientId } = props;
@@ -30,7 +30,6 @@ export const Viewer = ( props ) => {
 	const [ pdfKey ] = useEntityProp( 'root', 'site', 'pdf_embed_api_key' );
 
 	const [ interactive, setInteractive ] = useState( false );
-	const pdf = useRef( null );
 
 	const setupRef = useRefEffect(
 		( element ) => {
@@ -41,12 +40,12 @@ export const Viewer = ( props ) => {
 				'adobe_dc_view_sdk.ready',
 				function () {
 					if ( defaultView.AdobeDC ) {
-						loadAdobeDc();
+						loadAdobeDc( defaultView );
 					}
 				}
 			);
 			if ( mediaUrl && defaultView.AdobeDC ) {
-				if ( pdfKey ) loadAdobeDc();
+				if ( pdfKey ) loadAdobeDc( defaultView );
 			}
 
 			if ( ! defaultView.AdobeDC ) {
@@ -60,8 +59,8 @@ export const Viewer = ( props ) => {
 		[ attributes ]
 	);
 
-	const loadAdobeDc = () => {
-		const adobeDCView = new window.AdobeDC.View( {
+	const loadAdobeDc = ( view ) => {
+		const adobeDCView = new view.AdobeDC.View( {
 			clientId: pdfKey,
 			divId: clientId,
 		} );

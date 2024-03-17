@@ -10,7 +10,7 @@ document.addEventListener( 'adobe_dc_view_sdk.ready', function () {
 		const embedConfig = elms[ i ].dataset;
 
 		const adobeDCView = new window.AdobeDC.View( {
-			clientId: embedConfig.apiKey,
+			clientId: embedConfig.clientId,
 			divId: elms[ i ].id,
 			locale: userLang,
 		} );
@@ -26,7 +26,7 @@ document.addEventListener( 'adobe_dc_view_sdk.ready', function () {
 				},
 			},
 			{
-				embedMode: embedConfig.embedMode,
+				embedMode: embedConfig.embedMode || 'FULL_WINDOW',
 				dockPageControls: Boolean( embedConfig.dockPageControls ),
 				showDownloadPDF: Boolean( embedConfig.showDownloadPdf ),
 				showPrintPDF: Boolean( embedConfig.showPrintPdf ),
@@ -35,7 +35,7 @@ document.addEventListener( 'adobe_dc_view_sdk.ready', function () {
 				showFullScreen: Boolean( embedConfig.showFullScreen ),
 				showThumbnails: Boolean( embedConfig.showThumbnails ),
 				showBookmarks: Boolean( embedConfig.showBookmarks ),
-				defaultViewMode: embedConfig.defaultViewMode || 'FULL_WINDOW',
+				defaultViewMode: embedConfig.defaultViewMode || 'FIT_PAGE',
 				showAnnotationTools: Boolean( embedConfig.showAnnotationTools ),
 				enableFormFilling: Boolean( embedConfig.enableFormFilling ),
 			}
