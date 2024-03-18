@@ -69,12 +69,12 @@ const v1 = {
 		return true;
 	},
 	migrate( attributes ) {
-		console.log(attributes)
+		console.log( attributes );
 		return {
 			...attributes,
-			'data-api-key': attributes.apiKey,
-			'data-media-url': attributes.mediaUrl,
-			'data-default-view-mode': 'FIT_PAGE',
+			'data-apikey': attributes.apiKey,
+			'data-mediaurl': attributes.mediaUrl,
+			'data-defaultviewmode': 'FIT_PAGE',
 		};
 	},
 	save( { attributes } ) {
