@@ -29,12 +29,12 @@ Much of what the PDF Embed API delivers is supported in the mobile devices. Howe
 
 ##
 
-| Embed mode                 | Description                                                                                                                         | Example |
-|----------------------------|-------------------------------------------------------------------------------------------------------------------------------------|---------|
-| Full window (default mode) | Renders the PDF viewer into the full height and width of the parent element. Best suited for storage and productivity applications. |         |
-| Sized container            | The sized container mode displays PDFs in a boxed container with landscape orientation. Best suited for presentations.              |         |
-| In-Line                    | All PDF pages rendered in line within a web page. Best suited for reading applications.                                             |         |
-| Lightbox                   | Displays PDFs in a focused view. Best suited for content websites, content portals, and email.                                      |         |
+| Embed mode                 | Description                                                                                                                         | Example                      |
+|----------------------------|-------------------------------------------------------------------------------------------------------------------------------------|------------------------------|
+| Full window (default mode) | Renders the PDF viewer into the full height and width of the parent element. Best suited for storage and productivity applications. | ![Full Window](https://developer.adobe.com/document-services/docs/static/38e444fffa8fc0f335e8464d4ee70420/f1bd9/embedfull.webp) |
+| Sized container            | The sized container mode displays PDFs in a boxed container with landscape orientation. Best suited for presentations.              | ![Sized Container](https://developer.adobe.com/document-services/docs/static/ac789460629aad711a093856dfe0f690/f1bd9/embedsized.webp) |
+| In-Line                    | All PDF pages rendered in line within a web page. Best suited for reading applications.                                             | ![In-line](https://developer.adobe.com/document-services/docs/static/9e248d1adb940e7f8f9c14dab8023415/f1bd9/embedinline.webp) |
+| Lightbox                   | Displays PDFs in a focused view. Best suited for content websites, content portals, and email.                                      | ![Lightbox](https://developer.adobe.com/document-services/docs/static/3b9567cd27b371b4fbeecf5b2c17648a/c28f2/lightbox.webp) |
 
 
 ## Requirements
