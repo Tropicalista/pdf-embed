@@ -2,11 +2,11 @@
 
 ![Social Sharing](https://github.com/tropicalista/pdf-embed/blob/main/_wordpress-org/banner-1544x500.png)
 
-[![Active Installs](https://img.shields.io/wordpress/plugin/installs/pdf-embed?logo=wordpress&logoColor=%23fff&label=Active%20Installs&labelColor=%230F172A&color=%230F172A)](https://wordpress.org/plugins/pdf-embed/) [![Playground Demo Link](https://img.shields.io/wordpress/plugin/v/pdf-embed?logo=wordpress&logoColor=%23fff&label=Playground%20Demo&labelColor=%233858e9&color=%233858e9)](https://playground.wordpress.net/?blueprint-url=https://raw.githubusercontent.com/ndiego/pdf-embed/main/_playground/blueprint.json)
+[![Active Installs](https://img.shields.io/wordpress/plugin/installs/pdf-embed?logo=wordpress&logoColor=%23fff&label=Active%20Installs&labelColor=%230F172A&color=%230F172A)](https://wordpress.org/plugins/pdf-embed/) [![Playground Demo Link](https://img.shields.io/wordpress/plugin/v/pdf-embed?logo=wordpress&logoColor=%23fff&label=Playground%20Demo&labelColor=%233858e9&color=%233858e9)](https://playground.wordpress.net/?blueprint-url=https://raw.githubusercontent.com/tropicalista/pdf-embed/main/.playground/blueprint.json)
 
 A simple little WordPress block that allows you to embed PDF to your website using official [Adobe Pdf Embed API](https://www.adobe.io/apis/documentcloud/dcsdk/pdf-embed.html). This block requires you to create a **free** api key on Adobe. [Download on WordPress.org](https://wordpress.org/plugins/pdf-embed/)
 
-### Supported Browsers
+## Supported Browsers
 
 PDF Embed API is supported on the latest versions of the following browsers:
 
@@ -19,7 +19,7 @@ PDF Embed API is supported on the latest versions of the following browsers:
 
 PDF printing is currently not supported in Firefox browser. Clicking on the print PDF button will show a popup asking users to download the file and print using Adobe Acrobat Reader.
 
-### Mobile support
+## Mobile support
 
 Much of what the PDF Embed API delivers is supported in the mobile devices. However, there are some limitations:
 
@@ -27,7 +27,7 @@ Much of what the PDF Embed API delivers is supported in the mobile devices. Howe
 - Print functionality is unsupported.
 - PDF download is unsupported on iOS devices, but it is supported on Android.
 
-##
+## Embed mode
 
 | Embed mode                 | Description                                                                                                                         | Example                      |
 |----------------------------|-------------------------------------------------------------------------------------------------------------------------------------|------------------------------|
