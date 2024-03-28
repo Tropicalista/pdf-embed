@@ -1,8 +1,8 @@
 # Pdf Embed
 
-![Social Sharing](https://github.com/tropicalista/pdf-embed/blob/main/_wordpress-org/banner-1544x500.png)
+![Social Sharing](https://github.com/tropicalista/pdf-embed/blob/master/.wordpress-org/banner-1544x500.png)
 
-[![Active Installs](https://img.shields.io/wordpress/plugin/installs/pdf-embed?logo=wordpress&logoColor=%23fff&label=Active%20Installs&labelColor=%230F172A&color=%230F172A)](https://wordpress.org/plugins/pdf-embed/) [![Playground Demo Link](https://img.shields.io/wordpress/plugin/v/pdf-embed?logo=wordpress&logoColor=%23fff&label=Playground%20Demo&labelColor=%233858e9&color=%233858e9)](https://playground.wordpress.net/?blueprint-url=https://raw.githubusercontent.com/tropicalista/pdf-embed/main/.playground/blueprint.json)
+[![Active Installs](https://img.shields.io/wordpress/plugin/installs/pdf-embed?logo=wordpress&logoColor=%23fff&label=Active%20Installs&labelColor=%230F172A&color=%230F172A)](https://wordpress.org/plugins/pdf-embed/) [![Playground Demo Link](https://img.shields.io/wordpress/plugin/v/pdf-embed?logo=wordpress&logoColor=%23fff&label=Playground%20Demo&labelColor=%233858e9&color=%233858e9)](https://playground.wordpress.net/?blueprint-url=https://raw.githubusercontent.com/tropicalista/pdf-embed/master/.playground/blueprint.json)
 
 A simple little WordPress block that allows you to embed PDF to your website using official [Adobe Pdf Embed API](https://www.adobe.io/apis/documentcloud/dcsdk/pdf-embed.html). This block requires you to create a **free** api key on Adobe. [Download on WordPress.org](https://wordpress.org/plugins/pdf-embed/)
 
