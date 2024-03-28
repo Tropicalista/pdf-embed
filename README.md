@@ -1,10 +1,10 @@
-# Social Sharing Block
+# Pdf Embed
 
 ![Social Sharing](https://github.com/tropicalista/pdf-embed/blob/main/_wordpress-org/banner-1544x500.png)
 
-[![Active Installs](https://img.shields.io/wordpress/plugin/installs/social-sharing-block?logo=wordpress&logoColor=%23fff&label=Active%20Installs&labelColor=%230F172A&color=%230F172A)](https://wordpress.org/plugins/social-sharing-block/) [![Playground Demo Link](https://img.shields.io/wordpress/plugin/v/social-sharing-block?logo=wordpress&logoColor=%23fff&label=Playground%20Demo&labelColor=%233858e9&color=%233858e9)](https://playground.wordpress.net/?blueprint-url=https://raw.githubusercontent.com/ndiego/social-sharing-block/main/_playground/blueprint.json)
+[![Active Installs](https://img.shields.io/wordpress/plugin/installs/pdf-embed?logo=wordpress&logoColor=%23fff&label=Active%20Installs&labelColor=%230F172A&color=%230F172A)](https://wordpress.org/plugins/social-sharing-block/) [![Playground Demo Link](https://img.shields.io/wordpress/plugin/v/pdf-embed?logo=wordpress&logoColor=%23fff&label=Playground%20Demo&labelColor=%233858e9&color=%233858e9)](https://playground.wordpress.net/?blueprint-url=https://raw.githubusercontent.com/ndiego/social-sharing-block/main/_playground/blueprint.json)
 
-A simple little WordPress block that allows you to add social share icons to your website. Choose from 15+ of the most popular social channels. [Download on WordPress.org](https://wordpress.org/plugins/social-sharing-block/)
+A simple little WordPress block that allows you to embed PDF to your website using official [Adobe Pdf Embed API](https://www.adobe.io/apis/documentcloud/dcsdk/pdf-embed.html). This block requires you to create a **free** api key on Adobe. [Download on WordPress.org](https://wordpress.org/plugins/pdf-embed/)
 
 ### Supported Browsers
 
