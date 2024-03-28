@@ -17,7 +17,7 @@ import { useEntityRecord } from '@wordpress/core-data';
 
 export default function Edit( props ) {
 	const blockProps = useBlockProps();
-
+console.log(props)
 	const { record, hasResolved } = useEntityRecord( 'root', 'site' );
 
 	if ( ! hasResolved ) {
