@@ -2,7 +2,7 @@
 
 ![Social Sharing](https://github.com/tropicalista/pdf-embed/blob/main/_wordpress-org/banner-1544x500.png)
 
-[![Active Installs](https://img.shields.io/wordpress/plugin/installs/pdf-embed?logo=wordpress&logoColor=%23fff&label=Active%20Installs&labelColor=%230F172A&color=%230F172A)](https://wordpress.org/plugins/social-sharing-block/) [![Playground Demo Link](https://img.shields.io/wordpress/plugin/v/pdf-embed?logo=wordpress&logoColor=%23fff&label=Playground%20Demo&labelColor=%233858e9&color=%233858e9)](https://playground.wordpress.net/?blueprint-url=https://raw.githubusercontent.com/ndiego/social-sharing-block/main/_playground/blueprint.json)
+[![Active Installs](https://img.shields.io/wordpress/plugin/installs/pdf-embed?logo=wordpress&logoColor=%23fff&label=Active%20Installs&labelColor=%230F172A&color=%230F172A)](https://wordpress.org/plugins/pdf-embed/) [![Playground Demo Link](https://img.shields.io/wordpress/plugin/v/pdf-embed?logo=wordpress&logoColor=%23fff&label=Playground%20Demo&labelColor=%233858e9&color=%233858e9)](https://playground.wordpress.net/?blueprint-url=https://raw.githubusercontent.com/ndiego/pdf-embed/main/_playground/blueprint.json)
 
 A simple little WordPress block that allows you to embed PDF to your website using official [Adobe Pdf Embed API](https://www.adobe.io/apis/documentcloud/dcsdk/pdf-embed.html). This block requires you to create a **free** api key on Adobe. [Download on WordPress.org](https://wordpress.org/plugins/pdf-embed/)
 
@@ -46,7 +46,7 @@ Much of what the PDF Embed API delivers is supported in the mobile devices. Howe
 
 1. Set up a local WordPress development environment.
 2. Clone / download this repository into the `wp-content/plugins` folder.
-3. Navigate to the `wp-content/plugins/social-sharing-block` folder in the command line.
+3. Navigate to the `wp-content/plugins/pdf-embed` folder in the command line.
 4. Run `npm install` to install the plugin's dependencies within a `/node_modules/` folder.
 5. Run `composer install` to install the additional WordPress composer tools within a `/vendor/` folder.
 6. Run `npm run start` to compile and watch source files for changes while developing.
