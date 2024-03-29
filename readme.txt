@@ -1,8 +1,8 @@
 === Pdf Embed ===
 Contributors:      tropicalista
 Tags:              pdf embedder, embed pdf, pdf embed api, pdf block, block
-Tested up to:      6.4.3
-Stable tag:        0.3.9
+Tested up to:      6.5.0
+Stable tag:        0.4.0
 License:           GPL-2.0-or-later
 License URI:       https://www.gnu.org/licenses/gpl-2.0.html
 Requires at least: 5.6.0
@@ -51,6 +51,10 @@ e.g.
 Yes you will need a free [Adobe PDF Embed API](https://developer.adobe.com/document-services/apis/pdf-embed/).
 
 == Changelog ==
+
+= 0.4.0 =
+* Added assets and readme
+* Added min height(500px) to default
 
 = 0.3.9 =
 * FIx migration error (temporary)
