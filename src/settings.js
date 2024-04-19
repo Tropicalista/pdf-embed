@@ -29,6 +29,48 @@ export default function Settings( props ) {
 		dockPageControls,
 	} = attributes;
 
+	const embedModeHelp = {
+		FULL_WINDOW: __(
+			'Renders the PDF viewer into the full height and width of the parent element.',
+			'pdf-embed'
+		),
+		SIZED_CONTAINER: __(
+			'The sized container mode displays PDFs in a boxed container with landscape orientation.',
+			'pdf-embed'
+		),
+		IN_LINE: __(
+			'All PDF pages rendered in line within a web page.',
+			'pdf-embed'
+		),
+	};
+
+	const defaultViewsHelp = {
+		FIT_PAGE: __(
+			'Displays the entire page in the current view pane.',
+			'pdf-embed'
+		),
+		FIT_WIDTH: __(
+			'Expands the page horizontally to the full width of the document pane.',
+			'pdf-embed'
+		),
+		TWO_COLUMN_FIT_PAGE: __(
+			'Displays two pages of the PDF side by side where the entire two pages are displayed in the current view pane.',
+			'pdf-embed'
+		),
+		TWO_COLUMN: __(
+			'Displays two pages of the PDF side by side in the current view pane.',
+			'pdf-embed'
+		),
+		CONTINUOS: __(
+			'This mode displays all the document pages one after the other and users can easily navigate through the pages by scrolling up or down.',
+			'pdf-embed'
+		),
+		SINGLE_PAGE: __(
+			"This mode displays only a single document page at a time and doesn't show any adjoining page.",
+			'pdf-embed'
+		),
+	};
+
 	return (
 		<Fragment>
 			<PanelBody
@@ -55,15 +97,12 @@ export default function Settings( props ) {
 						},
 					] }
 					onChange={ ( val ) => setAttributes( { embedMode: val } ) }
+					help={ embedModeHelp[ embedMode ] }
 				/>
 				<SelectControl
 					label={ __( 'Default view mode', 'pdf-embed' ) }
 					value={ defaultViewMode }
 					options={ [
-						{
-							label: __( 'Default', 'pdf-embed' ),
-							value: 'FIT_PAGE',
-						},
 						{
 							label: __( 'Fit Page', 'pdf-embed' ),
 							value: 'FIT_PAGE',
@@ -73,31 +112,42 @@ export default function Settings( props ) {
 							value: 'FIT_WIDTH',
 						},
 						{
-							label: __( 'Two Column Fit Page', 'pdf-embed' ),
-							value: 'TWO_COLUMN_FIT_PAGE',
-						},
-						{
 							label: __( 'Two Column', 'pdf-embed' ),
 							value: 'TWO_COLUMN',
+						},
+						{
+							label: __( 'Two Column Fit Page', 'pdf-embed' ),
+							value: 'TWO_COLUMN_FIT_PAGE',
 						},
 					] }
 					onChange={ ( val ) =>
 						setAttributes( { defaultViewMode: val } )
 					}
+					help={ defaultViewsHelp[ defaultViewMode ] }
 				/>
-				<ToggleControl
-					label={ __( 'Show Download PDF', 'pdf-embed' ) }
-					checked={ showDownloadPDF }
-					onChange={ ( val ) =>
-						setAttributes( { showDownloadPDF: val } )
-					}
-				/>
+				{ 'FULL_WINDOW' === embedMode && (
+					<ToggleControl
+						label={ __( 'Show Download PDF', 'pdf-embed' ) }
+						checked={ showDownloadPDF }
+						onChange={ ( val ) =>
+							setAttributes( { showDownloadPDF: val } )
+						}
+						help={ __(
+							'If true, PDF can be downloaded in all embed modes. Set this to false to disable PDF download.',
+							'pdf-embed'
+						) }
+					/>
+				) }
 				<ToggleControl
 					label={ __( 'Show Print PDF', 'pdf-embed' ) }
 					checked={ showPrintPDF }
 					onChange={ ( val ) =>
 						setAttributes( { showPrintPDF: val } )
 					}
+					help={ __(
+						'If true, PDF can be printed in all embed modes. Set this to false to disable PDF printing.',
+						'pdf-embed'
+					) }
 				/>
 				<ToggleControl
 					label={ __( 'Show FullScreen Mode', 'pdf-embed' ) }
@@ -105,6 +155,10 @@ export default function Settings( props ) {
 					onChange={ ( val ) =>
 						setAttributes( { showFullScreen: val } )
 					}
+					help={ __(
+						'By default, the full screen toggle appears in the bottom toolbar in sized container embed mode. Set this to false to hide the full screen toggle.',
+						'pdf-embed'
+					) }
 				/>
 				<ToggleControl
 					label={ __( 'Show Zoom Control', 'pdf-embed' ) }
@@ -112,6 +166,10 @@ export default function Settings( props ) {
 					onChange={ ( val ) =>
 						setAttributes( { showZoomControl: val } )
 					}
+					help={ __(
+						'Set this to false to hide the zoom-in and zoom-out options available in the right-hand panel. This configuration will work for full window and lightbox embed modes.',
+						'pdf-embed'
+					) }
 				/>
 				<ToggleControl
 					label={ __( 'Show Thumbnails', 'pdf-embed' ) }
@@ -119,6 +177,10 @@ export default function Settings( props ) {
 					onChange={ ( val ) =>
 						setAttributes( { showThumbnails: val } )
 					}
+					help={ __(
+						'Page thumbnails are available by default in full window and lightbox embed modes. Set this to false if you want to hide the thumbnails from the right-hand panel.',
+						'pdf-embed'
+					) }
 				/>
 				<ToggleControl
 					label={ __( 'Show Bookmarks', 'pdf-embed' ) }
@@ -126,6 +188,10 @@ export default function Settings( props ) {
 					onChange={ ( val ) =>
 						setAttributes( { showBookmarks: val } )
 					}
+					help={ __(
+						'PDF bookmarks are available by default in full window and lightbox embed modes. Set this to false if you want to hide the bookmarks from the right-hand panel.',
+						'pdf-embed'
+					) }
 				/>
 				<ToggleControl
 					label={ __( 'Show Annotation Tools', 'pdf-embed' ) }
@@ -133,6 +199,10 @@ export default function Settings( props ) {
 					onChange={ ( val ) =>
 						setAttributes( { showAnnotationTools: val } )
 					}
+					help={ __(
+						'If true, tools such as add text, sticky note, highlight, and so on appear in the quick tools menu on the left-hand side in full window embed mode.',
+						'pdf-embed'
+					) }
 				/>
 				<ToggleControl
 					label={ __( 'Dock Page Controls', 'pdf-embed' ) }
@@ -147,6 +217,10 @@ export default function Settings( props ) {
 					onChange={ ( val ) =>
 						setAttributes( { enableFormFilling: val } )
 					}
+					help={ __(
+						'If true, form filling is enabled and users can edit fields in full window embed mode.',
+						'pdf-embed'
+					) }
 				/>
 
 				{ 'IN_LINE' !== embedMode && (

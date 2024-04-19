@@ -1,8 +1,8 @@
 === Pdf Embed ===
 Contributors:      tropicalista
 Tags:              pdf embedder, embed pdf, pdf embed api, pdf block, block
-Tested up to:      6.5.0
-Stable tag:        0.4.0
+Tested up to:      6.5
+Stable tag:        0.4.1
 License:           GPL-2.0-or-later
 License URI:       https://www.gnu.org/licenses/gpl-2.0.html
 Requires at least: 5.6.0
@@ -24,6 +24,15 @@ A simple, responsive and 100% free Gutenberg Block to display PDF on your websit
 - Show print button
 - Show full screen
 - 🔥Show PDF in Lightbox on button click
+
+== Supported Browsers ==
+
+PDF Embed API is supported on the latest versions of the following browsers:
+
+- Windows - Microsoft Edge, Google Chrome, Mozilla Firefox.
+- macOS - Safari, Google Chrome, Microsoft Edge, Mozilla Firefox.
+- Android - Google Chrome.
+- iOS - Safari, Google Chrome.
 
 == WHAT’S NEXT ==
 
@@ -51,6 +60,10 @@ e.g.
 Yes you will need a free [Adobe PDF Embed API](https://developer.adobe.com/document-services/apis/pdf-embed/).
 
 == Changelog ==
+
+= 0.4.1 =
+* Added help messages
+* Fixed WP version
 
 = 0.4.0 =
 * Added assets and readme
