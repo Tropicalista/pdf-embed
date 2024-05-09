@@ -14,7 +14,7 @@ PDF embedder with official Adobe Embed API.
 
 A simple, responsive and 100% free Gutenberg Block to display PDF on your website using the official [Adobe PDF Embed API](https://www.adobe.io/apis/documentcloud/dcsdk/pdf-embed.html).
 
-[vimeo https://vimeo.com/827868503]
+[youtube https://youtu.be/mcKJXWmyre4?si=XlU45a0dhiFESriH]
 
 == Features ==
 - Embed or inline PDF
