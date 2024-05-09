@@ -5,7 +5,7 @@
  * Description: PDF embedded with official Adobe API.
  * Version:     0.4.1
  * Author:      Tropicalista
- * Author URI:  https://formello.net
+ * Author URI:  https://www.francescopepe.com
  * License:     GPL2
  * License URI: https://www.gnu.org/licenses/gpl-2.0.html
  * Text Domain: pdf-embed
