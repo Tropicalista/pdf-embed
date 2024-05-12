@@ -3,7 +3,7 @@
  * Plugin Name: Pdf Embed
  * Plugin URI:  https://formello.net/
  * Description: PDF embedded with official Adobe API.
- * Version:     0.4.1
+ * Version:     0.4.3
  * Author:      Tropicalista
  * Author URI:  https://www.francescopepe.com
  * License:     GPL2
