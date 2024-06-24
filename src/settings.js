@@ -119,25 +119,37 @@ export default function Settings( props ) {
 							label: __( 'Two Column Fit Page', 'pdf-embed' ),
 							value: 'TWO_COLUMN_FIT_PAGE',
 						},
+						{
+							label: __(
+								'Continuous (mobile only)',
+								'pdf-embed'
+							),
+							value: 'CONTINUOUS',
+						},
+						{
+							label: __(
+								'Single page (mobile only)',
+								'pdf-embed'
+							),
+							value: 'SINGLE_PAGE',
+						},
 					] }
 					onChange={ ( val ) =>
 						setAttributes( { defaultViewMode: val } )
 					}
 					help={ defaultViewsHelp[ defaultViewMode ] }
 				/>
-				{ 'FULL_WINDOW' === embedMode && (
-					<ToggleControl
-						label={ __( 'Show Download PDF', 'pdf-embed' ) }
-						checked={ showDownloadPDF }
-						onChange={ ( val ) =>
-							setAttributes( { showDownloadPDF: val } )
-						}
-						help={ __(
-							'If true, PDF can be downloaded in all embed modes. Set this to false to disable PDF download.',
-							'pdf-embed'
-						) }
-					/>
-				) }
+				<ToggleControl
+					label={ __( 'Show Download PDF', 'pdf-embed' ) }
+					checked={ showDownloadPDF }
+					onChange={ ( val ) =>
+						setAttributes( { showDownloadPDF: val } )
+					}
+					help={ __(
+						'If true, PDF can be downloaded in all embed modes. Set this to false to disable PDF download.',
+						'pdf-embed'
+					) }
+				/>
 				<ToggleControl
 					label={ __( 'Show Print PDF', 'pdf-embed' ) }
 					checked={ showPrintPDF }

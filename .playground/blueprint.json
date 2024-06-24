@@ -33,6 +33,16 @@
             }
         },
         {
+            "step": "installPlugin",
+            "pluginZipFile": {
+                "resource": "url",
+                "url": "https:\/\/downloads.wordpress.org\/plugin\/popper.zip"
+            },
+            "options": {
+                "activate": true
+            }
+        },
+        {
             "step": "login",
             "username": "admin",
             "password": "password"

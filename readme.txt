@@ -2,7 +2,7 @@
 Contributors:      tropicalista
 Tags:              pdf embedder, embed pdf, pdf embed api, pdf block, block
 Tested up to:      6.5
-Stable tag:        0.4.3
+Stable tag:        0.4.4
 License:           GPL-2.0-or-later
 License URI:       https://www.gnu.org/licenses/gpl-2.0.html
 Requires at least: 5.6.0
@@ -60,6 +60,10 @@ e.g.
 Yes you will need a free [Adobe PDF Embed API](https://developer.adobe.com/document-services/apis/pdf-embed/).
 
 == Changelog ==
+
+= 0.4.4 =
+* Fix download settings not showing
+* Added Continuous and Single page option
 
 = 0.4.3 =
 * Small fix
