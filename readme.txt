@@ -59,6 +59,14 @@ e.g.
 
 Yes you will need a free [Adobe PDF Embed API](https://developer.adobe.com/document-services/apis/pdf-embed/).
 
+== Screenshots ==
+
+1. Insert key
+2. Choose PDF
+3. View PDF
+4. Open PDF in Lightbox
+5. Pdf block controls
+
 == Changelog ==
 
 = 0.4.4 =
