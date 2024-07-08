@@ -1,6 +1,6 @@
 import { __ } from '@wordpress/i18n';
 
-import { useEffect } from '@wordpress/element';
+import { Fragment } from '@wordpress/element';
 import {
 	Placeholder,
 	Disabled,
@@ -13,29 +13,20 @@ import './editor.scss';
 import KeyInput from './key-input';
 import Settings from './settings';
 import { Viewer } from './viewer';
-import { useEntityRecord } from '@wordpress/core-data';
+import { useEntityProp } from '@wordpress/core-data';
 
 export default function Edit( props ) {
 	const blockProps = useBlockProps();
-console.log(props)
-	const { record, hasResolved } = useEntityRecord( 'root', 'site' );
+	const [ pdfKey ] = useEntityProp( 'root', 'site', 'pdf_embed_api_key' );
 
-	if ( ! hasResolved ) {
+	if ( pdfKey || pdf_embed.apiKey ) {
 		return (
-			<Disabled>
-				<Spinner />
-			</Disabled>
-		);
-	}
-
-	if ( record.pdf_embed_api_key ) {
-		return (
-			<div { ...blockProps }>
+			<Fragment>
 				<InspectorControls>
 					<Settings { ...props } />
 				</InspectorControls>
 				<Viewer { ...props } />
-			</div>
+			</Fragment>
 		);
 	}
 

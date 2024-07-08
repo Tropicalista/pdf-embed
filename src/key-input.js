@@ -6,7 +6,7 @@ import {
 	ExternalLink,
 } from '@wordpress/components';
 import { useEntityProp, store as coreStore } from '@wordpress/core-data';
-import { useDispatch } from '@wordpress/data';
+import { useDispatch, useSelect } from '@wordpress/data';
 import {
 	Fragment,
 	createInterpolateElement,
@@ -19,6 +19,15 @@ export default function KeyInput( { setAttributes } ) {
 
 	const { editEntityRecord, saveEditedEntityRecord } =
 		useDispatch( coreStore );
+
+	const { canUserEdit } = useSelect( ( select ) => {
+		const { canUser } = select( coreStore );
+		const canEdit = canUser( 'update', 'settings' );
+
+		return {
+			canUserEdit: canEdit,
+		};
+	}, [] );
 
 	const save = () => {
 		setAttributes( { apiKey: pdfKey } );
@@ -53,35 +62,45 @@ export default function KeyInput( { setAttributes } ) {
 
 	return (
 		<Fragment>
-			<InputControl
-				label={ __( 'API Key', 'pdf-embed' ) }
-				help={ createInterpolateElement(
-					__(
-						'Get your free API key on <a>Adobe Official site</a>.',
+			{ ! canUserEdit && (
+				<p>
+					{ __(
+						'Only admin can manage PDF Embed api key',
 						'pdf-embed'
-					),
-					{
-						a: (
-							<ExternalLink
-								href="https://www.adobe.io/apis/documentcloud/dcsdk/pdf-embed.html"
-								target="_blank"
-								rel="noreferrer"
-							/>
+					) }
+				</p>
+			) }
+			{ canUserEdit && (
+				<InputControl
+					label={ __( 'API Key', 'pdf-embed' ) }
+					help={ createInterpolateElement(
+						__(
+							'Get your free API key on <a>Adobe Official site</a>.',
+							'pdf-embed'
 						),
+						{
+							a: (
+								<ExternalLink
+									href="https://www.adobe.io/apis/documentcloud/dcsdk/pdf-embed.html"
+									target="_blank"
+									rel="noreferrer"
+								/>
+							),
+						}
+					) }
+					value={ pdfKey }
+					onChange={ ( val ) => {
+						editEntityRecord( 'root', 'site', undefined, {
+							pdf_embed_api_key: val,
+						} );
+					} }
+					suffix={
+						<Button onClick={ () => save() } isPrimary>
+							{ __( 'Save' ) }
+						</Button>
 					}
-				) }
-				value={ pdfKey }
-				onChange={ ( val ) => {
-					editEntityRecord( 'root', 'site', undefined, {
-						pdf_embed_api_key: val,
-					} );
-				} }
-				suffix={
-					<Button onClick={ () => save() } isPrimary>
-						{ __( 'Save' ) }
-					</Button>
-				}
-			/>
+				/>
+			) }
 		</Fragment>
 	);
 }

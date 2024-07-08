@@ -69,7 +69,6 @@ const v1 = {
 		return true;
 	},
 	migrate( attributes ) {
-		console.log( attributes );
 		return {
 			...attributes,
 			'data-apikey': attributes.apiKey,
@@ -93,7 +92,6 @@ const v1 = {
 			showAnnotationTools,
 			enableFormFilling,
 		} = attributes;
-		console.log( attributes );
 
 		return (
 			<div
@@ -207,13 +205,11 @@ const v2 = {
 		return true;
 	},
 	migrate( attributes ) {
-		console.log( attributes );
 		return {
 			...attributes,
 		};
 	},
 	save( { attributes } ) {
-		console.log( attributes );
 		const {
 			blockId,
 			mediaUrl,
