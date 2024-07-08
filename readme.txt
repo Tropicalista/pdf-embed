@@ -2,7 +2,7 @@
 Contributors:      tropicalista
 Tags:              pdf embedder, embed pdf, pdf embed api, pdf block, block
 Tested up to:      6.5
-Stable tag:        0.4.5
+Stable tag:        0.4.6
 License:           GPL-2.0-or-later
 License URI:       https://www.gnu.org/licenses/gpl-2.0.html
 Requires at least: 5.6.0
@@ -43,6 +43,15 @@ If you like this plugin, then consider checking out our other projects:
 * [Mortgage Calculator](https://wordpress.org/plugins/mortgage): a mortgage calculator block for Gutenberg.
 * [Search Console](https://wordpress.org/plugins/search-console): view all your search console data inside WordPress admin.
 
+## Privacy Policy 
+Pdf Embed uses [Appsero](https://appsero.com) SDK to collect some telemetry data upon user's confirmation. This helps us to troubleshoot problems faster & make product improvements.
+
+Appsero SDK **does not gather any data by default.** The SDK only starts gathering basic telemetry data **when a user allows it via the admin notice**. We collect the data to ensure a great user experience for all our users. 
+
+Integrating Appsero SDK **DOES NOT IMMEDIATELY** start gathering data, **without confirmation from users in any case.**
+
+Learn more about how [Appsero collects and uses this data](https://appsero.com/privacy-policy/).
+
 == Installation ==
 
 This section describes how to install the plugin and get it working.
@@ -68,6 +77,9 @@ Yes you will need a free [Adobe PDF Embed API](https://developer.adobe.com/docum
 5. Pdf block controls
 
 == Changelog ==
+
+= 0.4.6 =
+* Fix missing tracker.
 
 = 0.4.5 =
 * Allow users other than admin to use the block.

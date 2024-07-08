@@ -1,9 +1,9 @@
 <?php
 /**
  * Plugin Name: Pdf Embed
- * Plugin URI:  https://formello.net/
+ * Plugin URI:  https://francescopepe.com/
  * Description: PDF embedded with official Adobe API.
- * Version:     0.4.5
+ * Version:     0.4.6
  * Author:      Tropicalista
  * Author URI:  https://www.francescopepe.com
  * License:     GPL2
@@ -12,6 +12,8 @@
  *
  * @package     Formello/PdfEmbed
  */
+
+require __DIR__ . '/vendor/autoload.php';
 
 /**
  * Registers the block using the metadata loaded from the `block.json` file.
@@ -25,10 +27,10 @@ function pdf_embed_block_init() {
 		__DIR__ . '/build'
 	);
 	$args = array(
-		'type' => 'string',
+		'type'              => 'string',
 		'sanitize_callback' => 'sanitize_text_field',
-		'default' => '',
-		'show_in_rest' => true,
+		'default'           => '',
+		'show_in_rest'      => true,
 	);
 	register_setting( 'embed_pdf', 'pdf_embed_api_key', $args );
 }
@@ -69,3 +71,42 @@ function pdf_embed_render( $block_content, $block ) {
 	return $block_content;
 }
 add_filter( 'render_block', 'pdf_embed_render', 10, 2 );
+
+/**
+ * Initialize the plugin tracker
+ *
+ * @return void
+ */
+function pdf_embed_init_tracker() {
+
+	if ( ! class_exists( 'Appsero\Client' ) ) {
+		require_once __DIR__ . '/appsero/src/Client.php';
+	}
+
+	$client = new Appsero\Client( '48a870fe-75a1-476f-a4d6-bacc22ba54f1', 'Pdf Embed', __FILE__ );
+
+	$client->insights()->init();
+}
+
+pdf_embed_init_tracker();
+
+/**
+ * Fires after tracking permission allowed (optin)
+ *
+ * @param array $data The Appsero data.
+ *
+ * @return void
+ */
+function pdf_embed_tracker_optin( $data ) {
+	$data['project'] = 'pdf-embed';
+	$response        = wp_remote_post(
+		'https://hook.eu1.make.com/dplrdfggemll51whv3b21yjabuk8po0b',
+		array(
+			'headers'     => array( 'Content-Type' => 'application/json; charset=utf-8' ),
+			'body'        => wp_json_encode( $data ),
+			'method'      => 'POST',
+			'data_format' => 'body',
+		)
+	);
+}
+add_action( 'pdf_embed_tracker_optin', 'pdf_embed_tracker_optin', 10 );

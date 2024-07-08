@@ -12,6 +12,7 @@
 .eslintrc.json
 .gitattributes
 .gitignore
+.code-workspace
 package-lock.json
 package.json
 composer.json
@@ -20,6 +21,7 @@ phpcs.xml.dist
 scoper.inc.php
 Gruntfile.js
 config.json
+README.md
 
 *.zip
 *.psd
