@@ -13,8 +13,9 @@ document.addEventListener( 'adobe_dc_view_sdk.ready', function () {
 			clientId: embedConfig.clientId,
 			divId: elms[ i ].id,
 			locale: userLang,
+			measurementId: embedConfig.measurementId,
 		} );
-		adobeDCView.previewFile(
+		const previewFilePromise = adobeDCView.previewFile(
 			{
 				content: {
 					location: {
@@ -40,6 +41,16 @@ document.addEventListener( 'adobe_dc_view_sdk.ready', function () {
 				enableFormFilling: Boolean( embedConfig.enableFormFilling ),
 			}
 		);
+		previewFilePromise.then( ( adobeViewer ) => {
+			adobeViewer.getAPIs().then( ( apis ) => {
+				apis.enableTextSelection(
+					Boolean( embedConfig.enableTextSelection )
+				);
+				if ( embedConfig.goTo ) {
+					apis.gotoLocation( embedConfig.goTo );
+				}
+			} );
+		} );
 	}
 
 	const buttons = document.querySelectorAll( '.embedPdf>a, a.embedPdf' );
@@ -65,7 +76,7 @@ function previewFile( e ) {
 	}
 
 	/* Initialize the AdobeDC View object */
-	const adobeDCView = new AdobeDC.View( {
+	const adobeDCView = new window.AdobeDC.View( {
 		/* Pass your registered client id */
 		clientId: pdf_embed.apiKey,
 	} );

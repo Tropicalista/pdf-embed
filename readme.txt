@@ -2,7 +2,7 @@
 Contributors:      tropicalista
 Tags:              pdf embedder, embed pdf, pdf embed api, pdf block, block
 Tested up to:      6.5
-Stable tag:        0.4.7
+Stable tag:        0.4.8
 License:           GPL-2.0-or-later
 License URI:       https://www.gnu.org/licenses/gpl-2.0.html
 Requires at least: 5.6.0
@@ -77,6 +77,10 @@ Yes you will need a free [Adobe PDF Embed API](https://developer.adobe.com/docum
 5. Pdf block controls
 
 == Changelog ==
+
+= 0.4.8 =
+* Added Analytics tracking.
+* Added option to disable text selection
 
 = 0.4.7 =
 * Fix tracker.

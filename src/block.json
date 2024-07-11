@@ -128,6 +128,20 @@
 			"selector": "div.wp-block-tropicalista-pdfembed",
 			"attribute": "data-show-annotation-tools",
 			"default": true
+		},
+		"enableTextSelection": {
+			"type": "boolean",
+			"source": "attribute",
+			"selector": "div.wp-block-tropicalista-pdfembed",
+			"attribute": "data-enable-text-selection",
+			"default": true
+		},
+		"measurementId": {
+			"type": "string",
+			"source": "attribute",
+			"selector": "div.wp-block-tropicalista-pdfembed",
+			"attribute": "data-measurement-id",
+			"default": ""	
 		}
 	},
 	"textdomain": "pdf-embed",

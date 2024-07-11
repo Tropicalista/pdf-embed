@@ -18,6 +18,8 @@ export default function save( { attributes, className } ) {
 		showAnnotationTools,
 		enableFormFilling,
 		dockPageControls,
+		measurementId,
+		enableTextSelection,
 	} = attributes;
 
 	return (
@@ -39,6 +41,8 @@ export default function save( { attributes, className } ) {
 			data-default-view-mode={ defaultViewMode || undefined }
 			data-show-annotation-tools={ showAnnotationTools || undefined }
 			data-enable-form-filling={ enableFormFilling || undefined }
+			data-measurement-id={ measurementId || undefined }
+			data-enable-text-selection={ enableTextSelection || undefined }
 		></div>
 	);
 }

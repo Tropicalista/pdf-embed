@@ -3,6 +3,7 @@ import {
 	PanelBody,
 	SelectControl,
 	ToggleControl,
+	TextControl,
 	BaseControl,
 } from '@wordpress/components';
 import { HeightControl } from '@wordpress/block-editor';
@@ -27,6 +28,8 @@ export default function Settings( props ) {
 		showBookmarks,
 		showThumbnails,
 		dockPageControls,
+		enableTextSelection,
+		measurementId,
 	} = attributes;
 
 	const embedModeHelp = {
@@ -249,6 +252,27 @@ export default function Settings( props ) {
 						/>
 					</BaseControl>
 				) }
+
+				<ToggleControl
+					label={ __( 'Enable Text Selection', 'pdf-embed' ) }
+					checked={ enableTextSelection }
+					onChange={ ( val ) =>
+						setAttributes( { enableTextSelection: val } )
+					}
+					help={ __( 'Enable text selection in PDF.', 'pdf-embed' ) }
+				/>
+
+				<TextControl
+					label={ __( 'Google Analytics', 'pdf-embed' ) }
+					value={ measurementId }
+					onChange={ ( val ) =>
+						setAttributes( { measurementId: val } )
+					}
+					help={ __(
+						'Add your measurement id to track pdf event in Google Analytics.',
+						'pdf-embed'
+					) }
+				/>
 			</PanelBody>
 		</Fragment>
 	);
