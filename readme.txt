@@ -23,6 +23,7 @@ A simple, responsive and 100% free Gutenberg Block to display PDF on your websit
 - Show download button
 - Show print button
 - Show full screen
+- 📈Track Pdf events in Google Analytics
 - 🔥Show PDF in Lightbox on button click
 
 == Supported Browsers ==
