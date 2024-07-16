@@ -1,13 +1,7 @@
 import { __ } from '@wordpress/i18n';
 
 import { Fragment } from '@wordpress/element';
-import {
-	Placeholder,
-	Disabled,
-	Spinner,
-	Flex,
-	FlexItem,
-} from '@wordpress/components';
+import { Placeholder, Flex, FlexItem } from '@wordpress/components';
 import { InspectorControls, useBlockProps } from '@wordpress/block-editor';
 import './editor.scss';
 import KeyInput from './key-input';

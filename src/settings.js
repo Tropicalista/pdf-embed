@@ -100,7 +100,9 @@ export default function Settings( props ) {
 						},
 					] }
 					onChange={ ( val ) => setAttributes( { embedMode: val } ) }
-					help={ embedModeHelp[ embedMode ] }
+					help={
+						embedModeHelp[ embedMode ] || embedModeHelp.FULL_WINDOW
+					}
 				/>
 				<SelectControl
 					label={ __( 'Default view mode', 'pdf-embed' ) }
