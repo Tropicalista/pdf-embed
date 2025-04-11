@@ -19,15 +19,17 @@ import {
 } from '@wordpress/block-editor';
 import { useEntityProp } from '@wordpress/core-data';
 
-import { ToolbarGroup } from '@wordpress/components';
+import { ToolbarGroup, ToolbarButton, Modal } from '@wordpress/components';
 import { useRefEffect, useInstanceId } from '@wordpress/compose';
 import { useEffect, useState } from '@wordpress/element';
+import { SettingsModal } from './settings/modal.js';
 
 export const Viewer = ( props ) => {
 	const { attributes, setAttributes, isSelected, clientId } = props;
 	const { mediaUrl, height, fileName } = attributes;
 	const instanceId = 'pdf-' + useInstanceId( Viewer );
-	const [ pdfKey ] = useEntityProp( 'root', 'site', 'pdf_embed_api_key' );
+	const [ settings ] = useEntityProp( 'root', 'site', 'pdf_embed' );
+	const [ isOpen, setOpen ] = useState( false );
 
 	const [ interactive, setInteractive ] = useState( false );
 
@@ -45,7 +47,7 @@ export const Viewer = ( props ) => {
 				}
 			);
 			if ( mediaUrl && defaultView.AdobeDC ) {
-				if ( pdfKey || pdf_embed.apiKey ) loadAdobeDc( defaultView );
+				if ( settings?.apiKey || pdf_embed.apiKey ) loadAdobeDc( defaultView );
 			}
 
 			if ( ! defaultView.AdobeDC ) {
@@ -61,7 +63,7 @@ export const Viewer = ( props ) => {
 
 	const loadAdobeDc = ( view ) => {
 		const adobeDCView = new view.AdobeDC.View( {
-			clientId: pdfKey ?? pdf_embed.apiKey,
+			clientId: settings?.apiKey ?? pdf_embed.apiKey,
 			divId: instanceId,
 		} );
 
@@ -114,11 +116,18 @@ export const Viewer = ( props ) => {
 							></MediaReplaceFlow>
 						</ToolbarGroup>
 					) }
+					<ToolbarGroup>
+						<ToolbarButton
+							icon='admin-generic'
+							label="Edit"
+							onClick={ () => setOpen( true ) }
+						/>
+					</ToolbarGroup>
 				</BlockControls>
 				<div
 					id={ instanceId }
 					ref={ setupRef }
-					style={ { height } }
+					style={ { height: height || settings?.height } }
 					tabIndex={ '-1' }
 				></div>
 				{ ! interactive && (
@@ -129,6 +138,16 @@ export const Viewer = ( props ) => {
 							setInteractive( true );
 						} }
 					/>
+				) }
+				{ isOpen && (
+					<Modal
+						title={ __( 'Global Settings', 'pdf-embed' ) }
+						onRequestClose={ () => setOpen( false ) }
+						focusOnMount={ true }
+						size="small"
+					>
+						<SettingsModal onRequestClose={ () => setOpen( false ) } />
+					</Modal>
 				) }
 			</div>
 		);

@@ -103,6 +103,8 @@ export default function Settings( props ) {
 					help={
 						embedModeHelp[ embedMode ] || embedModeHelp.FULL_WINDOW
 					}
+					__next40pxDefaultSize
+					__nextHasNoMarginBottom
 				/>
 				<SelectControl
 					label={ __( 'Default view mode', 'pdf-embed' ) }
@@ -143,6 +145,8 @@ export default function Settings( props ) {
 						setAttributes( { defaultViewMode: val } )
 					}
 					help={ defaultViewsHelp[ defaultViewMode ] }
+					__next40pxDefaultSize
+					__nextHasNoMarginBottom
 				/>
 				<ToggleControl
 					label={ __( 'Show Download PDF', 'pdf-embed' ) }
@@ -154,6 +158,7 @@ export default function Settings( props ) {
 						'If true, PDF can be downloaded in all embed modes. Set this to false to disable PDF download.',
 						'pdf-embed'
 					) }
+					__nextHasNoMarginBottom
 				/>
 				<ToggleControl
 					label={ __( 'Show Print PDF', 'pdf-embed' ) }
@@ -165,6 +170,7 @@ export default function Settings( props ) {
 						'If true, PDF can be printed in all embed modes. Set this to false to disable PDF printing.',
 						'pdf-embed'
 					) }
+					__nextHasNoMarginBottom
 				/>
 				<ToggleControl
 					label={ __( 'Show FullScreen Mode', 'pdf-embed' ) }
@@ -176,6 +182,7 @@ export default function Settings( props ) {
 						'By default, the full screen toggle appears in the bottom toolbar in sized container embed mode. Set this to false to hide the full screen toggle.',
 						'pdf-embed'
 					) }
+					__nextHasNoMarginBottom
 				/>
 				<ToggleControl
 					label={ __( 'Show Zoom Control', 'pdf-embed' ) }
@@ -187,6 +194,7 @@ export default function Settings( props ) {
 						'Set this to false to hide the zoom-in and zoom-out options available in the right-hand panel. This configuration will work for full window and lightbox embed modes.',
 						'pdf-embed'
 					) }
+					__nextHasNoMarginBottom
 				/>
 				<ToggleControl
 					label={ __( 'Show Thumbnails', 'pdf-embed' ) }
@@ -198,6 +206,7 @@ export default function Settings( props ) {
 						'Page thumbnails are available by default in full window and lightbox embed modes. Set this to false if you want to hide the thumbnails from the right-hand panel.',
 						'pdf-embed'
 					) }
+					__nextHasNoMarginBottom
 				/>
 				<ToggleControl
 					label={ __( 'Show Bookmarks', 'pdf-embed' ) }
@@ -209,6 +218,7 @@ export default function Settings( props ) {
 						'PDF bookmarks are available by default in full window and lightbox embed modes. Set this to false if you want to hide the bookmarks from the right-hand panel.',
 						'pdf-embed'
 					) }
+					__nextHasNoMarginBottom
 				/>
 				<ToggleControl
 					label={ __( 'Show Annotation Tools', 'pdf-embed' ) }
@@ -220,6 +230,7 @@ export default function Settings( props ) {
 						'If true, tools such as add text, sticky note, highlight, and so on appear in the quick tools menu on the left-hand side in full window embed mode.',
 						'pdf-embed'
 					) }
+					__nextHasNoMarginBottom
 				/>
 				<ToggleControl
 					label={ __( 'Dock Page Controls', 'pdf-embed' ) }
@@ -227,6 +238,7 @@ export default function Settings( props ) {
 					onChange={ ( val ) =>
 						setAttributes( { dockPageControls: val } )
 					}
+					__nextHasNoMarginBottom
 				/>
 				<ToggleControl
 					label={ __( 'Enable Form Filling', 'pdf-embed' ) }
@@ -238,11 +250,13 @@ export default function Settings( props ) {
 						'If true, form filling is enabled and users can edit fields in full window embed mode.',
 						'pdf-embed'
 					) }
+					__nextHasNoMarginBottom
 				/>
 
 				{ 'IN_LINE' !== embedMode && (
 					<BaseControl
 						help={ __( 'Set the height of PDF.', 'pdf-embed' ) }
+						__nextHasNoMarginBottom
 					>
 						<HeightControl
 							label={ __( 'Height', 'pdf-embed' ) }
@@ -262,6 +276,7 @@ export default function Settings( props ) {
 						setAttributes( { enableTextSelection: val } )
 					}
 					help={ __( 'Enable text selection in PDF.', 'pdf-embed' ) }
+					__nextHasNoMarginBottom
 				/>
 
 				<TextControl
@@ -274,6 +289,8 @@ export default function Settings( props ) {
 						'Add your measurement id to track pdf event in Google Analytics.',
 						'pdf-embed'
 					) }
+					__nextHasNoMarginBottom
+					__next40pxDefaultSize
 				/>
 			</PanelBody>
 		</Fragment>

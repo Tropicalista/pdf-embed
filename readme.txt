@@ -79,6 +79,13 @@ Yes you will need a free [Adobe PDF Embed API](https://developer.adobe.com/docum
 
 == Changelog ==
 
+= 0.5.2 =
+* Added text selection option
+* Added PDF linearization
+* Added global options
+* Better handling of API key error
+* Better handling of height
+
 = 0.5.1 =
 * Fix appsero client
 

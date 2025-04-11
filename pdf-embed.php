@@ -33,6 +33,34 @@ function pdf_embed_block_init() {
 		'show_in_rest'      => true,
 	);
 	register_setting( 'embed_pdf', 'pdf_embed_api_key', $args );
+	$args = array(
+		'type'              => 'object',
+		'default'        => array(
+			'apiKey'              => '',
+			'embedMode'           => 'FULL_WINDOW',
+			'defaultViewMode'     => 'FIT_PAGE',
+			'height'              => '500px',
+			'measurementId'       => '',
+			'showDownloadPDF'     => false,
+			'showPrintPDF'        => false,
+			'showFullScreen'      => false,
+			'showZoomControl'     => false,
+			'showAnnotationTools' => false,
+			'showBookmarks'       => false,
+			'showThumbnails'      => false,
+			'dockPageControls'    => false,
+			'enableTextSelection' => false,
+			'enableFormFilling'   => false,
+			'enableLinearization' => false,
+		),
+		'show_in_rest' => array(
+			'schema' => array(
+				'type'  => 'object',
+				'additionalProperties' => true,
+			),
+		),
+	);
+	register_setting( 'pdf_embed', 'pdf_embed', $args );
 }
 add_action( 'init', 'pdf_embed_block_init' );
 
@@ -40,19 +68,16 @@ add_action( 'init', 'pdf_embed_block_init' );
  * Register settings
  */
 function pdf_embed_setting() {
-	$key = wp_json_encode(
-		array(
-			'apiKey' => get_option( 'pdf_embed_api_key', '' ),
-		)
-	);
+	$options = get_option( 'pdf_embed', '' );
+
 	wp_add_inline_script(
 		'tropicalista-pdfembed-view-script',
-		'const pdf_embed = ' . $key,
+		'const pdf_embed = ' . wp_json_encode( $options ),
 		'before'
 	);
 	wp_add_inline_script(
 		'tropicalista-pdfembed-editor-script',
-		'const pdf_embed = ' . $key,
+		'const pdf_embed = ' . wp_json_encode( $options ),
 		'before'
 	);
 }

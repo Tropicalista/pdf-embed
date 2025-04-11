@@ -9,36 +9,41 @@ document.addEventListener( 'adobe_dc_view_sdk.ready', function () {
 	for ( let i = 0; i < elms.length; i++ ) {
 		const embedConfig = elms[ i ].dataset;
 
+		const config = { ...pdf_embed, ...embedConfig };
+console.log(config, embedConfig)
 		const adobeDCView = new window.AdobeDC.View( {
-			clientId: embedConfig.clientId,
+			clientId: config.clientId,
 			divId: elms[ i ].id,
 			locale: userLang,
-			measurementId: embedConfig.measurementId,
+			measurementId: config.measurementId,
 		} );
+
 		const previewFilePromise = adobeDCView.previewFile(
 			{
 				content: {
 					location: {
-						url: embedConfig.mediaUrl,
+						url: config.mediaUrl,
 					},
 				},
 				metaData: {
-					fileName: embedConfig.fileName,
+					fileName: config.fileName,
 				},
 			},
 			{
-				embedMode: embedConfig.embedMode || 'FULL_WINDOW',
-				dockPageControls: Boolean( embedConfig.dockPageControls ),
-				showDownloadPDF: Boolean( embedConfig.showDownloadPdf ),
-				showPrintPDF: Boolean( embedConfig.showPrintPdf ),
-				showPageControls: Boolean( embedConfig.showPageControls ),
-				showZoomControl: Boolean( embedConfig.showZoomControl ),
-				showFullScreen: Boolean( embedConfig.showFullScreen ),
-				showThumbnails: Boolean( embedConfig.showThumbnails ),
-				showBookmarks: Boolean( embedConfig.showBookmarks ),
-				defaultViewMode: embedConfig.defaultViewMode || 'FIT_PAGE',
-				showAnnotationTools: Boolean( embedConfig.showAnnotationTools ),
-				enableFormFilling: Boolean( embedConfig.enableFormFilling ),
+				embedMode: config.embedMode,
+				defaultViewMode: config.defaultViewMode,
+				dockPageControls: Boolean( config.dockPageControls ),
+				showDownloadPDF: Boolean( config.showDownloadPdf ),
+				showPrintPDF: Boolean( config.showPrintPdf ),
+				showPageControls: Boolean( config.showPageControls ),
+				showZoomControl: Boolean( config.showZoomControl ),
+				showFullScreen: Boolean( config.showFullScreen ),
+				showThumbnails: Boolean( config.showThumbnails ),
+				showBookmarks: Boolean( config.showBookmarks ),
+				showAnnotationTools: Boolean( config.showAnnotationTools ),
+				enableTextSelection: Boolean( config.enableTextSelection ),
+				enableFormFilling: Boolean( config.enableFormFilling ),
+				enableLinearization: Boolean( config.enableLinearization ),
 			}
 		);
 		previewFilePromise.then( ( adobeViewer ) => {

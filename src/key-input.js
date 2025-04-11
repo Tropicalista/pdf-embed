@@ -99,6 +99,7 @@ export default function KeyInput( { setAttributes } ) {
 							{ __( 'Save' ) }
 						</Button>
 					}
+					__next40pxDefaultSize
 				/>
 			) }
 		</Fragment>
