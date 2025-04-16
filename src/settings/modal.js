@@ -100,9 +100,12 @@ export const SettingsModal = ( { onRequestClose } ) => {
 		} );
 
 		response
-			.then( (a) => setLoading( false ), setMessage( 'success' ) )
+			.then( (a) => setMessage( 'success' ) )
 			.catch( (s) => {
 				setMessage( 'error' );
+			} )
+			.finally( () => {
+				setLoading( false );				
 			} )
 
 		return response;

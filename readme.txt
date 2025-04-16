@@ -1,7 +1,7 @@
 === Pdf Embed ===
 Contributors:      tropicalista
 Tags:              pdf embedder, embed pdf, pdf embed api, pdf block, block
-Tested up to:      6.7.2
+Tested up to:      6.8
 Stable tag:        0.5.3
 License:           GPL-2.0-or-later
 License URI:       https://www.gnu.org/licenses/gpl-2.0.html
@@ -78,6 +78,9 @@ Yes you will need a free [Adobe PDF Embed API](https://developer.adobe.com/docum
 5. Pdf block controls
 
 == Changelog ==
+
+= 0.5.4 =
+* Wp 6.8 compatibility
 
 = 0.5.3 =
 * Minor fix

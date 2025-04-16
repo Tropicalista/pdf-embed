@@ -10,7 +10,7 @@ document.addEventListener( 'adobe_dc_view_sdk.ready', function () {
 		const embedConfig = elms[ i ].dataset;
 
 		const config = { ...pdf_embed, ...embedConfig };
-console.log(config, embedConfig)
+
 		const adobeDCView = new window.AdobeDC.View( {
 			clientId: config.clientId,
 			divId: elms[ i ].id,

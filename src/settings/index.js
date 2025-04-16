@@ -265,7 +265,7 @@ export default function Settings( props ) {
 				value={ measurementId ?? settings.measurementId }
 				onChange={ ( val ) => onChange( 'measurementId', val ) }
 				help={ __(
-					'Add your measurement id (G-XXXXXXX) to track pdf event in Google Analytics.',
+					'Add your measurement id (G-XXXXXXX) to track pdf events in Google Analytics.',
 					'pdf-embed'
 				) }
 				__nextHasNoMarginBottom
