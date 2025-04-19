@@ -3,7 +3,7 @@
  * Plugin Name: Pdf Embed
  * Plugin URI:  https://www.francescopepe.com/
  * Description: PDF embedded with official Adobe API.
- * Version:     0.5.4
+ * Version:     0.5.5
  * Author:      Tropicalista
  * Author URI:  https://www.francescopepe.com
  * License:     GPL2
@@ -26,13 +26,6 @@ function pdf_embed_block_init() {
 	register_block_type_from_metadata(
 		__DIR__ . '/build'
 	);
-	$args = array(
-		'type'              => 'string',
-		'sanitize_callback' => 'sanitize_text_field',
-		'default'           => '',
-		'show_in_rest'      => true,
-	);
-	register_setting( 'embed_pdf', 'pdf_embed_api_key', $args );
 	$args = array(
 		'type'              => 'object',
 		'default'        => array(
