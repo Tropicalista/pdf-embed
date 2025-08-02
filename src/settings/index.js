@@ -155,7 +155,7 @@ export default function Settings( props ) {
 			/>
 			<ToggleControl
 				label={ __( 'Show Download PDF', 'pdf-embed' ) }
-				checked={ showDownloadPDF ?? settings.showDownloadPDF }
+				checked={ showDownloadPDF ?? settings?.showDownloadPDF }
 				onChange={ ( val ) => onChange( 'showDownloadPDF', val ) }
 				help={ __(
 					'If true, PDF can be downloaded in all embed modes. Set this to false to disable PDF download.',
@@ -165,7 +165,7 @@ export default function Settings( props ) {
 			/>
 			<ToggleControl
 				label={ __( 'Show Print PDF', 'pdf-embed' ) }
-				checked={ showPrintPDF ?? settings.showPrintPDF }
+				checked={ showPrintPDF ?? settings?.showPrintPDF }
 				onChange={ ( val ) => onChange( 'showPrintPDF', val ) }
 				help={ __(
 					'If true, PDF can be printed in all embed modes. Set this to false to disable PDF printing.',
@@ -175,7 +175,7 @@ export default function Settings( props ) {
 			/>
 			<ToggleControl
 				label={ __( 'Show FullScreen Mode', 'pdf-embed' ) }
-				checked={ showFullScreen ?? settings.showFullScreen }
+				checked={ showFullScreen ?? settings?.showFullScreen }
 				onChange={ ( val ) => onChange( 'showFullScreen', val ) }
 				help={ __(
 					'By default, the full screen toggle appears in the bottom toolbar in sized container embed mode. Set this to false to hide the full screen toggle.',
@@ -185,7 +185,7 @@ export default function Settings( props ) {
 			/>
 			<ToggleControl
 				label={ __( 'Show Zoom Control', 'pdf-embed' ) }
-				checked={ showZoomControl ?? settings.showZoomControl }
+				checked={ showZoomControl ?? settings?.showZoomControl }
 				onChange={ ( val ) => onChange( 'showZoomControl', val ) }
 				help={ __(
 					'Set this to false to hide the zoom-in and zoom-out options available in the right-hand panel. This configuration will work for full window and lightbox embed modes.',
@@ -195,7 +195,7 @@ export default function Settings( props ) {
 			/>
 			<ToggleControl
 				label={ __( 'Show Thumbnails', 'pdf-embed' ) }
-				checked={ showThumbnails ?? settings.showThumbnails }
+				checked={ showThumbnails ?? settings?.showThumbnails }
 				onChange={ ( val ) => onChange( 'showThumbnails', val ) }
 				help={ __(
 					'Page thumbnails are available by default in full window and lightbox embed modes. Set this to false if you want to hide the thumbnails from the right-hand panel.',
@@ -205,7 +205,7 @@ export default function Settings( props ) {
 			/>
 			<ToggleControl
 				label={ __( 'Show Bookmarks', 'pdf-embed' ) }
-				checked={ showBookmarks ?? settings.showBookmarks }
+				checked={ showBookmarks ?? settings?.showBookmarks }
 				onChange={ ( val ) => onChange( 'showBookmarks', val ) }
 				help={ __(
 					'PDF bookmarks are available by default in full window and lightbox embed modes. Set this to false if you want to hide the bookmarks from the right-hand panel.',
@@ -215,7 +215,7 @@ export default function Settings( props ) {
 			/>
 			<ToggleControl
 				label={ __( 'Show Annotation Tools', 'pdf-embed' ) }
-				checked={ showAnnotationTools ?? settings.showAnnotationTools }
+				checked={ showAnnotationTools ?? settings?.showAnnotationTools }
 				onChange={ ( val ) => onChange( 'showAnnotationTools', val ) }
 				help={ __(
 					'If true, tools such as add text, sticky note, highlight, and so on appear in the quick tools menu on the left-hand side in full window embed mode.',
@@ -225,21 +225,21 @@ export default function Settings( props ) {
 			/>
 			<ToggleControl
 				label={ __( 'Enable Text Selection', 'pdf-embed' ) }
-				checked={ enableTextSelection?? settings.enableTextSelection }
+				checked={ enableTextSelection?? settings?.enableTextSelection }
 				onChange={ ( val ) => onChange( 'enableTextSelection', val ) }
 				help={ __( 'Enable text selection in PDF.', 'pdf-embed' ) }
 				__nextHasNoMarginBottom
 			/>
 			<ToggleControl
 				label={ __( 'Enable Linearization', 'pdf-embed' ) }
-				checked={ enableLinearization ?? settings.enableLinearization }
+				checked={ enableLinearization ?? settings?.enableLinearization }
 				onChange={ ( val ) => onChange( 'enableLinearization', val ) }
 				help={ __( 'Enable linearization to optimize PDFs for faster viewing.', 'pdf-embed' ) }
 				__nextHasNoMarginBottom
 			/>
 			<ToggleControl
 				label={ __( 'Enable Form Filling', 'pdf-embed' ) }
-				checked={ enableFormFilling ?? settings.enableFormFilling }
+				checked={ enableFormFilling ?? settings?.enableFormFilling }
 				onChange={ ( val ) => onChange( 'enableFormFilling', val ) }
 				help={ __(
 					'If true, form filling is enabled and users can edit fields in full window embed mode.',
@@ -262,7 +262,7 @@ export default function Settings( props ) {
 			}
 			<TextControl
 				label={ __( 'Google Analytics', 'pdf-embed' ) }
-				value={ measurementId ?? settings.measurementId }
+				value={ measurementId ?? settings?.measurementId }
 				onChange={ ( val ) => onChange( 'measurementId', val ) }
 				help={ __(
 					'Add your measurement id (G-XXXXXXX) to track pdf events in Google Analytics.',

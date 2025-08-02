@@ -8,7 +8,7 @@ import {
 	Notice,
 	TextControl,
 } from '@wordpress/components';
-import { useEntityProp, store as coreStore } from '@wordpress/core-data';
+import { useEntityProp, useEntityRecord, store as coreStore } from '@wordpress/core-data';
 import { useDispatch, useSelect } from '@wordpress/data';
 import {
 	Fragment,
@@ -20,7 +20,7 @@ import {
 import Settings from './index.js';
 
 export const SettingsModal = ( { onRequestClose } ) => {
-	const [ settings ] = useEntityProp( 'root', 'site', 'pdf_embed' );
+	const { record: settings, isResolving } = useEntityRecord( 'root', 'site' );
 	const [ pdfKey ] = useEntityProp( 'root', 'site', 'pdf_embed_apiKey' );
 	const [ siteUrl ] = useEntityProp( 'root', 'site', 'url' );
 
@@ -32,17 +32,12 @@ export const SettingsModal = ( { onRequestClose } ) => {
 
 	const inputRef = useRef();
 
-	const { canUserEdit } = useSelect( ( select ) => {
-		const { canUser } = select( coreStore );
+	const { canUserEdit, isSaving, hasEdits, sett } = useSelect( ( select ) => {
+		const { canUser } = select( 'core' );
 		const canEdit = canUser( 'update', 'settings' );
 
 		return {
 			canUserEdit: canEdit,
-		};
-	}, [] );
-
-	const { isSaving, hasEdits } = useSelect(
-		( select ) => ( {
 			isSaving: select( coreStore ).isSavingEntityRecord(
 				'root',
 				'site'
@@ -53,9 +48,8 @@ export const SettingsModal = ( { onRequestClose } ) => {
 				undefined,
 				'popper'
 			),
-		} ),
-		[]
-	);
+		};
+	}, [] );
 
 	const onChange = ( key, val ) => {
 		editEntityRecord( 'root', 'site', undefined, {
@@ -111,17 +105,19 @@ export const SettingsModal = ( { onRequestClose } ) => {
 		return response;
 	};
 
-	if ( ! canUserEdit ) {
-		<p>
-			{ __(
-				'Only admin can manage PDF Embed api key',
-				'pdf-embed'
-			) }
-		</p>
+	if ( isResolving ) {
+		return <Spinner />;
 	}
 
-	if ( ! settings ) {
-		return <Spinner />;
+	if ( ! canUserEdit ) {
+		return ( 
+			<p>
+				{ __(
+					'Only admin can manage PDF Embed api key',
+					'pdf-embed'
+				) }
+			</p>
+		)
 	}
 
 	return (
