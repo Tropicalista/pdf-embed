@@ -20,8 +20,8 @@ import {
 import Settings from './index.js';
 
 export const SettingsModal = ( { onRequestClose } ) => {
-	const { record: settings, isResolving } = useEntityRecord( 'root', 'site' );
-	const [ pdfKey ] = useEntityProp( 'root', 'site', 'pdf_embed_apiKey' );
+	const { record, isResolving } = useEntityRecord( 'root', 'site' );
+	const [ settings ] = useEntityProp( 'root', 'site', 'pdf_embed' );
 	const [ siteUrl ] = useEntityProp( 'root', 'site', 'url' );
 
 	const [message, setMessage] = useState();
@@ -52,6 +52,7 @@ export const SettingsModal = ( { onRequestClose } ) => {
 	}, [] );
 
 	const onChange = ( key, val ) => {
+		console.log( key, val, settings )
 		editEntityRecord( 'root', 'site', undefined, {
 			pdf_embed: {
 				...settings,
