@@ -7,43 +7,48 @@ document.addEventListener( 'adobe_dc_view_sdk.ready', function () {
 	const userLang = window.navigator.language || window.navigator.userLanguage;
 
 	for ( let i = 0; i < elms.length; i++ ) {
-		const embedConfig = elms[ i ].dataset;
+		const { config, ...rest } = elms[ i ].dataset;
 
-		const config = { ...pdf_embed, ...embedConfig };
+		const embedConfig = {
+			...pdf_embed,
+			...rest,
+			...( config ? JSON.parse( config ) : undefined ),
+		};
 
 		const adobeDCView = new window.AdobeDC.View( {
-			clientId: config.clientId,
+			clientId: pdf_embed.apiKey,
 			divId: elms[ i ].id,
 			locale: userLang,
-			measurementId: config.measurementId,
+			measurementId: embedConfig.measurementId,
 		} );
 
 		const previewFilePromise = adobeDCView.previewFile(
 			{
 				content: {
 					location: {
-						url: config.mediaUrl,
+						url: embedConfig.mediaUrl,
 					},
 				},
 				metaData: {
-					fileName: config.fileName,
+					fileName: embedConfig.fileName,
 				},
 			},
 			{
-				embedMode: config.embedMode,
-				defaultViewMode: config.defaultViewMode,
-				dockPageControls: Boolean( config.dockPageControls ),
-				showDownloadPDF: Boolean( config.showDownloadPDF ),
-				showPrintPDF: Boolean( config.showPrintPDF ),
-				showPageControls: Boolean( config.showPageControls ),
-				showZoomControl: Boolean( config.showZoomControl ),
-				showFullScreen: Boolean( config.showFullScreen ),
-				showThumbnails: Boolean( config.showThumbnails ),
-				showBookmarks: Boolean( config.showBookmarks ),
-				showAnnotationTools: Boolean( config.showAnnotationTools ),
-				enableTextSelection: Boolean( config.enableTextSelection ),
-				enableFormFilling: Boolean( config.enableFormFilling ),
-				enableLinearization: Boolean( config.enableLinearization ),
+				embedMode: embedConfig.embedMode ?? 'FULL_WINDOW',
+				defaultViewMode: embedConfig.defaultViewMode,
+				dockPageControls: Boolean( embedConfig.dockPageControls ),
+				showDownloadPDF: Boolean( embedConfig.showDownloadPDF ),
+				showPrintPDF: Boolean( embedConfig.showPrintPDF ),
+				showPageControls: Boolean( embedConfig.showPageControls ),
+				showZoomControl: Boolean( embedConfig.showZoomControl ),
+				showFullScreen: Boolean( embedConfig.showFullScreen ),
+				showThumbnails: Boolean( embedConfig.showThumbnails ),
+				showBookmarks: Boolean( embedConfig.showBookmarks ),
+				showAnnotationTools: Boolean( embedConfig.showAnnotationTools ),
+				enableTextSelection: Boolean( embedConfig.enableTextSelection ),
+				enableFormFilling: Boolean( embedConfig.enableFormFilling ),
+				enableLinearization: Boolean( embedConfig.enableLinearization ),
+				exitPDFViewerType: embedConfig.exitPDFViewerType,
 			}
 		);
 		previewFilePromise.then( ( adobeViewer ) => {
@@ -100,9 +105,11 @@ function previewFile( e ) {
 			metaData: {
 				/* file name */
 				fileName: new URL( e.target.href ).pathname.split( '/' ).pop(),
+				id: e.target.href,
 			},
 		},
 		{
+			...pdf_embed,
 			embedMode: 'LIGHT_BOX',
 		}
 	);

@@ -1,5 +1,6 @@
 import { __ } from '@wordpress/i18n';
 import {
+	__experimentalVStack as VStack,
 	__experimentalInputControl as InputControl,
 	Button,
 	ExternalLink,
@@ -12,23 +13,20 @@ import {
 	store as coreStore,
 } from '@wordpress/core-data';
 import { useDispatch, useSelect } from '@wordpress/data';
-import {
-	createInterpolateElement,
-	useState,
-	useRef,
-	Fragment,
-} from '@wordpress/element';
+import { createInterpolateElement, useState, useRef } from '@wordpress/element';
 
-export const KeyInput = () => {
+export const KeyInput = ( { onRequestClose } ) => {
 	const { record: settings, isResolving } = useEntityRecord( 'root', 'site' );
+	const [ pdfEmbedSettings ] = useEntityProp( 'root', 'site', 'pdf_embed' );
 	const [ siteUrl ] = useEntityProp( 'root', 'site', 'url' );
 
 	const [ message, setMessage ] = useState();
 	const [ loading, setLoading ] = useState();
+	console.log( isResolving );
+	const { editEntityRecord, saveEditedEntityRecord, saveEntityRecord } =
+		useDispatch( coreStore );
 
-	const { saveEntityRecord } = useDispatch( coreStore );
-
-	const inputRef = useRef( '' );
+	const inputRef = useRef();
 
 	const { canUserEdit } = useSelect( ( select ) => {
 		return {
@@ -36,13 +34,18 @@ export const KeyInput = () => {
 		};
 	}, [] );
 
-	const save = () => {
-		saveEntityRecord( 'root', 'site', {
+	const onChange = ( key, val ) => {
+		editEntityRecord( 'root', 'site', undefined, {
 			pdf_embed: {
-				...settings.pdf_embed,
-				apiKey: inputRef.current.value,
+				...pdfEmbedSettings,
+				[ key ]: val,
 			},
 		} );
+	};
+
+	const save = () => {
+		saveEditedEntityRecord( 'root', 'site' );
+		onRequestClose();
 	};
 
 	const validate = () => {
@@ -50,7 +53,7 @@ export const KeyInput = () => {
 		const url = 'https://viewlicense.adobe.io/viewsdklicense/jwt';
 
 		const data = {
-			client_id: inputRef.current.value,
+			client_id: settings.apiKey,
 			client_device_time: Date.now(),
 			domain: siteUrl,
 		};
@@ -62,17 +65,14 @@ export const KeyInput = () => {
 			headers: {
 				'X-Key-Pair-Version': 'v1',
 				'Content-Type': 'application/json',
-				'x-api-key': inputRef.current.value,
+				'x-api-key': settings.apiKey,
 			},
 			body: JSON.stringify( data ),
 		} );
 
 		response
-			.then( () => {
-				setMessage( 'success' );
-				save();
-			} )
-			.catch( () => {
+			.then( ( a ) => setMessage( 'success' ) )
+			.catch( ( s ) => {
 				setMessage( 'error' );
 			} )
 			.finally( () => {
@@ -95,7 +95,7 @@ export const KeyInput = () => {
 	}
 
 	return (
-		<Fragment spacing={ 4 } expanded={ true } width="100%">
+		<VStack spacing={ 4 }>
 			<InputControl
 				label={ __( 'API Key', 'pdf-embed' ) }
 				help={ createInterpolateElement(
@@ -113,10 +113,12 @@ export const KeyInput = () => {
 						),
 					}
 				) }
+				value={ settings.apiKey }
 				ref={ inputRef }
+				onChange={ ( val ) => onChange( 'apiKey', val ) }
 				suffix={
 					<Button
-						text={ __( 'Save' ) }
+						text={ __( 'Test' ) }
 						onClick={ () => validate() }
 						variant="primary"
 						isBusy={ loading }
@@ -129,11 +131,7 @@ export const KeyInput = () => {
 				__nextHasNoMarginBottom
 			/>
 			{ message && (
-				<Notice
-					status={ message }
-					isDismissible={ true }
-					onRemove={ () => setMessage( false ) }
-				>
+				<Notice status={ message } isDismissible={ false }>
 					{ 'error' === message && (
 						<small>
 							An error occurred: please check that you have
@@ -145,6 +143,6 @@ export const KeyInput = () => {
 					) }
 				</Notice>
 			) }
-		</Fragment>
+		</VStack>
 	);
 };

@@ -1,29 +1,19 @@
 import { useBlockProps } from '@wordpress/block-editor';
 
 export default function save( { attributes, className } ) {
-	const {
-		mediaUrl,
-		embedMode,
-		height,
-		apiKey,
-		showPrintPDF,
-		showDownloadPDF,
-		showPageControls,
-		showBookmarks,
-		showThumbnails,
-		showFullScreen,
-		defaultViewMode,
-		showZoomControl,
-		fileName,
-		showAnnotationTools,
-		enableFormFilling,
-		enableLinearization,
-		dockPageControls,
-		measurementId,
-		enableTextSelection,
-	} = attributes;
+	const { mediaUrl, apiKey, config, fileName, type } = attributes;
 
 	return (
+		<div
+			{ ...useBlockProps.save( { className } ) }
+			data-api-key={ apiKey }
+			data-config={ 'local' === type ? JSON.stringify( config ) : undefined }
+			data-file-name={ fileName }
+			data-media-url={ mediaUrl }
+		></div>
+	);
+
+	/*return (
 		<div
 			{ ...useBlockProps.save( { className } ) }
 			style={ { height: height || undefined } }
@@ -46,5 +36,5 @@ export default function save( { attributes, className } ) {
 			data-enable-linearization={ enableLinearization || undefined }
 			data-measurement-id={ measurementId || undefined }
 		></div>
-	);
+	);*/
 }

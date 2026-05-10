@@ -17,26 +17,6 @@ $p = new WP_HTML_Tag_Processor( $content );
 
 $options = get_option( 'pdf_embed' );
 
-if ( empty( $attributes['height'] ) ) {
-
-	$pdf_embed_styles = array(
-		array(
-			'selector'     => 'div[id="' . $unique_id . '"]',
-			'declarations' => array( 'height' => $options['height'] ),
-		),
-	);
-
-	$pdf_embed_stylesheet = wp_style_engine_get_stylesheet_from_css_rules(
-		$pdf_embed_styles,
-		array(
-			'context' => 'pdf-embed-styles-' . $unique_id,
-		)
-	);
-
-	$stylesheet = wp_style_engine_get_stylesheet_from_context( 'pdf-embed-styles-' . $unique_id );
-
-}
-
 if ( $p->next_tag(
 	array(
 		'tag_name'   => 'DIV',

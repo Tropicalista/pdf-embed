@@ -3,7 +3,7 @@
  * Plugin Name: Pdf Embed
  * Plugin URI:  https://www.francescopepe.com/
  * Description: PDF embedded with official Adobe API.
- * Version:     0.5.8
+ * Version:     0.5.9
  * Author:      Tropicalista
  * Author URI:  https://www.francescopepe.com
  * License:     GPL2
@@ -29,22 +29,28 @@ function pdf_embed_block_init() {
 	$args = array(
 		'type'              => 'object',
 		'default'        => array(
-			'apiKey'              => '',
-			'embedMode'           => 'FULL_WINDOW',
-			'defaultViewMode'     => 'FIT_PAGE',
-			'height'              => '500px',
-			'measurementId'       => '',
-			'showDownloadPDF'     => false,
-			'showPrintPDF'        => false,
-			'showFullScreen'      => false,
-			'showZoomControl'     => false,
-			'showAnnotationTools' => false,
-			'showBookmarks'       => false,
-			'showThumbnails'      => false,
-			'dockPageControls'    => false,
-			'enableTextSelection' => false,
-			'enableFormFilling'   => false,
-			'enableLinearization' => false,
+			'apiKey'                   => '',
+			'measurementId'            => '',
+			'embedMode'                => 'FULL_WINDOW',
+			'showZoomControl'          => true,
+			'showAnnotationTools'      => true,
+			'showFullScreen'           => true,
+			'defaultViewMode'          => 'FIT_PAGE',
+			'enableFormFilling'        => false,
+			'showDownloadPDF'          => true,
+			'showPrintPDF'             => true,
+			'exitPDFViewerType'        => 'CLOSE',
+			'showThumbnails'           => true,
+			'showBookmarks'            => true,
+			'enableLinearization'      => false,
+			'enableAnnotationAPIs'     => false,
+			'includePDFAnnotations'    => false,
+			'enableSearchAPIs'         => true,
+			'showDisabledSaveButton'   => true,
+			'focusOnRendering'         => true,
+			'showFullScreenViewButton' => true,
+			'dockPageControls'         => true,
+			'enableTextSelection'      => false,
 		),
 		'show_in_rest' => array(
 			'schema' => array(
@@ -58,10 +64,60 @@ function pdf_embed_block_init() {
 add_action( 'init', 'pdf_embed_block_init' );
 
 /**
+ * Add menu item
+ */
+function pdf_embed_admin_menu() {
+	$dashboard_hook = add_options_page(
+		__( 'PDF Embed Settings', 'pdf-embed' ),
+		__( 'PDF Embed', 'pdf-embed' ),
+		'manage_options',
+		'pdf-embed',
+		'pdf_embed_admin_page'
+	);
+	add_action( 'load-' . $dashboard_hook, 'pdf_embed_enqueue_admin_js' );
+}
+add_action( 'admin_menu', 'pdf_embed_admin_menu' );
+
+/**
+ * Enqueue admin JavaScript
+ *
+ * @return void
+ */
+function pdf_embed_enqueue_admin_js() {
+	$asset_file = include plugin_dir_path( __FILE__ ) . 'build/admin-script.asset.php';
+
+	remove_action( 'admin_print_scripts', 'print_emoji_detection_script' );
+
+	wp_enqueue_script(
+		'pdf-embed-script',
+		plugins_url( 'build/admin-script.js', __FILE__ ),
+		$asset_file['dependencies'],
+		$asset_file['version'],
+		true
+	);
+
+	wp_enqueue_style(
+		'pdf-embed-style',
+		plugins_url( 'build/style-admin-script.css', __FILE__ ),
+		array( 'wp-components', 'wp-reset-editor-styles' ),
+		$asset_file['version']
+	);
+}
+
+/**
+ * Admin page HTML
+ */
+function pdf_embed_admin_page() {
+	?>
+	<div id="pdf-embed"></div>
+	<?php
+}
+
+/**
  * Register settings
  */
 function pdf_embed_setting() {
-	$options = get_option( 'pdf_embed', '' );
+	$options = get_option( 'pdf_embed', false );
 
 	wp_add_inline_script(
 		'tropicalista-pdfembed-view-script',
@@ -89,6 +145,34 @@ function pdf_embed_render( $block_content, $block ) {
 	return $block_content;
 }
 add_filter( 'render_block', 'pdf_embed_render', 10, 2 );
+
+/**
+ * Add settings link on plugin page
+ *
+ * @param array  $links The links.
+ * @param string $plugin_file_name The plugin file name.
+ * @return array
+ */
+function pdf_embed_settings_link( $links, $plugin_file_name ) {
+	if ( strpos( $plugin_file_name, basename( __FILE__ ) ) ) {
+		array_unshift(
+			$links,
+			sprintf(
+				'<a href="%s">%s</a>',
+				add_query_arg(
+					array(
+						'page' => 'pdf-embed',
+					),
+					'admin.php'
+				),
+				esc_html__( 'Settings' )
+			)
+		);
+	}
+
+	return $links;
+}
+add_filter( 'plugin_action_links', 'pdf_embed_settings_link', 25, 2 );
 
 /**
  * Initialize the plugin tracker

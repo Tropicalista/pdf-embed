@@ -3,7 +3,7 @@
  *
  * @see https://developer.wordpress.org/block-editor/reference-guides/block-api/block-registration/
  */
-import { registerBlockType } from '@wordpress/blocks';
+import { registerBlockType, createBlock } from '@wordpress/blocks';
 
 /**
  * Lets webpack process CSS, SASS or SCSS files referenced in JavaScript files.
@@ -40,4 +40,24 @@ registerBlockType( metadata, {
 	 * @see ./save.js
 	 */
 	save,
+
+	transforms: {
+		from: [
+			{
+				type: 'block',
+				blocks: [ 'core/file' ],
+				transform: ( { href, fileName } ) => {
+					if ( ! href ) {
+						return createBlock( 'tropicalista/pdfembed' );
+					}
+					return createBlock( 'tropicalista/pdfembed', {
+						mediaUrl: href,
+						fileName:
+							fileName ??
+							new URL( href ).pathname.split( '/' ).pop(),
+					} );
+				},
+			},
+		],
+	},
 } );

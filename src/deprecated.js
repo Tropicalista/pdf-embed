@@ -115,11 +115,10 @@ const v1 = {
 };
 
 const v2 = {
-	/*attributes: {
+	attributes: {
 		id: {
 			type: 'string',
 			source: 'attribute',
-			selector: 'div.wp-block-tropicalista-pdfembed',
 			attribute: 'id',
 		},
 		blockId: {
@@ -129,87 +128,129 @@ const v2 = {
 			type: 'string',
 			source: 'attribute',
 			selector: 'div.wp-block-tropicalista-pdfembed',
-			attribute: 'data-apikey',
+			attribute: 'data-api-key',
+			default: '',
 		},
-		fileName: {
+		width: {
+			type: 'number',
+		},
+		height: {
 			type: 'string',
-			source: 'attribute',
-			selector: 'div.wp-block-tropicalista-pdfembed',
-			attribute: 'data-filename',
+			default: '500px',
 		},
 		mediaUrl: {
 			type: 'string',
 			source: 'attribute',
 			selector: 'div.wp-block-tropicalista-pdfembed',
-			attribute: 'data-mediaurl',
+			attribute: 'data-media-url',
+		},
+		fileName: {
+			type: 'string',
+			source: 'attribute',
+			selector: 'div.wp-block-tropicalista-pdfembed',
+			attribute: 'data-file-name',
 		},
 		embedMode: {
 			type: 'string',
 			source: 'attribute',
 			selector: 'div.wp-block-tropicalista-pdfembed',
-			attribute: 'data-embedmode',
+			attribute: 'data-embed-mode',
 		},
 		showDownloadPDF: {
-			type: 'string',
+			type: 'boolean',
 			source: 'attribute',
 			selector: 'div.wp-block-tropicalista-pdfembed',
-			attribute: 'data-showdownloadpdf',
-			default: true,
+			attribute: 'data-show-download-pdf',
 		},
 		dockPageControls: {
-			type: 'string',
+			type: 'boolean',
 			source: 'attribute',
 			selector: 'div.wp-block-tropicalista-pdfembed',
-			attribute: 'data-dockpagecontrols',
-			default: false,
+			attribute: 'data-dock-page-controls',
 		},
 		showPrintPDF: {
-			type: 'string',
+			type: 'boolean',
 			source: 'attribute',
 			selector: 'div.wp-block-tropicalista-pdfembed',
-			attribute: 'data-showprintpdf',
-			default: true,
+			attribute: 'data-show-print-pdf',
 		},
 		showFullScreen: {
-			type: 'string',
+			type: 'boolean',
 			source: 'attribute',
 			selector: 'div.wp-block-tropicalista-pdfembed',
-			attribute: 'data-showfullscreen',
-			default: true,
+			attribute: 'data-show-full-screen',
 		},
 		showPageControls: {
+			type: 'boolean',
+			source: 'attribute',
+			selector: 'div.wp-block-tropicalista-pdfembed',
+			attribute: 'data-show-page-controls',
+		},
+		showZoomControl: {
+			type: 'boolean',
+			source: 'attribute',
+			selector: 'div.wp-block-tropicalista-pdfembed',
+			attribute: 'data-show-zoom-control',
+		},
+		showThumbnails: {
+			type: 'boolean',
+			source: 'attribute',
+			selector: 'div.wp-block-tropicalista-pdfembed',
+			attribute: 'data-show-thumbnails',
+		},
+		showBookmarks: {
+			type: 'boolean',
+			source: 'attribute',
+			selector: 'div.wp-block-tropicalista-pdfembed',
+			attribute: 'data-show-bookmarks',
+		},
+		defaultViewMode: {
 			type: 'string',
 			source: 'attribute',
 			selector: 'div.wp-block-tropicalista-pdfembed',
-			attribute: 'data-showpagecontrols',
-			default: true,
+			attribute: 'data-default-view-mode',
+			default: 'FIT_PAGE',
 		},
 		enableFormFilling: {
-			type: 'string',
+			type: 'boolean',
 			source: 'attribute',
 			selector: 'div.wp-block-tropicalista-pdfembed',
-			attribute: 'data-enableformfilling',
-			default: true,
+			attribute: 'data-enable-form-filling',
 		},
 		showAnnotationTools: {
+			type: 'boolean',
+			source: 'attribute',
+			selector: 'div.wp-block-tropicalista-pdfembed',
+			attribute: 'data-show-annotation-tools',
+		},
+		enableTextSelection: {
+			type: 'boolean',
+			source: 'attribute',
+			selector: 'div.wp-block-tropicalista-pdfembed',
+			attribute: 'data-enable-text-selection',
+		},
+		enableLinearization: {
+			type: 'boolean',
+			source: 'attribute',
+			selector: 'div.wp-block-tropicalista-pdfembed',
+			attribute: 'data-enable-linearization',
+		},
+		measurementId: {
 			type: 'string',
 			source: 'attribute',
 			selector: 'div.wp-block-tropicalista-pdfembed',
-			attribute: 'data-showannotationtools',
-			default: true,
+			attribute: 'data-measurement-id',
+			default: '',
 		},
-	},*/
-	blockAttributes,
-	supports,
-	isEligible() {
-		return true;
 	},
-	migrate( attributes ) {
+	migrate( { fileName, mediaUrl, height, ...rest } ) {
 		return {
-			...attributes,
+			config: rest,
+			fileName,
+			mediaUrl,
 		};
 	},
-	save( { attributes } ) {
+	save( { attributes, className } ) {
 		const {
 			blockId,
 			mediaUrl,
@@ -224,26 +265,37 @@ const v2 = {
 			fileName,
 			showAnnotationTools,
 			enableFormFilling,
+			defaultViewMode,
+			showThumbnails,
+			showBookmarks,
+			showZoomControl,
+			enableTextSelection,
+			enableLinearization,
+			measurementId,
 		} = attributes;
 
 		return (
 			<div
-				id={ blockId }
-				{ ...useBlockProps.save() }
-				style={ { height } }
-				data-apiKey={ apiKey }
-				data-fileName={ fileName }
-				data-mediaUrl={ mediaUrl }
-				data-embedMode={ embedMode }
-				data-showDownloadPDF={ JSON.stringify( showDownloadPDF ) }
-				data-showPrintPDF={ JSON.stringify( showPrintPDF ) }
-				data-showPageControls={ JSON.stringify( showPageControls ) }
-				data-showFullScreen={ JSON.stringify( showFullScreen ) }
-				data-dockPageControls={ JSON.stringify( dockPageControls ) }
-				data-showAnnotationTools={ JSON.stringify(
-					showAnnotationTools
-				) }
-				data-enableFormFilling={ JSON.stringify( enableFormFilling ) }
+				{ ...useBlockProps.save( { className } ) }
+				style={ { height: height || undefined } }
+				data-api-key={ apiKey }
+				data-file-name={ fileName }
+				data-media-url={ mediaUrl }
+				data-embed-mode={ embedMode }
+				data-show-download-PDF={ showDownloadPDF || undefined }
+				data-show-print-PDF={ showPrintPDF || undefined }
+				data-show-annotation-tools={ showAnnotationTools || undefined }
+				data-show-page-controls={ showPageControls || undefined }
+				data-show-thumbnails={ showThumbnails || undefined }
+				data-show-bookmarks={ showBookmarks || undefined }
+				data-show-zoom-control={ showZoomControl || undefined }
+				data-show-full-screen={ showFullScreen || undefined }
+				data-default-view-mode={ defaultViewMode || undefined }
+				data-dock-page-controls={ dockPageControls || undefined }
+				data-enable-form-filling={ enableFormFilling || undefined }
+				data-enable-text-selection={ enableTextSelection || undefined }
+				data-enable-linearization={ enableLinearization || undefined }
+				data-measurement-id={ measurementId || undefined }
 			></div>
 		);
 	},

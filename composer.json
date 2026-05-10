@@ -1,4 +1,10 @@
 {
+    "autoload": {
+        "classmap": [
+            "includes/"
+        ],
+        "files": ["includes/Rest.php"]
+    },
     "require": {
         "appsero/client": "^2.0"
     }

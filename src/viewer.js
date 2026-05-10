@@ -19,19 +19,17 @@ import {
 } from '@wordpress/block-editor';
 import { useEntityProp } from '@wordpress/core-data';
 
-import { ToolbarGroup, ToolbarButton, Modal } from '@wordpress/components';
+import { ToolbarGroup } from '@wordpress/components';
 import { useRefEffect, useInstanceId } from '@wordpress/compose';
 import { useEffect, useState } from '@wordpress/element';
-import { SettingsModal } from './settings/modal.js';
 
 export const Viewer = ( props ) => {
 	const { attributes, setAttributes, isSelected, clientId } = props;
-	const { mediaUrl, height, fileName } = attributes;
+	const { mediaUrl, fileName, config } = attributes;
 	const instanceId = 'pdf-' + useInstanceId( Viewer );
 	const [ settings ] = useEntityProp( 'root', 'site', 'pdf_embed' );
-	const [ isOpen, setOpen ] = useState( false );
 
-	const [ interactive, setInteractive ] = useState( false );
+	const [ interactive, setInteractive ] = useState( isSelected );
 
 	const setupRef = useRefEffect(
 		( element ) => {
@@ -47,7 +45,9 @@ export const Viewer = ( props ) => {
 				}
 			);
 			if ( mediaUrl && defaultView.AdobeDC ) {
-				if ( settings?.apiKey || pdf_embed.apiKey ) loadAdobeDc( defaultView );
+				if ( settings?.apiKey || pdf_embed.apiKey ) {
+					loadAdobeDc( defaultView );
+				}
 			}
 
 			if ( ! defaultView.AdobeDC ) {
@@ -74,13 +74,15 @@ export const Viewer = ( props ) => {
 						url: mediaUrl,
 					},
 				},
-				metaData: { fileName },
+				metaData: { fileName, id: instanceId },
 			},
-			attributes
+			config ?? settings
 		);
 	};
 
-	const blockProps = useBlockProps( { id: instanceId } );
+	const blockProps = useBlockProps( {
+		id: instanceId,
+	} );
 
 	const onSelectMedia = ( media ) => {
 		if ( media.id ) {
@@ -99,7 +101,9 @@ export const Viewer = ( props ) => {
 	};
 
 	useEffect( () => {
-		if ( ! isSelected ) setInteractive( false );
+		if ( ! isSelected ) {
+			setInteractive( false );
+		}
 	}, [ isSelected ] );
 
 	if ( mediaUrl ) {
@@ -110,24 +114,23 @@ export const Viewer = ( props ) => {
 						<ToolbarGroup>
 							<MediaReplaceFlow
 								mediaURL={ mediaUrl }
-								allowedTypes={ [ 'application/pdf' ] }
-								accept=".pdf"
+								allowedTypes={ [ 'pdf' ] }
+								accept="application/pdf"
 								onSelect={ ( media ) => onSelectMedia( media ) }
+								onReset={ () =>
+									setAttributes( {
+										mediaUrl: undefined,
+										fileName: undefined,
+									} )
+								}
 							></MediaReplaceFlow>
 						</ToolbarGroup>
 					) }
-					<ToolbarGroup>
-						<ToolbarButton
-							icon='admin-generic'
-							label="Edit"
-							onClick={ () => setOpen( true ) }
-						/>
-					</ToolbarGroup>
 				</BlockControls>
 				<div
 					id={ instanceId }
 					ref={ setupRef }
-					style={ { height: height || settings?.height } }
+					//style={ { height: height ? `${ height }px` : undefined } }
 					tabIndex={ '-1' }
 				></div>
 				{ ! interactive && (
@@ -138,16 +141,6 @@ export const Viewer = ( props ) => {
 							setInteractive( true );
 						} }
 					/>
-				) }
-				{ isOpen && (
-					<Modal
-						title={ __( 'Global Settings', 'pdf-embed' ) }
-						onRequestClose={ () => setOpen( false ) }
-						focusOnMount={ true }
-						size="small"
-					>
-						<SettingsModal onRequestClose={ () => setOpen( false ) } />
-					</Modal>
 				) }
 			</div>
 		);
@@ -167,8 +160,8 @@ export const Viewer = ( props ) => {
 				className="block-image"
 				onSelect={ onSelectMedia }
 				onSelectURL={ onSelectUrl }
-				accept=".pdf"
-				allowedTypes={ [ 'application/pdf' ] }
+				accept="application/pdf"
+				allowedTypes={ [ 'application' ] }
 			/>
 		</div>
 	);

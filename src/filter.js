@@ -4,7 +4,7 @@ import { createHigherOrderComponent } from '@wordpress/compose';
 import { Fragment } from '@wordpress/element';
 import { BlockControls } from '@wordpress/block-editor';
 import { ToolbarButton, ToolbarGroup } from '@wordpress/components';
-import classnames from 'classnames';
+import clsx from 'clsx';
 
 const supportedBlocks = [ 'core/button', 'generateblocks/button' ];
 
@@ -94,7 +94,7 @@ function addClassName( props, blockType, attributes ) {
 	const { className } = props;
 
 	return Object.assign( {}, props, {
-		className: classnames( className, {
+		className: clsx( className, {
 			embedPdf,
 		} ),
 	} );

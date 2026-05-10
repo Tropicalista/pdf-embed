@@ -9,30 +9,16 @@
 	"description": "PDF embedder with official Adobe Embed API.",
 	"supports": {
 		"html": false,
-		"anchor": true
+		"anchor": true,
+		"dimensions": {
+			"minHeight": true,
+			"height": true
+		}
 	},
 	"attributes": {
-		"id": {
-			"type": "string",
-			"source": "attribute",
-			"attribute": "id"
-		},
-		"blockId": {
-			"type": "string"
-		},
-		"apiKey": {
-			"type": "string",
-			"source": "attribute",
-			"selector": "div.wp-block-tropicalista-pdfembed",
-			"attribute": "data-api-key",
-			"default": ""
-		},
-		"width": {
-			"type": "number"
-		},
-		"height": {
-			"type": "string",
-			"default": "500px"
+		"type": {
+			"enum": ["global", "local"],
+			"default": "global"
 		},
 		"mediaUrl": {
 			"type": "string",
@@ -46,97 +32,8 @@
 			"selector": "div.wp-block-tropicalista-pdfembed",
 			"attribute": "data-file-name"
 		},
-		"embedMode": {
-			"type": "string",
-			"source": "attribute",
-			"selector": "div.wp-block-tropicalista-pdfembed",
-			"attribute": "data-embed-mode"
-		},
-		"showDownloadPDF": {
-			"type": "boolean",
-			"source": "attribute",
-			"selector": "div.wp-block-tropicalista-pdfembed",
-			"attribute": "data-show-download-pdf"
-		},
-		"dockPageControls": {
-			"type": "boolean",
-			"source": "attribute",
-			"selector": "div.wp-block-tropicalista-pdfembed",
-			"attribute": "data-dock-page-controls"
-		},
-		"showPrintPDF": {
-			"type": "boolean",
-			"source": "attribute",
-			"selector": "div.wp-block-tropicalista-pdfembed",
-			"attribute": "data-show-print-pdf"
-		},
-		"showFullScreen": {
-			"type": "boolean",
-			"source": "attribute",
-			"selector": "div.wp-block-tropicalista-pdfembed",
-			"attribute": "data-show-full-screen"
-		},
-		"showPageControls": {
-			"type": "boolean",
-			"source": "attribute",
-			"selector": "div.wp-block-tropicalista-pdfembed",
-			"attribute": "data-show-page-controls"
-		},
-		"showZoomControl": {
-			"type": "boolean",
-			"source": "attribute",
-			"selector": "div.wp-block-tropicalista-pdfembed",
-			"attribute": "data-show-zoom-control"
-		},
-		"showThumbnails": {
-			"type": "boolean",
-			"source": "attribute",
-			"selector": "div.wp-block-tropicalista-pdfembed",
-			"attribute": "data-show-thumbnails"
-		},
-		"showBookmarks": {
-			"type": "boolean",
-			"source": "attribute",
-			"selector": "div.wp-block-tropicalista-pdfembed",
-			"attribute": "data-show-bookmarks"
-		},
-		"defaultViewMode": {
-			"type": "string",
-			"source": "attribute",
-			"selector": "div.wp-block-tropicalista-pdfembed",
-			"attribute": "data-default-view-mode",
-			"default": "FIT_PAGE"
-		},
-		"enableFormFilling": {
-			"type": "boolean",
-			"source": "attribute",
-			"selector": "div.wp-block-tropicalista-pdfembed",
-			"attribute": "data-enable-form-filling"
-		},
-		"showAnnotationTools": {
-			"type": "boolean",
-			"source": "attribute",
-			"selector": "div.wp-block-tropicalista-pdfembed",
-			"attribute": "data-show-annotation-tools"
-		},
-		"enableTextSelection": {
-			"type": "boolean",
-			"source": "attribute",
-			"selector": "div.wp-block-tropicalista-pdfembed",
-			"attribute": "data-enable-text-selection"
-		},
-		"enableLinearization": {
-			"type": "boolean",
-			"source": "attribute",
-			"selector": "div.wp-block-tropicalista-pdfembed",
-			"attribute": "data-enable-linearization"
-		},
-		"measurementId": {
-			"type": "string",
-			"source": "attribute",
-			"selector": "div.wp-block-tropicalista-pdfembed",
-			"attribute": "data-measurement-id",
-			"default": ""	
+		"config": {
+			"type": "object"
 		}
 	},
 	"textdomain": "pdf-embed",

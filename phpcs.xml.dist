@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
-<ruleset name="Formello">
-	<description>Rules for Formello</description>
+<ruleset name="PDF Embed" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/squizlabs/PHP_CodeSniffer/master/phpcs.xsd">
+	<description>Rules for PDF Embed</description>
 
     <arg name="extensions" value="php" />
 
