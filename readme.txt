@@ -79,6 +79,9 @@ Yes you will need a free [Adobe PDF Embed API](https://developer.adobe.com/docum
 
 == Changelog ==
 
+= 0.5.9 =
+* Add settings global page
+
 = 0.5.8 =
 * Fix settings not saving
 
