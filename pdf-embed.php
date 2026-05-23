@@ -128,7 +128,6 @@ function pdf_embed_enqueue_admin_js() {
  * Admin page HTML
  */
 function pdf_embed_admin_page() {
-	$options = get_option( 'pdf_embed', false );
 	?>
 	<div id="pdf-embed"></div>
 	<?php
