@@ -31,6 +31,9 @@ if ( $p->next_tag(
 	if ( ! empty( $p->get_attribute( 'data-filename' ) ) ) {
 		$p->set_attribute( 'data-file-name', $p->get_attribute( 'data-filename' ) );
 	}
+	if ( empty( $p->get_attribute( 'data-config' ) ) ) {
+		$p->set_attribute( 'data-config', wp_json_encode( $options ) );
+	}
 }
 
 echo $p->get_updated_html();

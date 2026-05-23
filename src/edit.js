@@ -24,7 +24,6 @@ export const MIN_PREVIEW_HEIGHT = 200;
 export const MAX_PREVIEW_HEIGHT = 2000;
 
 export default function Edit( props ) {
-	const blockProps = useBlockProps();
 	const [ pdfEmbedSettings ] = useEntityProp( 'root', 'site', 'pdf_embed' );
 
 	const {
@@ -49,6 +48,13 @@ export default function Edit( props ) {
 			),
 		}
 	);
+
+	const blockProps = useBlockProps( {
+		style: {
+			height: null,
+			minHeight: null,
+		},
+	} );
 
 	if ( window.pdf_embed?.apiKey || pdfEmbedSettings?.apiKey ) {
 		return (
@@ -124,17 +130,18 @@ export default function Edit( props ) {
 	}
 
 	return (
-		<Placeholder
-			icon={ 'pdf' }
-			instructions={ __(
-				'Please insert a free api key to start using this block.',
-				'pdf-embed'
-			) }
-			label={ __( 'PDF Embed', 'pdf-embed' ) }
-			isColumnLayout
-			{ ...blockProps }
-		>
-			<KeyInput />
-		</Placeholder>
+		<div { ...blockProps }>
+			<Placeholder
+				icon={ 'pdf' }
+				instructions={ __(
+					'Please insert a free api key to start using this block.',
+					'pdf-embed'
+				) }
+				label={ __( 'PDF Embed', 'pdf-embed' ) }
+				isColumnLayout
+			>
+				<KeyInput />
+			</Placeholder>
+		</div>
 	);
 }

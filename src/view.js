@@ -35,7 +35,7 @@ document.addEventListener( 'adobe_dc_view_sdk.ready', function () {
 			},
 			{
 				embedMode: embedConfig.embedMode ?? 'FULL_WINDOW',
-				defaultViewMode: embedConfig.defaultViewMode,
+				defaultViewMode: embedConfig.defaultViewMode ?? 'FIT_PAGE',
 				dockPageControls: Boolean( embedConfig.dockPageControls ),
 				showDownloadPDF: Boolean( embedConfig.showDownloadPDF ),
 				showPrintPDF: Boolean( embedConfig.showPrintPDF ),
@@ -48,7 +48,7 @@ document.addEventListener( 'adobe_dc_view_sdk.ready', function () {
 				enableTextSelection: Boolean( embedConfig.enableTextSelection ),
 				enableFormFilling: Boolean( embedConfig.enableFormFilling ),
 				enableLinearization: Boolean( embedConfig.enableLinearization ),
-				exitPDFViewerType: embedConfig.exitPDFViewerType,
+				exitPDFViewerType: embedConfig.exitPDFViewerType ?? 'CLOSE',
 			}
 		);
 		previewFilePromise.then( ( adobeViewer ) => {
