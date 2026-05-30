@@ -3,7 +3,7 @@
  * Plugin Name: Pdf Embed
  * Plugin URI:  https://www.francescopepe.com/
  * Description: PDF embedded with official Adobe API.
- * Version:     0.6.1
+ * Version:     0.6.2
  * Author:      Tropicalista
  * Author URI:  https://www.francescopepe.com
  * License:     GPL2
@@ -235,15 +235,16 @@ add_action( 'pdf-embed_tracker_optin', 'pdf_embed_tracker_optin', 10 );
 /**
  * This function runs when WordPress completes its upgrade process
  * It iterates through each plugin updated to see if ours is included
- * @param $upgrader_object Array
+ *
+ * @param $upgrader_object
  * @param $options Array
  */
 function pdf_embed_upgrade_completed( $upgrader_object, $options ) {
-	// The path to our plugin's main file
+	// The path to our plugin's main file.
 	$our_plugin = plugin_basename( __FILE__ );
-	// If an update has taken place and the updated type is plugins and the plugins element exists
+	// If an update has taken place and the updated type is plugins and the plugins element exists.
 	if ( 'update' === $options['action'] && 'plugin' === $options['type'] && isset( $options['plugins'] ) ) {
-		// Iterate through the plugins being updated and check if ours is there
+		// Iterate through the plugins being updated and check if ours is there.
 		foreach ( $options['plugins'] as $plugin ) {
 			if ( $plugin === $our_plugin ) {
 				// Remove old setting.

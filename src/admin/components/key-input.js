@@ -22,7 +22,7 @@ export const KeyInput = ( { onRequestClose } ) => {
 
 	const [ message, setMessage ] = useState();
 	const [ loading, setLoading ] = useState();
-	console.log( isResolving );
+
 	const { editEntityRecord, saveEditedEntityRecord, saveEntityRecord } =
 		useDispatch( coreStore );
 

@@ -68,7 +68,7 @@ export default function ResetButton( props ) {
 				onClick={ () => setShowConfirmDialog( true ) }
 				variant={ variant }
 				isDestructive={ isDestructive }
-				//disabled={ ! hasEdits }
+				disabled={ ! hasEdits }
 			>
 				{ text }
 			</Button>

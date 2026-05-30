@@ -131,14 +131,6 @@ const fields = [
 		],
 		isValid: {
 			required: true,
-			custom: ( item, field ) => {
-				const value = field.getValue( { item } );
-				console.log(value)
-				if ( value ) {
-					//return null;
-				}
-				return 'STO GRAN CAZZO';
-			}
 		},
 		Edit: ( { onChange, field, data, validity } ) => {
 			const { label, placeholder, setValue } = field;
@@ -150,19 +142,11 @@ const fields = [
 				[ data, onChange, setValue ]
 			);
 
-			const options = [
-				{
-					value: '',
-					label: __( 'Select an option', 'pdf-embed' ),
-				},
-				...field.elements,
-			];
-
 			return (
 				<SelectControl
 					label={ label }
 					onChange={ onChangeControl }
-					options={ options ?? [] }
+					options={ field.elements }
 					placeholder={ placeholder }
 					value={ value }
 					help={ embedModeHelp[ value ] || embedModeHelp.FULL_WINDOW }
@@ -215,19 +199,11 @@ const fields = [
 				[ data, onChange, setValue ]
 			);
 
-			const options = [
-				{
-					value: '',
-					label: __( 'Select an option', 'pdf-embed' ),
-				},
-				...field.elements,
-			];
-
 			return (
 				<SelectControl
 					label={ label }
 					onChange={ onChangeControl }
-					options={ options }
+					options={ field.elements }
 					placeholder={ placeholder }
 					value={ value ?? '' }
 					help={

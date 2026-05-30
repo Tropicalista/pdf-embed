@@ -77,7 +77,7 @@ export const Settings = () => {
 			} );
 		}
 	}, [ validity ] );
-console.log(validity)
+
 	const save = ( e ) => {
 		e.preventDefault();
 		saveSettings();
